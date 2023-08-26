@@ -36,6 +36,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B116CB92A9A7FA900E5CA8E /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				2BE1B8742A9A7A3900CD2929 /* Persistence.swift */,
+				2BE1B8762A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
 		2BE1B85F2A9A7A3800CD2929 = {
 			isa = PBXGroup;
 			children = (
@@ -58,8 +67,7 @@
 				2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */,
 				2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */,
 				2BE1B86F2A9A7A3900CD2929 /* Assets.xcassets */,
-				2BE1B8742A9A7A3900CD2929 /* Persistence.swift */,
-				2BE1B8762A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld */,
+				2B116CB92A9A7FA900E5CA8E /* Core Data */,
 				2BE1B8712A9A7A3900CD2929 /* Preview Content */,
 			);
 			path = "Date Tracker";
