@@ -14,6 +14,7 @@ struct ContentView: View {
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: false)],  // This is what decides the order or the list
         animation: .default)
+    
     private var items: FetchedResults<Item>
     
     var body: some View {
@@ -44,11 +45,9 @@ struct ContentView: View {
                 ToolbarItem {
                     HStack {
                         NavigationLink(destination: NewDataEntryForm()) {
-                            Label("New Event", systemImage: "plus")
+                            Label("Create a new event", systemImage: "plus")
                         }
-//                        Button(action: addItem) {
-//                            Label("Add Item", systemImage: "plus")
-//                        }
+                        
                     }
                     
                 }
@@ -103,6 +102,6 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView().environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
 }

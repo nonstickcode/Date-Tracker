@@ -14,6 +14,8 @@ import CoreData
 struct NewDataEntryForm: View {
     
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     
     let stringOptions1 = ["Option 1", "Option 2", "Option 3"]
     let stringOptions2 = ["Choice A", "Choice B", "Choice C"]
@@ -73,9 +75,9 @@ struct NewDataEntryForm: View {
                 }
                 
                 Button(action: addItem) {
-                    Label("Save Event", systemImage: "plus")
+                    Label("Save Event", systemImage: "circle")
                 }
-
+                
                 
             }
             .navigationBarTitle("New Entry", displayMode: .inline)
@@ -88,27 +90,26 @@ struct NewDataEntryForm: View {
     
     
     private func addItem() {
-        withAnimation {
-            
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-            
-            let uuid = UUID().uuidString
-            newItem.id = uuid
-            newItem.name = newEventName
-            newItem.preferredPronoun = newPreferredPronoun
-            newItem.eventDate = newEventDate
-            
-            
-            
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+        
+        let newItem = Item(context: viewContext)
+        newItem.timestamp = Date()
+        
+        let uuid = UUID().uuidString
+        newItem.id = uuid
+        newItem.name = newEventName
+        newItem.preferredPronoun = newPreferredPronoun
+        newItem.eventDate = newEventDate
+        
+        
+        
+        do {
+            try viewContext.save()
+            self.presentationMode.wrappedValue.dismiss()  // Add this line to dismiss the view
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
 }
@@ -117,6 +118,8 @@ struct NewDataEntryForm: View {
 
 struct NewDataEntryForm_Previews: PreviewProvider {
     static var previews: some View {
-        NewDataEntryForm()
+        NavigationView {
+            NewDataEntryForm()
+        }
     }
 }
