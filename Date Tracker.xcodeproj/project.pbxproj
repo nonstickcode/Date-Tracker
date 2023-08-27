@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */; };
 		2BE1B86C2A9A7A3800CD2929 /* Date_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */; };
 		2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */; };
 		2BE1B8702A9A7A3900CD2929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE1B86F2A9A7A3900CD2929 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataEntryForm.swift; sourceTree = "<group>"; };
 		2BE1B8682A9A7A3800CD2929 /* Date Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Date Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date_TrackerApp.swift; sourceTree = "<group>"; };
 		2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			children = (
 				2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */,
 				2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */,
+				2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */,
 				2BE1B86F2A9A7A3900CD2929 /* Assets.xcassets */,
 				2B116CB92A9A7FA900E5CA8E /* Core Data */,
 				2BE1B8712A9A7A3900CD2929 /* Preview Content */,
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BE1B8752A9A7A3900CD2929 /* Persistence.swift in Sources */,
+				2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */,
 				2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */,
 				2BE1B8782A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld in Sources */,
 				2BE1B86C2A9A7A3800CD2929 /* Date_TrackerApp.swift in Sources */,

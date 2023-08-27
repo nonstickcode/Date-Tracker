@@ -12,7 +12,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: false)],  // This is what decides the order or the list
         animation: .default)
     private var items: FetchedResults<Item>
     
@@ -23,15 +23,16 @@ struct ContentView: View {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        Text("\(item.name!)")
+                        Text("\(item.preferredPronoun!)")
+                        Text("\(item.eventDate!)")
+                        Text("Item created: \(item.timestamp!, formatter: itemFormatter)")
                         
                         Text("\(item.id!)")
                             .foregroundColor(.blue)
                     } label: {
-//                        Image(systemName: "hazardsign.fill")
-//                            .foregroundColor(.orange)
-                            
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        
+                        Text(item.timestamp!, formatter: itemFormatter)  // This is what is shown in Label for each item
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -41,9 +42,15 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    HStack {
+                        NavigationLink(destination: NewDataEntryForm()) {
+                            Label("New Event", systemImage: "plus")
+                        }
+//                        Button(action: addItem) {
+//                            Label("Add Item", systemImage: "plus")
+//                        }
                     }
+                    
                 }
             }
             Text("Select an item")
