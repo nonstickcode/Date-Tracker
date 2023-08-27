@@ -17,15 +17,16 @@ struct NewDataEntryForm: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     
-    let stringOptions1 = ["Option 1", "Option 2", "Option 3"]
-    let stringOptions2 = ["Choice A", "Choice B", "Choice C"]
+    let newEventTypeOptions = ["Birthday", "Anniversary", "Holiday"]
+    
+    let stringOptions2 = ["Choice A", "Choice B", "Choice C"] //---------------
     
     @State private var newEventName: String = ""
     @State private var newPreferredPronoun: String = ""
     @State private var newEventDate = Date()
+    @State private var newEventType: String = ""
     
-    @State private var selectedString1: String = "Option 1"
-    @State private var selectedString2: String = "Choice A"
+    @State private var selectedString2: String = "Choice A" //------------------
     
     
     
@@ -58,8 +59,8 @@ struct NewDataEntryForm: View {
                 
                 Section(header: Text("New Date Entry")) {
                     
-                    Picker("Select Custom String 2", selection: $selectedString2) {
-                        ForEach(stringOptions2, id: \.self) {
+                    Picker("Select Custom String 1", selection: $newEventType) {
+                        ForEach(newEventTypeOptions, id: \.self) {
                             Text($0)
                         }
                     }
@@ -67,12 +68,13 @@ struct NewDataEntryForm: View {
                 
                 Section(header: Text("New Date Entry")) {
                     
-                    Picker("Select Custom String 1", selection: $selectedString1) {
-                        ForEach(stringOptions1, id: \.self) {
+                    Picker("Select Custom String 2", selection: $selectedString2) {
+                        ForEach(stringOptions2, id: \.self) {
                             Text($0)
                         }
                     }
                 }
+                
                 
                 Button(action: addItem) {
                     Label("Save Event", systemImage: "circle")
@@ -92,13 +94,14 @@ struct NewDataEntryForm: View {
     private func addItem() {
         
         let newItem = Item(context: viewContext)
-        newItem.timestamp = Date()
-        
         let uuid = UUID().uuidString
+        
+        newItem.timestamp = Date()
         newItem.id = uuid
         newItem.name = newEventName
         newItem.preferredPronoun = newPreferredPronoun
         newItem.eventDate = newEventDate
+        newItem.eventType = newEventType
         
         
         
