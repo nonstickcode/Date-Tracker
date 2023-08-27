@@ -24,17 +24,23 @@ struct ContentView: View {
             List {
                 ForEach(items) { item in
                     NavigationLink {
+                        
                         Text("\(item.name!)")
+                        
                         Text("\(item.preferredPronoun!)")
-                        Text("\(item.eventDate!, formatter: itemFormatter)")
-                        Text("Item created: \(item.timestamp!, formatter: itemFormatter)")
+                        
+                        Text("\(item.eventType!)")
+                        
+                        Text("\(item.eventDate!, formatter: dateFormatter)")
+                        
+                        Text("Item created: \(item.timestamp!, formatter: dateTimeFormatter)")
                         
                         Text("\(item.id!)")
                             .foregroundColor(.blue)
                     } label: {
                         
-                        Text(item.timestamp!, formatter: itemFormatter)  // This is what is shown in Label for each item
-                    }
+                            Text(item.timestamp!, formatter: dateTimeFormatter)  // This is what is shown in Label for each item
+                                            }
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -94,10 +100,17 @@ struct ContentView: View {
     }
 }
 
-private let itemFormatter: DateFormatter = {
+private let dateTimeFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .short
     formatter.timeStyle = .medium
+    return formatter
+}()
+
+private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .none
     return formatter
 }()
 

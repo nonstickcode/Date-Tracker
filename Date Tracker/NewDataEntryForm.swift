@@ -15,7 +15,7 @@ struct NewDataEntryForm: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    
     
     let newEventTypeOptions = ["Birthday", "Anniversary", "Holiday"]
     
@@ -42,24 +42,24 @@ struct NewDataEntryForm: View {
                 
                 Section(header: Text("Name of Person or Event")) {
                     
-                    TextField("enter text here", text: $newEventName)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    TextField("enter name here", text: $newEventName)
+                    
                 }
                 
                 Section(header: Text("Preferred pronoun for person or event")) {
                     
-                    TextField("enter text here", text: $newPreferredPronoun)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    TextField("enter pronoun here", text: $newPreferredPronoun)
+                    
                 }
                 
-                Section(header: Text("New Date Entry")) {
+                Section(header: Text("Event Date, upcoming or past")) {
                     
                     DatePicker("Select Date", selection: $newEventDate, displayedComponents: [.date])
                 }
                 
-                Section(header: Text("New Date Entry")) {
+                Section(header: Text("Event Type")) {
                     
-                    Picker("Select Custom String 1", selection: $newEventType) {
+                    Picker("Select Event Type", selection: $newEventType) {
                         ForEach(newEventTypeOptions, id: \.self) {
                             Text($0)
                         }
@@ -76,9 +76,24 @@ struct NewDataEntryForm: View {
                 }
                 
                 
-                Button(action: addItem) {
-                    Label("Save Event", systemImage: "circle")
+                
+                Section {
+                    VStack {
+                        Spacer()
+                        Button(action: addItem) {
+                            Text("Save Event")
+                                .font(.system(size: 18))
+                                .bold()
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .padding()
+                        }
+                        .background(Color.accentColor)
+                        .foregroundColor(Color.white)
+                        .cornerRadius(10)
+                        Spacer()
+                    }
                 }
+                .frame(minHeight: 0, maxHeight: .infinity)
                 
                 
             }
