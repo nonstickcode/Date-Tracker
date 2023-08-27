@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */; };
+		2BCC2DDF2A9B17B800D81239 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC2DDD2A9B17B800D81239 /* Item+CoreDataClass.swift */; };
+		2BCC2DE02A9B17B800D81239 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC2DDE2A9B17B800D81239 /* Item+CoreDataProperties.swift */; };
 		2BE1B86C2A9A7A3800CD2929 /* Date_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */; };
 		2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */; };
 		2BE1B8702A9A7A3900CD2929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE1B86F2A9A7A3900CD2929 /* Assets.xcassets */; };
@@ -18,6 +20,8 @@
 
 /* Begin PBXFileReference section */
 		2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataEntryForm.swift; sourceTree = "<group>"; };
+		2BCC2DDD2A9B17B800D81239 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2BCC2DDE2A9B17B800D81239 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2BE1B8682A9A7A3800CD2929 /* Date Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Date Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date_TrackerApp.swift; sourceTree = "<group>"; };
 		2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,6 +45,8 @@
 		2B116CB92A9A7FA900E5CA8E /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				2BCC2DDD2A9B17B800D81239 /* Item+CoreDataClass.swift */,
+				2BCC2DDE2A9B17B800D81239 /* Item+CoreDataProperties.swift */,
 				2BE1B8742A9A7A3900CD2929 /* Persistence.swift */,
 				2BE1B8762A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld */,
 			);
@@ -154,6 +160,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BCC2DE02A9B17B800D81239 /* Item+CoreDataProperties.swift in Sources */,
+				2BCC2DDF2A9B17B800D81239 /* Item+CoreDataClass.swift in Sources */,
 				2BE1B8752A9A7A3900CD2929 /* Persistence.swift in Sources */,
 				2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */,
 				2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */,
