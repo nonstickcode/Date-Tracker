@@ -16,67 +16,36 @@ struct NewDataEntryForm: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    
-    let newEventTypeOptions = ["Birthday", "Anniversary", "Holiday"]
-    
-    let stringOptions2 = ["Choice A", "Choice B", "Choice C"] //---------------
+    @State private var showAlert = false
     
     @State private var newEventName: String = ""
     @State private var newPreferredPronoun: String = ""
     @State private var newEventDate = Date()
-    @State private var newEventType: String = ""
+    @State private var newEventType: String = "Birthday"
     
-    @State private var selectedString2: String = "Choice A" //------------------
-    
-    
-    
+    let newEventTypeOptions = ["Birthday", "Anniversary", "Holiday"]
     
     
     
     var body: some View {
-        
         NavigationView {
-            
             Form {
-                
-                
                 Section(header: Text("Name of Person or Event")) {
-                    
                     TextField("enter name here", text: $newEventName)
-                    
                 }
-                
                 Section(header: Text("Preferred pronoun for person or event")) {
-                    
                     TextField("enter pronoun here", text: $newPreferredPronoun)
-                    
                 }
-                
                 Section(header: Text("Event Date, upcoming or past")) {
-                    
                     DatePicker("Select Date", selection: $newEventDate, displayedComponents: [.date])
                 }
-                
                 Section(header: Text("Event Type")) {
-                    
                     Picker("Select Event Type", selection: $newEventType) {
                         ForEach(newEventTypeOptions, id: \.self) {
                             Text($0)
                         }
                     }
                 }
-                
-                Section(header: Text("New Date Entry")) {
-                    
-                    Picker("Select Custom String 2", selection: $selectedString2) {
-                        ForEach(stringOptions2, id: \.self) {
-                            Text($0)
-                        }
-                    }
-                }
-                
-                
-                
                 Section {
                     VStack {
                         Spacer()
@@ -95,14 +64,16 @@ struct NewDataEntryForm: View {
                 }
                 .frame(minHeight: 0, maxHeight: .infinity)
                 
-                
             }
             .navigationBarTitle("New Entry", displayMode: .inline)
+            .alert(isPresented: $showAlert) { // Place the .alert here
+                Alert(title: Text("Error"),
+                      message: Text("All fields are required."),
+                      dismissButton: .default(Text("OK")))
+            }
         }
         
     }
-    
-    
     
     
     
@@ -118,16 +89,21 @@ struct NewDataEntryForm: View {
         newItem.eventDate = newEventDate
         newItem.eventType = newEventType
         
-        
+        if newEventName.isEmpty || newPreferredPronoun.isEmpty {
+            showAlert = true
+            return
+        }
         
         do {
             try viewContext.save()
             self.presentationMode.wrappedValue.dismiss()  // Add this line to dismiss the view
         } catch {
+            print("Error saving: \(error)")
             // Replace this implementation with code to handle the error appropriately.
             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            
         }
     }
 }
