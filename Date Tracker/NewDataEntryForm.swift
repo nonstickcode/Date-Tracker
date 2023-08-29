@@ -23,7 +23,7 @@ struct NewDataEntryForm: View {
     @State private var newEventDate = Date()
     @State private var newEventType: String = "Birthday"
     
-    let newEventTypeOptions = ["Birthday", "Anniversary", "Holiday"]
+    let newEventTypeOptions = ["Birthday", "Anniversary", "Holiday", "Vacation"]
     
     
     
@@ -46,6 +46,9 @@ struct NewDataEntryForm: View {
                         }
                     }
                 }
+                
+                // Save Button --------------------------------------------------------------------
+                
                 Section {
                     VStack {
                         Spacer()
@@ -64,13 +67,20 @@ struct NewDataEntryForm: View {
                 }
                 .frame(minHeight: 0, maxHeight: .infinity)
                 
+                // Save Button End ------------------------------------------------------------------
+                
             }
-            .navigationBarTitle("New Entry", displayMode: .inline)
-            .alert(isPresented: $showAlert) { // Place the .alert here
+            .navigationBarTitle("New Event Entry", displayMode: .inline)
+            
+            // Alert ---------------------------------------------------------------------------
+            
+            .alert(isPresented: $showAlert) {
                 Alert(title: Text("Error"),
                       message: Text("All fields are required."),
                       dismissButton: .default(Text("OK")))
             }
+            
+            // Alert End -----------------------------------------------------------------------
         }
         
     }
@@ -96,7 +106,7 @@ struct NewDataEntryForm: View {
         
         do {
             try viewContext.save()
-            self.presentationMode.wrappedValue.dismiss()  // Add this line to dismiss the view
+            self.presentationMode.wrappedValue.dismiss()  // line to dismiss the view after save
         } catch {
             print("Error saving: \(error)")
             // Replace this implementation with code to handle the error appropriately.

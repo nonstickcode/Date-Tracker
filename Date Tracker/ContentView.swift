@@ -12,35 +12,47 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: false)],  // This is what decides the order or the list
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: false)],  // This is what decides the order of the list when fetched
         animation: .default)
     
     private var items: FetchedResults<Item>
+    
+    private var sortedItems: [Item] {
+           return items.sorted { daysUntilEvent($0.eventDate) < daysUntilEvent($1.eventDate) } // This is what decides the order of the list after the one above does then lets daysUntilEvent sort it
+       }
     
     var body: some View {
         
         NavigationView {
             
             List {
-                ForEach(items) { item in
+                ForEach(sortedItems, id: \.self) { item in
                     NavigationLink {
                         
-                        Text("\(item.name!)")
+                        Spacer()
                         
-                        Text("\(item.preferredPronoun!)")
+                        Text("\(item.name!)'s \(item.eventType!) is \(item.eventDate!, formatter: dateFormatter)")
+                            .padding(.bottom, 1)
                         
-                        Text("\(item.eventType!)")
+                        Text("\(item.preferredPronoun!) next \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days.")
+                            .padding(.bottom, 1)
                         
-                        Text("\(item.eventDate!, formatter: dateFormatter)")
+                        Text("\(item.name!) is exactly \(yearsSinceEvent(item.eventDate)) years old!")
+                            .padding(.bottom)
                         
-                        Text("Item created: \(item.timestamp!, formatter: dateTimeFormatter)")
                         
-                        Text("\(item.id!)")
+                        Text("Event added to app: \(item.timestamp!, formatter: dateTimeFormatter)")
+                            .font(.caption)
+                        Text("ID: \(item.id!)")
+                            .font(.caption)
                             .foregroundColor(.blue)
+                        
+                        Spacer()
+                        
                     } label: {
                         
-                            Text(item.timestamp!, formatter: dateTimeFormatter)  // This is what is shown in Label for each item
-                                            }
+                        Text("\(item.name!)'s \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")  // This is what is shown in Label for each item
+                    }
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -62,43 +74,67 @@ struct ContentView: View {
         }
     }
     
-//    private func addItem() {
-//        withAnimation {
-//
-//            let newItem = Item(context: viewContext)
-//            newItem.timestamp = Date()
-//
-//            let uuid = UUID().uuidString
-//            newItem.id = uuid
-//            
-//
-//
-//            do {
-//                try viewContext.save()
-//            } catch {
-//                // Replace this implementation with code to handle the error appropriately.
-//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//                let nsError = error as NSError
-//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//            }
-//        }
-//    }
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            let itemsToDelete = offsets.map { sortedItems[$0] }
+            
+            for itemToDelete in itemsToDelete {
+                if let index = items.firstIndex(where: { $0.id == itemToDelete.id }) {
+                    viewContext.delete(items[index])
+                }
+            }
             
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
 }
+
+
+private func daysUntilEvent(_ eventDate: Date?) -> Int {
+    guard let eventDate = eventDate else { return 0 }
+    
+    let calendar = Calendar.current
+    var nextEventDate = eventDate
+    
+    // Loop until nextEventDate is in the future
+    while nextEventDate < Date() {
+        if let newDate = calendar.date(byAdding: .year, value: 1, to: nextEventDate) {
+            nextEventDate = newDate
+        } else {
+            return 0  // Return 0 if we can't calculate the next event date
+        }
+    }
+    
+    let components = calendar.dateComponents([.day], from: Date(), to: nextEventDate)
+    return components.day ?? 0
+}
+
+
+private func yearsSinceEvent(_ eventDate: Date?) -> Double {
+    guard let eventDate = eventDate else { return 0.0 }
+    
+    // Only proceed if eventDate is in the past
+    if eventDate >= Date() {
+        return 0.0
+    }
+    
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.day], from: eventDate, to: Date())
+    
+    guard let days = components.day else { return 0.0 }
+    
+    // Calculate the exact years, accounting for leap years
+    let exactYears = Double(days) / 365.25
+    
+    return Double(String(format: "%.3f", exactYears)) ?? 0.0  // Truncate to 3 decimal places
+}
+
 
 private let dateTimeFormatter: DateFormatter = {
     let formatter = DateFormatter()
@@ -107,12 +143,14 @@ private let dateTimeFormatter: DateFormatter = {
     return formatter
 }()
 
+
 private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateStyle = .short
+    formatter.dateStyle = .medium
     formatter.timeStyle = .none
     return formatter
-}()
+}()  // is () needed after this function or the function above?
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
