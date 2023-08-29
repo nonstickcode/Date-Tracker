@@ -37,9 +37,13 @@ struct ContentView: View {
                         Text("\(item.preferredPronoun!) next \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days.")
                             .padding(.bottom, 1)
                         
-                        Text("\(item.name!) is exactly \(yearsSinceEvent(item.eventDate)) years old!")
-                            .padding(.bottom)
-                        
+                        if yearsSinceEvent(item.eventDate) > 0 {
+                            Text("\(item.name!) is exactly \(yearsSinceEvent(item.eventDate)) years old!")
+                                .padding(.bottom)
+                        } else {
+                            Text("\(daysUntilEvent(item.eventDate)) days is exactly \(daysConvertedToYears(daysUntilEvent(item.eventDate))) years")
+                                .padding(.bottom)
+                        }
                         
                         Text("Event added to app: \(item.timestamp!, formatter: dateTimeFormatter)")
                             .font(.caption)
@@ -133,6 +137,12 @@ private func yearsSinceEvent(_ eventDate: Date?) -> Double {
     let exactYears = Double(days) / 365.25
     
     return Double(String(format: "%.3f", exactYears)) ?? 0.0  // Truncate to 3 decimal places
+}
+
+private func daysConvertedToYears(_ days: Int) -> Double {
+    // Calculate the exact years, accounting for leap years
+    let exactYears = Double(days) / 365.25
+    return exactYears
 }
 
 

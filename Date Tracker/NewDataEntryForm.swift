@@ -23,8 +23,21 @@ struct NewDataEntryForm: View {
     @State private var newEventDate = Date()
     @State private var newEventType: String = "Birthday"
     
+    @State private var selectedMonth = "January"
+    @State private var selectedDay = 1
+    @State private var selectedYear = 2023
+    
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    
     let newEventTypeOptions = ["Birthday", "Anniversary", "Holiday", "Vacation"]
     
+    var customDate: Date {
+        var components = DateComponents()
+        components.day = selectedDay
+        components.month = months.firstIndex(of: selectedMonth)! + 1
+        components.year = selectedYear
+        return Calendar.current.date(from: components) ?? Date()
+    }
     
     
     var body: some View {
@@ -36,9 +49,48 @@ struct NewDataEntryForm: View {
                 Section(header: Text("Preferred pronoun for person or event")) {
                     TextField("enter pronoun here", text: $newPreferredPronoun)
                 }
+                
+                
                 Section(header: Text("Event Date, upcoming or past")) {
-                    DatePicker("Select Date", selection: $newEventDate, displayedComponents: [.date])
+                    VStack {
+                        Picker("Month", selection: $selectedMonth) {
+                            ForEach(months, id: \.self) { month in
+                                Text(month).tag(month)
+                            }
+                        }
+                        
+                        
+                        Picker("Day", selection: $selectedDay) {
+                            ForEach(1..<32) { day in
+                                Text("\(day)").tag(day)
+                            }
+                        }
+                        
+                        
+                        Picker("Year", selection: $selectedYear) {
+                            ForEach(1920..<2100) { year in
+                                Text(String(format: "%ld", locale: Locale(identifier: "en_US_POSIX"), year)).tag(year)
+
+                            }
+                        }
+                        
+                        
+                    }
+                    .onAppear {
+                        // Initialize the custom picker with the existing date
+                        let components = Calendar.current.dateComponents([.day, .month, .year], from: newEventDate)
+                        selectedMonth = months[(components.month ?? 1) - 1]
+                        selectedDay = components.day ?? 1
+                        selectedYear = components.year ?? 2023
+                    }
+                    .onChange(of: customDate) { newDate in
+                        newEventDate = newDate
+                    }
                 }
+                
+                
+                
+                
                 Section(header: Text("Event Type")) {
                     Picker("Select Event Type", selection: $newEventType) {
                         ForEach(newEventTypeOptions, id: \.self) {
