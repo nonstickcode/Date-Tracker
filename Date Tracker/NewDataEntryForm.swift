@@ -124,6 +124,7 @@ struct NewDataEntryForm: View {
             }
             .navigationBarTitle("New Event Entry", displayMode: .inline)
             
+            
             // Alert ---------------------------------------------------------------------------
             
             .alert(isPresented: $showAlert) {

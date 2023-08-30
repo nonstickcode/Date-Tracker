@@ -25,56 +25,63 @@ struct ContentView: View {
         
         NavigationView {
             
-            List {
-                ForEach(sortedItems, id: \.self) { item in
-                    NavigationLink {
-                        
-                        Spacer()
-                        
-                        Text("\(item.name!)'s \(item.eventType!) is \(item.eventDate!, formatter: dateFormatter)")
-                            .padding(.bottom, 1)
-                        
-                        Text("\(item.preferredPronoun!) next \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days.")
-                            .padding(.bottom, 1)
-                        
-                        if yearsSinceEvent(item.eventDate) > 0 {
-                            Text("\(item.name!) is exactly \(yearsSinceEvent(item.eventDate)) years old!")
-                                .padding(.bottom)
-                        } else {
-                            Text("\(daysUntilEvent(item.eventDate)) days is exactly \(daysConvertedToYears(daysUntilEvent(item.eventDate))) years")
-                                .padding(.bottom)
+            VStack {
+                HStack {
+                    Text("Date Tracker")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding()
+                    Spacer()
+                }
+                List {
+                    ForEach(sortedItems, id: \.self) { item in
+                        NavigationLink {
+                            VStack(spacing: 5) {
+                                Text("\(item.name!)'s \(item.eventType!) is \(item.eventDate!, formatter: dateFormatter)")
+                                
+                                Text("\(item.preferredPronoun!) next \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")
+                                
+                                Text("on \(dayOfWeek(item.eventDate)) \(item.eventDate!, formatter: shortDateFormatter)")
+                                
+                                if yearsSinceEvent(item.eventDate) > 0 {
+                                    Text("\(item.name!) is exactly \(yearsSinceEvent(item.eventDate)) years old!")
+                                } else {
+                                    Text("\(daysUntilEvent(item.eventDate)) days is exactly \(daysConvertedToYears(daysUntilEvent(item.eventDate))) years")
+                                }
+                                Text("Event added to app: \(item.timestamp!, formatter: dateTimeFormatter)")
+                                    .font(.caption)
+                                    .padding(.top, 20)
+                                Text("ID: \(item.id!)")
+                                    .font(.caption)
+                                    .foregroundColor(.blue)
+                                
+                            }
+                        } label: {
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("\(item.name!)'s \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")  // This is what is shown in Label for each item
+
+                                Text("\(dayOfWeek(item.eventDate)) \(item.eventDate!, formatter: shortDateFormatter)")
+                            }
+                        }
+                    }
+                    .onDelete(perform: deleteItems)
+                }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                    ToolbarItem {
+                        HStack {
+                            NavigationLink(destination: NewDataEntryForm()) {
+                                Label("Create a new event", systemImage: "plus")
+                            }
+                            
                         }
                         
-                        Text("Event added to app: \(item.timestamp!, formatter: dateTimeFormatter)")
-                            .font(.caption)
-                        Text("ID: \(item.id!)")
-                            .font(.caption)
-                            .foregroundColor(.blue)
-                        
-                        Spacer()
-                        
-                    } label: {
-                        
-                        Text("\(item.name!)'s \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")  // This is what is shown in Label for each item
                     }
                 }
-                .onDelete(perform: deleteItems)
+                Text("Select an item")
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    HStack {
-                        NavigationLink(destination: NewDataEntryForm()) {
-                            Label("Create a new event", systemImage: "plus")
-                        }
-                        
-                    }
-                    
-                }
-            }
-            Text("Select an item")
         }
     }
     
@@ -145,6 +152,26 @@ private func daysConvertedToYears(_ days: Int) -> Double {
     return exactYears
 }
 
+private func dayOfWeek(_ eventDate: Date?) -> String {
+    guard let eventDate = eventDate else { return "Unknown" }
+
+    let calendar = Calendar.current
+    var nextEventDate = eventDate
+
+    // Loop until nextEventDate is in the future, similar to daysUntilEvent function
+    while nextEventDate < Date() {
+        if let newDate = calendar.date(byAdding: .year, value: 1, to: nextEventDate) {
+            nextEventDate = newDate
+        } else {
+            return "Unknown"  // Return "Unknown" if we can't calculate the next event date
+        }
+    }
+
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEEE"  // "EEEE" returns the full name of the weekday (e.g., "Sunday")
+    return dateFormatter.string(from: nextEventDate)
+}
+
 
 private let dateTimeFormatter: DateFormatter = {
     let formatter = DateFormatter()
@@ -153,13 +180,18 @@ private let dateTimeFormatter: DateFormatter = {
     return formatter
 }()
 
-
 private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .medium
     formatter.timeStyle = .none
     return formatter
-}()  // is () needed after this function or the function above?
+}()
+
+private let shortDateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMMM dd"  // Month and day, without the year
+    return formatter
+}()
 
 
 struct ContentView_Previews: PreviewProvider {
