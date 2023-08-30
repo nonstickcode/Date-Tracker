@@ -18,8 +18,8 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
     
     private var sortedItems: [Item] {
-           return items.sorted { daysUntilEvent($0.eventDate) < daysUntilEvent($1.eventDate) } // This is what decides the order of the list after the one above does then lets daysUntilEvent sort it
-       }
+        return items.sorted { daysUntilEvent($0.eventDate) < daysUntilEvent($1.eventDate) } // This is what decides the order of the list after the one above does then lets daysUntilEvent sort it
+    }
     
     var body: some View {
         
@@ -28,6 +28,7 @@ struct ContentView: View {
             VStack {
                 HStack {
                     Text("Date Tracker")
+                        .foregroundColor(.white)
                         .font(.largeTitle)
                         .bold()
                         .padding()
@@ -39,9 +40,13 @@ struct ContentView: View {
                             VStack(spacing: 5) {
                                 Text("\(item.name!)'s \(item.eventType!) is \(item.eventDate!, formatter: dateFormatter)")
                                 
-                                Text("\(item.preferredPronoun!) next \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")
+                                Text("\(item.preferredPronoun!) \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")
                                 
-                                Text("on \(dayOfWeek(item.eventDate)) \(item.eventDate!, formatter: shortDateFormatter)")
+                                if yearsSinceEvent(item.eventDate) > 0 {
+                                    Text("on \(dayOfWeek(item.eventDate)) \(item.eventDate!, formatter: shortDateFormatter)")
+                                } else {
+                                    Text("\(item.eventDate!, formatter: dateFormatter) will be a \(dayOfWeek(item.eventDate))")
+                                }
                                 
                                 if yearsSinceEvent(item.eventDate) > 0 {
                                     Text("\(item.name!) is exactly \(yearsSinceEvent(item.eventDate)) years old!")
@@ -59,7 +64,7 @@ struct ContentView: View {
                         } label: {
                             VStack(alignment: .leading, spacing: 3) {
                                 Text("\(item.name!)'s \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")  // This is what is shown in Label for each item
-
+                                
                                 Text("\(dayOfWeek(item.eventDate)) \(item.eventDate!, formatter: shortDateFormatter)")
                             }
                         }
@@ -68,20 +73,20 @@ struct ContentView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
-                    ToolbarItem {
                         HStack {
                             NavigationLink(destination: NewDataEntryForm()) {
-                                Label("Create a new event", systemImage: "plus")
+                                Image(systemName: "plus")
+                                    .foregroundColor(.white)
                             }
-                            
+                            EditButton()
+                                .foregroundColor(.white)
                         }
-                        
                     }
                 }
                 Text("Select an item")
+                    .foregroundColor(.white)
             }
+            .background(Color.blue.edgesIgnoringSafeArea(.all))
         }
     }
     
@@ -140,10 +145,10 @@ private func yearsSinceEvent(_ eventDate: Date?) -> Double {
     
     guard let days = components.day else { return 0.0 }
     
-    // Calculate the exact years, accounting for leap years
     let exactYears = Double(days) / 365.25
     
-    return Double(String(format: "%.3f", exactYears)) ?? 0.0  // Truncate to 3 decimal places
+    return exactYears
+    
 }
 
 private func daysConvertedToYears(_ days: Int) -> Double {
@@ -154,10 +159,10 @@ private func daysConvertedToYears(_ days: Int) -> Double {
 
 private func dayOfWeek(_ eventDate: Date?) -> String {
     guard let eventDate = eventDate else { return "Unknown" }
-
+    
     let calendar = Calendar.current
     var nextEventDate = eventDate
-
+    
     // Loop until nextEventDate is in the future, similar to daysUntilEvent function
     while nextEventDate < Date() {
         if let newDate = calendar.date(byAdding: .year, value: 1, to: nextEventDate) {
@@ -166,7 +171,7 @@ private func dayOfWeek(_ eventDate: Date?) -> String {
             return "Unknown"  // Return "Unknown" if we can't calculate the next event date
         }
     }
-
+    
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "EEEE"  // "EEEE" returns the full name of the weekday (e.g., "Sunday")
     return dateFormatter.string(from: nextEventDate)
