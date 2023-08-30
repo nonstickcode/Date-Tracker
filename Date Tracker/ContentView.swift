@@ -43,13 +43,13 @@ struct ContentView: View {
                                 Text("\(item.preferredPronoun!) \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")
                                 
                                 if yearsSinceEvent(item.eventDate) > 0 {
-                                    Text("on \(dayOfWeek(item.eventDate)) \(item.eventDate!, formatter: shortDateFormatter)")
+                                    Text("It will be on a \(dayOfWeek(item.eventDate)) this year")
                                 } else {
                                     Text("\(item.eventDate!, formatter: dateFormatter) will be a \(dayOfWeek(item.eventDate))")
                                 }
                                 
                                 if yearsSinceEvent(item.eventDate) > 0 {
-                                    Text("\(item.name!) is exactly \(yearsSinceEvent(item.eventDate)) years old!")
+                                    Text("Exact age is \(yearsSinceEvent(item.eventDate)) years old!")
                                 } else {
                                     Text("\(daysUntilEvent(item.eventDate)) days is exactly \(daysConvertedToYears(daysUntilEvent(item.eventDate))) years")
                                 }
