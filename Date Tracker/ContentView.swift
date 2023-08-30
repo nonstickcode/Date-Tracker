@@ -86,7 +86,7 @@ struct ContentView: View {
                 Text("Select an item")
                     .foregroundColor(.white)
             }
-            .background(Color.blue.edgesIgnoringSafeArea(.all))
+            .background(Color.blue.opacity(0.7).edgesIgnoringSafeArea(.all))
         }
     }
     
