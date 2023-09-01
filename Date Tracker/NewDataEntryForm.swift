@@ -39,12 +39,13 @@ struct NewDataEntryForm: View {
         return Calendar.current.date(from: components) ?? Date()
     }
     
-    @State private var currentChevronIndex = 0
+    
     
     
     var body: some View {
         NavigationView {
             VStack {
+                
                 //
                 Text("Add New Event")
                     .font(.largeTitle)
@@ -52,21 +53,22 @@ struct NewDataEntryForm: View {
                     .padding(.bottom, 8)
                     .padding(.top, 8)
                 
-                Text("swipe down to dismiss")
-                    .italic()
-                    .padding(.bottom, 8)
-                VStack {
-                    ForEach(0..<3) { index in
-                        Image(systemName: "chevron.compact.down")
-                            .opacity(index == currentChevronIndex ? 1.0 : 0.5)
-                            .padding(.bottom, 4)
-                    }
-                }
-                .onAppear {
-                    withAnimation(Animation.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
-                        currentChevronIndex = 2
-                    }
-                }
+                Text("Swipe down to dismiss")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(.top, 8)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                // Detect swipe down gesture
+                                if value.translation.height > 100 {
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                            }
+                    )
+                Image(systemName: "chevron.compact.down")
+                // add .scaleEffect(.bounce) when ios 17 drops
+                    .padding(2)
                 
                 Form {
                     Section(header: Text("Name of Person or Event")) {
@@ -137,7 +139,7 @@ struct NewDataEntryForm: View {
                                     .frame(minWidth: 0, maxWidth: .infinity)
                                     .padding()
                             }
-                            .background(Color.accentColor)
+                            .background(Color.green)
                             .foregroundColor(Color.white)
                             .cornerRadius(10)
                             Spacer()
@@ -157,13 +159,13 @@ struct NewDataEntryForm: View {
                 
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text("Error"),
-                          message: Text("All fields are required."),
+                          message: Text("Name field is required."),
                           dismissButton: .default(Text("OK")))
                 }
                 
                 // Alert End -----------------------------------------------------------------------
             }
-            .background(Color.red.opacity(0.1))
+            .background(Color.green.opacity(0.5))
         }
         
     }
@@ -181,7 +183,7 @@ struct NewDataEntryForm: View {
         newItem.eventDate = newEventDate
         newItem.eventType = newEventType
         
-        if newEventName.isEmpty || newPreferredPronoun.isEmpty {
+        if newEventName.isEmpty {
             showAlert = true
             return
         }
