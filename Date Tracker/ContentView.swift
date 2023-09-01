@@ -17,9 +17,13 @@ struct ContentView: View {
     
     private var items: FetchedResults<Item>
     
+    @State private var isPresentingForm = false
+    
     private var sortedItems: [Item] {
         return items.sorted { daysUntilEvent($0.eventDate) < daysUntilEvent($1.eventDate) } // This is what decides the order of the list after the one above does then lets daysUntilEvent sort it
     }
+    
+    
     
     var body: some View {
         
@@ -33,6 +37,17 @@ struct ContentView: View {
                         .bold()
                         .padding()
                     Spacer()
+                    HStack {
+                        Button(action: {
+                            isPresentingForm.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                                .foregroundColor(.white)
+                        }
+                        EditButton()
+                            .foregroundColor(.white)
+                    }
+                    .padding()
                 }
                 List {
                     ForEach(sortedItems, id: \.self) { item in
@@ -71,22 +86,15 @@ struct ContentView: View {
                     }
                     .onDelete(perform: deleteItems)
                 }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack {
-                            NavigationLink(destination: NewDataEntryForm()) {
-                                Image(systemName: "plus")
-                                    .foregroundColor(.white)
-                            }
-                            EditButton()
-                                .foregroundColor(.white)
-                        }
-                    }
-                }
+                
                 Text("Select an item")
                     .foregroundColor(.white)
             }
             .background(Color.blue.opacity(0.7).edgesIgnoringSafeArea(.all))
+            .sheet(isPresented: $isPresentingForm) {
+                NewDataEntryForm()
+                    .environment(\.managedObjectContext, viewContext)
+            }
         }
     }
     
