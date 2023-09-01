@@ -39,105 +39,134 @@ struct NewDataEntryForm: View {
         return Calendar.current.date(from: components) ?? Date()
     }
     
+    @State private var currentChevronIndex = 0
+    
     
     var body: some View {
         NavigationView {
-            Form {
-                Section(header: Text("Name of Person or Event")) {
-                    TextField("enter name here", text: $newEventName)
+            VStack {
+                //
+                Text("Add New Event")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.bottom, 8)
+                    .padding(.top, 8)
+                
+                Text("swipe down to dismiss")
+                    .italic()
+                    .padding(.bottom, 8)
+                VStack {
+                    ForEach(0..<3) { index in
+                        Image(systemName: "chevron.compact.down")
+                            .opacity(index == currentChevronIndex ? 1.0 : 0.5)
+                            .padding(.bottom, 4)
+                    }
                 }
-                Section(header: Text("Preferred pronoun for person or event")) {
-                    TextField("enter pronoun here", text: $newPreferredPronoun)
+                .onAppear {
+                    withAnimation(Animation.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
+                        currentChevronIndex = 2
+                    }
                 }
                 
-                
-                Section(header: Text("Event Date, upcoming or past")) {
-                    VStack {
-                        Picker("Month", selection: $selectedMonth) {
-                            ForEach(months, id: \.self) { month in
-                                Text(month).tag(month)
+                Form {
+                    Section(header: Text("Name of Person or Event")) {
+                        TextField("enter name here", text: $newEventName)
+                    }
+                    Section(header: Text("Preferred pronoun for person or event")) {
+                        TextField("enter pronoun here", text: $newPreferredPronoun)
+                    }
+                    
+                    
+                    Section(header: Text("Event Date, upcoming or past")) {
+                        VStack {
+                            Picker("Month", selection: $selectedMonth) {
+                                ForEach(months, id: \.self) { month in
+                                    Text(month).tag(month)
+                                }
+                            }
+                            
+                            
+                            Picker("Day", selection: $selectedDay) {
+                                ForEach(1..<32) { day in
+                                    Text("\(day)").tag(day)
+                                }
+                            }
+                            
+                            
+                            Picker("Year", selection: $selectedYear) {
+                                ForEach(1920..<2100) { year in
+                                    Text(String(format: "%ld", locale: Locale(identifier: "en_US_POSIX"), year)).tag(year)
+                                    
+                                }
+                            }
+                            
+                            
+                        }
+                        .onAppear {
+                            // Initialize the custom picker with the existing date
+                            let components = Calendar.current.dateComponents([.day, .month, .year], from: newEventDate)
+                            selectedMonth = months[(components.month ?? 1) - 1]
+                            selectedDay = components.day ?? 1
+                            selectedYear = components.year ?? 2023
+                        }
+                        .onChange(of: customDate) { newDate in
+                            newEventDate = newDate
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    Section(header: Text("Event Type")) {
+                        Picker("Select Event Type", selection: $newEventType) {
+                            ForEach(newEventTypeOptions, id: \.self) {
+                                Text($0)
                             }
                         }
-                        
-                        
-                        Picker("Day", selection: $selectedDay) {
-                            ForEach(1..<32) { day in
-                                Text("\(day)").tag(day)
+                    }
+                    
+                    // Save Button --------------------------------------------------------------------
+                    
+                    Section {
+                        VStack {
+                            Spacer()
+                            Button(action: addItem) {
+                                Text("Save Event")
+                                    .font(.system(size: 18))
+                                    .bold()
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .padding()
                             }
+                            .background(Color.accentColor)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(10)
+                            Spacer()
                         }
-                        
-                        
-                        Picker("Year", selection: $selectedYear) {
-                            ForEach(1920..<2100) { year in
-                                Text(String(format: "%ld", locale: Locale(identifier: "en_US_POSIX"), year)).tag(year)
-
-                            }
-                        }
-                        
-                        
                     }
-                    .onAppear {
-                        // Initialize the custom picker with the existing date
-                        let components = Calendar.current.dateComponents([.day, .month, .year], from: newEventDate)
-                        selectedMonth = months[(components.month ?? 1) - 1]
-                        selectedDay = components.day ?? 1
-                        selectedYear = components.year ?? 2023
-                    }
-                    .onChange(of: customDate) { newDate in
-                        newEventDate = newDate
-                    }
+                    .frame(minHeight: 0, maxHeight: .infinity)
+                    
+                    // Save Button End ------------------------------------------------------------------
+                    
                 }
                 
                 
                 
                 
-                Section(header: Text("Event Type")) {
-                    Picker("Select Event Type", selection: $newEventType) {
-                        ForEach(newEventTypeOptions, id: \.self) {
-                            Text($0)
-                        }
-                    }
+                
+                // Alert ---------------------------------------------------------------------------
+                
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Error"),
+                          message: Text("All fields are required."),
+                          dismissButton: .default(Text("OK")))
                 }
                 
-                // Save Button --------------------------------------------------------------------
-                
-                Section {
-                    VStack {
-                        Spacer()
-                        Button(action: addItem) {
-                            Text("Save Event")
-                                .font(.system(size: 18))
-                                .bold()
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                                .padding()
-                        }
-                        .background(Color.accentColor)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(10)
-                        Spacer()
-                    }
-                }
-                .frame(minHeight: 0, maxHeight: .infinity)
-                
-                // Save Button End ------------------------------------------------------------------
-                
+                // Alert End -----------------------------------------------------------------------
             }
-            .navigationBarTitle("New Event Entry", displayMode: .inline)
-            
-            
-            // Alert ---------------------------------------------------------------------------
-            
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("Error"),
-                      message: Text("All fields are required."),
-                      dismissButton: .default(Text("OK")))
-            }
-            
-            // Alert End -----------------------------------------------------------------------
+            .background(Color.red.opacity(0.1))
         }
         
     }
-    
     
     
     private func addItem() {
@@ -180,3 +209,4 @@ struct NewDataEntryForm_Previews: PreviewProvider {
         }
     }
 }
+

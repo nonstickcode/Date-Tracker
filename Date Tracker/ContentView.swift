@@ -83,6 +83,7 @@ struct ContentView: View {
                                 Text("\(dayOfWeek(item.eventDate)) \(item.eventDate!, formatter: shortDateFormatter)")
                             }
                         }
+                        
                     }
                     .onDelete(perform: deleteItems)
                 }
