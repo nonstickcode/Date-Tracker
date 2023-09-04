@@ -21,8 +21,7 @@ struct HalfModalView<Content: View>: View {
                 VStack {
                     self.content
                 }
-                .cornerRadius(20)
-                .shadow(radius: 5)
+                .shadow(radius: 50)
                 .frame(width: geometry.size.width, height: geometry.size.height * 0.3)
                 .background(Color.white)
                 Spacer()
