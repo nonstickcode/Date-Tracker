@@ -39,13 +39,36 @@ struct ContentView: View {
                                     ItemButtonView(item: item)
                                 }
                                 
-                                if isEditMode {
-                                    Button("Delete") {
+                                // long press menu starts here ----------------------------------------------
+                                .contextMenu {
+                                    Button(action: {
                                         deleteItem(item: item)
+                                    }) {
+                                        Label("Delete", systemImage: "trash")
                                     }
-                                    .background(Color.red)
-                                    .foregroundColor(.white)
+                                    Button(action: {
+                                        // add edit action here
+                                    }) {
+                                        Label("Edit", systemImage: "pencil")
+                                    }
+                                    // long press menu ends here ----------------------------------------------
+                                    
+                                    
+                                    
+                                    //                                if isEditMode {
+                                    //                                    Button("Delete") {
+                                    //                                        deleteItem(item: item)
+                                    //                                    }
+                                    //                                    .background(Color.red)
+                                    //                                    .foregroundColor(.white)
+                                    //                                }
+                                    
+                                    
+                                    
+                                    
+                                    
                                 }
+                                
                             }
                         }
                         if items.isEmpty {
@@ -121,7 +144,7 @@ struct ContentView: View {
     
     
     
-
+    
     
     private func itemDetailView(item: Item) -> some View {
         VStack(spacing: 5) {
