@@ -17,14 +17,15 @@ struct ContentView: View {
     
     private var items: FetchedResults<Item>
     
-    @State private var isPresentingForm = false
-    
     private var sortedItems: [Item] {
         return items.sorted { daysUntilEvent($0.eventDate) < daysUntilEvent($1.eventDate) } // This is what decides the order of the list after the one above does then lets daysUntilEvent sort it
     }
     
-    
+    @State private var isPresentingForm = false
+    @State private var selectedItem: Item?  // <-- This is your state variable for the selected item
     @State private var isEditMode: Bool = false
+    
+    
     
     var body: some View {
         NavigationView {
@@ -36,17 +37,13 @@ struct ContentView: View {
                         Spacer()
                         ForEach(sortedItems, id: \.self) { item in
                             HStack {
-                                NavigationLink(destination: itemDetailView(item: item)) {
+                                Button(action: {
+                                    self.selectedItem = item
+                                }) {
                                     ItemButtonView(item: item)
                                 }
-                                .swipeActions {
-                                            Button(action: {
-                                                deleteItem(item: item)
-                                            }) {
-                                                Label("Delete", systemImage: "trash")
-                                            }
-                                            .tint(.red)
-                                        }
+                                
+                                
                                 // long press menu starts here ----------------------------------------------
                                 .contextMenu {
                                     Button(action: {
@@ -100,7 +97,14 @@ struct ContentView: View {
                 NewDataEntryForm()
                     .environment(\.managedObjectContext, viewContext)
             }
+            
         }
+        .sheet(item: $selectedItem) { item in
+                    HalfModalView {
+                        ItemDetailView(item: item)
+                    }
+                    
+                }
     }
     
     
@@ -151,37 +155,11 @@ struct ContentView: View {
         }
     }
     
-    
-    
-    
-    
-    private func itemDetailView(item: Item) -> some View {
-        VStack(spacing: 5) {
-            Text("\(item.name!)'s \(item.eventType!) is \(item.eventDate!, formatter: dateFormatter)")
-            
-            Text("\(item.preferredPronoun!) \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")
-            
-            if yearsSinceEvent(item.eventDate) > 0 {
-                Text("It will be on a \(dayOfWeek(item.eventDate)) this year")
-            } else {
-                Text("\(item.eventDate!, formatter: dateFormatter) will be a \(dayOfWeek(item.eventDate))")
-            }
-            
-            if yearsSinceEvent(item.eventDate) > 0 {
-                Text("Exact age is \(yearsSinceEvent(item.eventDate)) years old!")
-            } else {
-                Text("\(daysUntilEvent(item.eventDate)) days is exactly \(daysConvertedToYears(daysUntilEvent(item.eventDate))) years")
-            }
-            Text("Event added to app: \(item.timestamp!, formatter: dateTimeFormatter)")
-                .font(.caption)
-                .padding(.top, 20)
-            Text("ID: \(item.id!)")
-                .font(.caption)
-                .foregroundColor(.blue)
-            
-        }
-    }
 }
+    
+    
+    
+  
 
 
 
