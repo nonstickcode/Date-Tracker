@@ -99,7 +99,7 @@ struct ContentView: View {
                         .padding(.top, 12)
                         .frame(height: 25)
                 }
-                .background(Color.black.edgesIgnoringSafeArea(.all))
+                .background(Color.black.opacity(0.8).edgesIgnoringSafeArea(.all))
                 
                 if showOverlay, let selectedItem = selectedItem {
                     HalfModalView {
@@ -129,9 +129,8 @@ struct ContentView: View {
     private var headerView: some View {
         HStack {
             Text("Date Tracker")
-                .foregroundColor(.white)
-                .font(.largeTitle)
-                .bold()
+                .headerTopStyle()
+                
                 .padding()
             Spacer()
             HStack {

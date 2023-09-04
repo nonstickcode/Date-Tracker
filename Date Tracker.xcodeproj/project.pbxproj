@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6412292AA5788500CC7506 /* ItemButtonView.swift */; };
 		2B64122D2AA5797800CC7506 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */; };
+		2B9879A52AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */; };
+		2B9879A92AA660BC00DB74FF /* AppStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9879A82AA660BC00DB74FF /* AppStyles.swift */; };
 		2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */; };
 		2BCC2DDF2A9B17B800D81239 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC2DDD2A9B17B800D81239 /* Item+CoreDataClass.swift */; };
 		2BCC2DE02A9B17B800D81239 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC2DDE2A9B17B800D81239 /* Item+CoreDataProperties.swift */; };
@@ -25,6 +27,9 @@
 /* Begin PBXFileReference section */
 		2B6412292AA5788500CC7506 /* ItemButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemButtonView.swift; sourceTree = "<group>"; };
 		2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		2B9879A62AA6603F00DB74FF /* Date-Tracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Date-Tracker-Info.plist"; sourceTree = SOURCE_ROOT; };
+		2B9879A82AA660BC00DB74FF /* AppStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyles.swift; sourceTree = "<group>"; };
 		2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataEntryForm.swift; sourceTree = "<group>"; };
 		2BCC2DDD2A9B17B800D81239 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2BCC2DDE2A9B17B800D81239 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -86,6 +91,15 @@
 			path = "Global Functions";
 			sourceTree = "<group>";
 		};
+		2B9879A72AA6607200DB74FF /* App Styles */ = {
+			isa = PBXGroup;
+			children = (
+				2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */,
+				2B9879A82AA660BC00DB74FF /* AppStyles.swift */,
+			);
+			path = "App Styles";
+			sourceTree = "<group>";
+		};
 		2BE1B85F2A9A7A3800CD2929 = {
 			isa = PBXGroup;
 			children = (
@@ -105,12 +119,14 @@
 		2BE1B86A2A9A7A3800CD2929 /* Date Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				2B9879A62AA6603F00DB74FF /* Date-Tracker-Info.plist */,
 				2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */,
 				2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */,
 				2B6412282AA5784E00CC7506 /* Shared Components */,
 				2B64122B2AA5794E00CC7506 /* Global Functions */,
 				2B6412272AA51F5D00CC7506 /* Secondary Views */,
 				2BE1B86F2A9A7A3900CD2929 /* Assets.xcassets */,
+				2B9879A72AA6607200DB74FF /* App Styles */,
 				2B116CB92A9A7FA900E5CA8E /* Core Data */,
 				2BE1B8712A9A7A3900CD2929 /* Preview Content */,
 			);
@@ -193,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BE1B8732A9A7A3900CD2929 /* Preview Assets.xcassets in Resources */,
+				2B9879A52AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf in Resources */,
 				2BE1B8702A9A7A3900CD2929 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +224,7 @@
 				2BCC2DE02A9B17B800D81239 /* Item+CoreDataProperties.swift in Sources */,
 				2BCC2DDF2A9B17B800D81239 /* Item+CoreDataClass.swift in Sources */,
 				2BE1B8752A9A7A3900CD2929 /* Persistence.swift in Sources */,
+				2B9879A92AA660BC00DB74FF /* AppStyles.swift in Sources */,
 				2BF48F922AA5C47C004824C3 /* HalfModalView.swift in Sources */,
 				2BF48F8F2AA5B94E004824C3 /* ItemDetailView.swift in Sources */,
 				2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */,
@@ -346,6 +364,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Date Tracker/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Date-Tracker-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -377,6 +396,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Date Tracker/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Date-Tracker-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
