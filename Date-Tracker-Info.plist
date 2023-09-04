@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>LobsterTwo-Bold.ttf</string>
 		<string>RobotoSlab-VariableFont_wght.ttf</string>
 	</array>
 </dict>

@@ -11,7 +11,7 @@ extension Text {
     
     func headerTopStyle() -> Text {
         self
-            .font(.custom("RobotoSlab-Regular", size: 36))
+            .font(.custom("LobsterTwo-Bold", size: 36))
             .foregroundColor(.white)
     }
     
