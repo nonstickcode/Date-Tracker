@@ -33,12 +33,20 @@ struct ContentView: View {
                 
                 ScrollView {
                     LazyVStack {
+                        Spacer()
                         ForEach(sortedItems, id: \.self) { item in
                             HStack {
                                 NavigationLink(destination: itemDetailView(item: item)) {
                                     ItemButtonView(item: item)
                                 }
-                                
+                                .swipeActions {
+                                            Button(action: {
+                                                deleteItem(item: item)
+                                            }) {
+                                                Label("Delete", systemImage: "trash")
+                                            }
+                                            .tint(.red)
+                                        }
                                 // long press menu starts here ----------------------------------------------
                                 .contextMenu {
                                     Button(action: {
@@ -67,6 +75,7 @@ struct ContentView: View {
                                 }
                                 
                             }
+                            
                         }
                         if items.isEmpty {
                             ItemButtonView(item: nil)
@@ -81,8 +90,10 @@ struct ContentView: View {
                 }
                 .background(Color.gray.opacity(0.9).edgesIgnoringSafeArea(.all))
                 
-                Text("Select an item")
+                Text("Select an event")
                     .foregroundColor(.white)
+                    .padding(.top, 12)
+                    .frame(height: 25)
             }
             .background(Color.accentColor.edgesIgnoringSafeArea(.all))
             .sheet(isPresented: $isPresentingForm) {
@@ -122,6 +133,7 @@ struct ContentView: View {
             }
             .padding()
         }
+        .frame(height: 60)
     }
     
     
