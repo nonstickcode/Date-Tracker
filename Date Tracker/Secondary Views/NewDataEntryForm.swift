@@ -136,16 +136,25 @@ struct NewDataEntryForm: View {
                     
                     Section {
                         VStack {
-                            Spacer()
+                            
                             Button(action: addItem) {
-                                Text("Save Event")
-                                    .formSaveButtonStyle()
-                                    .frame(minWidth: 0, maxWidth: .infinity)
-                                    .padding()
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "calendar.badge.plus")
+                                        .font(.system(size: 30))
+                                        .padding(.trailing, 10)
+                                    Text("Save")
+                                        .formSaveButtonStyle()
+                                    Spacer()
+                                }
+                                .padding(10)
+                                
+                                .frame(minWidth: 0, maxWidth: .infinity)
                             }
-                            .background(Color.formHeaderAndSaveButton)
+                            .background(Color.formHeaderAndSaveButtonBackground)
+                            .foregroundColor(.formHeaderAndSaveButtonForeground)
                             .cornerRadius(10)
-                            Spacer()
+                            
                         }
                     }
                     .frame(minHeight: 0, maxHeight: .infinity)
@@ -168,7 +177,7 @@ struct NewDataEntryForm: View {
                 
                 // Alert End -----------------------------------------------------------------------
             }
-            .background(Color.formHeaderAndSaveButton)
+            .background(Color.formHeaderAndSaveButtonBackground)
         }
         
     }

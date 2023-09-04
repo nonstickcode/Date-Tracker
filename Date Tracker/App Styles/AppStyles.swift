@@ -56,7 +56,7 @@ extension Text {
     func formHeaderStyle() -> Text {
         self
             .font(.custom("BlackOpsOne-Regular", size: 36))
-            .foregroundColor(.formHeaderAndSaveButtonTextColor)
+            .foregroundColor(.formHeaderAndSaveButtonForeground)
             
     }
     func formRegularStyle() -> Text {
@@ -71,8 +71,8 @@ extension Text {
     }
     func formSaveButtonStyle() -> Text {
         self
-            .font(.custom("BlackOpsOne-Regular", size: 26))
-            .foregroundColor(.formHeaderAndSaveButtonTextColor)
+            .font(.custom("BlackOpsOne-Regular", size: 32))
+            .foregroundColor(.formHeaderAndSaveButtonForeground)
             
     }
     
@@ -107,6 +107,6 @@ extension Color {
     // accentColor = is blue
     static let mainHeaderTextColor = Color.white
     static let mainFooterTextColor = Color.white
-    static let formHeaderAndSaveButtonTextColor = Color.black
-    static let formHeaderAndSaveButton = Color.green.opacity(0.8)
+    static let formHeaderAndSaveButtonForeground = Color.black
+    static let formHeaderAndSaveButtonBackground = Color.green.opacity(0.8)
 }
