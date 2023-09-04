@@ -16,14 +16,20 @@ struct ItemButtonView: View {
             .fill(Color.white)
             .frame(height: 60)
             .overlay(
-                VStack(alignment: .leading, spacing: 3) {
+                VStack( spacing: 3) {
                     if let item = item {
                         Text("\(item.name ?? "Unknown")'s \(item.eventType ?? "Unknown") is in \(daysUntilEvent(item.eventDate)) days")
                         Text("\(dayOfWeek(item.eventDate) ) \(item.eventDate.map { dateFormatter.string(from: $0) } ?? "Unknown")")
                     } else {
                         Text("No data available.")
                             .bold()
-                        Text("Tap + to add new event.")
+                        HStack {
+                            
+                            Text("Tap ")
+                            Image(systemName: "plus.app")
+                                .padding(-6)
+                            Text(" to add new event.")
+                        }
                     }
                 }
                 
