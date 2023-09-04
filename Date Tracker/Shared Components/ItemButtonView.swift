@@ -22,6 +22,7 @@ struct ItemButtonView: View {
                         Text("\(dayOfWeek(item.eventDate) ) \(item.eventDate.map { dateFormatter.string(from: $0) } ?? "Unknown")")
                     } else {
                         Text("No data available.")
+                            .bold()
                         Text("Tap + to add new event.")
                     }
                 }

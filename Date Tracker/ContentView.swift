@@ -59,12 +59,12 @@ struct ContentView: View {
                         isEditMode = false
                     }
                 }
-                .background(Color.gray.opacity(0.7).edgesIgnoringSafeArea(.all))
+                .background(Color.gray.opacity(0.9).edgesIgnoringSafeArea(.all))
                 
                 Text("Select an item")
                     .foregroundColor(.white)
             }
-            .background(Color.blue.opacity(0.7).edgesIgnoringSafeArea(.all))
+            .background(Color.accentColor.edgesIgnoringSafeArea(.all))
             .sheet(isPresented: $isPresentingForm) {
                 NewDataEntryForm()
                     .environment(\.managedObjectContext, viewContext)
@@ -86,10 +86,13 @@ struct ContentView: View {
             Spacer()
             HStack {
                 Button(action: {
+                    isEditMode = false // Disable edit mode when the '+' button is pressed.
                     isPresentingForm.toggle()
                 }) {
-                    Image(systemName: "plus")
+                    Image(systemName: "plus.app")
                         .foregroundColor(.white)
+                        .font(.system(size: 24))
+                        .padding(10)
                 }
                 
                 Button(isEditMode ? "Done" : "Edit") {
