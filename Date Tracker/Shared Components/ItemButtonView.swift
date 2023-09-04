@@ -18,8 +18,23 @@ struct ItemButtonView: View {
             .overlay(
                 VStack( spacing: 3) {
                     if let item = item {
-                        Text("\(item.name ?? "Unknown")'s \(item.eventType ?? "Unknown") is in \(daysUntilEvent(item.eventDate)) days")
-                        Text("\(dayOfWeek(item.eventDate) ) \(item.eventDate.map { dateFormatter.string(from: $0) } ?? "Unknown")")
+                        
+                        if daysUntilEvent(item.eventDate!) == 0 {
+                            HStack {
+                                Text("\(item.name ?? "Unknown")'s \(item.eventType ?? "Unknown") is Tomorrow!")
+                                Image(systemName: "party.popper")
+                            }
+                            .bold()
+                        } else if daysUntilEvent(item.eventDate!) == 365 {
+                            HStack {
+                                Text("\(item.name ?? "Unknown")'s \(item.eventType ?? "Unknown") is Today!")
+                                Image(systemName: "party.popper.fill")
+                            }
+                            .bold()
+                        } else {
+                            Text("\(item.name ?? "Unknown")'s \(item.eventType ?? "Unknown") is in \(daysUntilEvent(item.eventDate)) days")
+                        }
+                        Text("\(dayOfWeek(item.eventDate)) \(item.eventDate.map { dateFormatter.string(from: $0) } ?? "Unknown")")
                     } else {
                         Text("No data available.")
                             .bold()

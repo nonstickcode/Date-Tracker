@@ -16,7 +16,21 @@ struct ItemDetailView: View {
             VStack(spacing: 5) {
                 Text("\(item.name!)'s \(item.eventType!) is \(item.eventDate!, formatter: dateFormatter)")
                 
-                Text("\(item.preferredPronoun!) \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")
+                if daysUntilEvent(item.eventDate!) == 0 {
+                    HStack {
+                        Text("Party Time Tomorrow!")
+                        Image(systemName: "party.popper")
+                    }
+                    .bold()
+                } else if daysUntilEvent(item.eventDate!) == 365 {
+                    HStack {
+                        Text("Party Time Today!")
+                        Image(systemName: "party.popper.fill")
+                    }
+                    .bold()
+                } else {
+                    Text("\(item.name ?? "Unknown")'s \(item.eventType ?? "Unknown") is in \(daysUntilEvent(item.eventDate)) days")
+                }
                 
                 if yearsSinceEvent(item.eventDate) > 0 {
                     Text("It will be on a \(dayOfWeek(item.eventDate)) this year")
