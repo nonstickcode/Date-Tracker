@@ -22,7 +22,7 @@ struct ContentView: View {
     }
     
     @State private var isPresentingForm = false
-    @State private var selectedItem: Item?  // <-- This is your state variable for the selected item
+    @State private var selectedItem: Item?  
     @State private var isEditMode: Bool = false
     
     
@@ -31,7 +31,7 @@ struct ContentView: View {
     
     
     var body: some View {
-        NavigationView {
+        
             ZStack {
                 VStack {
                     headerView
@@ -119,7 +119,7 @@ struct ContentView: View {
                 showOverlay = false
             }
         }
-    }
+    
     
     
     
