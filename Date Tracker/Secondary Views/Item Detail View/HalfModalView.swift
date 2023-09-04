@@ -1,15 +1,8 @@
-//
-//  HalfModalView.swift
-//  Date Tracker
-//
-//  Created by Cody McRoy on 9/4/23.
-//
-
 import SwiftUI
 
 struct HalfModalView<Content: View>: View {
     let content: Content
-
+    
     init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
@@ -21,9 +14,11 @@ struct HalfModalView<Content: View>: View {
                 VStack {
                     self.content
                 }
+                .padding(20)
                 .shadow(radius: 50)
-                .frame(width: geometry.size.width, height: geometry.size.height * 0.3)
+                .frame(width: geometry.size.width)
                 .background(Color.white)
+                .frame(minHeight: 0, maxHeight: .infinity)
                 Spacer()
             }
         }
