@@ -13,7 +13,7 @@ struct HalfModalView<Content: View>: View {
     init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -21,22 +21,28 @@ struct HalfModalView<Content: View>: View {
                 VStack {
                     self.content
                 }
+                .cornerRadius(20)
+                .shadow(radius: 5)
                 .frame(width: geometry.size.width, height: geometry.size.height * 0.3)
                 .background(Color.white)
-                .cornerRadius(20)
-                .shadow(radius: 30)
                 Spacer()
             }
-            .background(Color.clear.edgesIgnoringSafeArea(.all))
         }
-       
+        .background(
+            VisualEffectView(effect: UIBlurEffect(style: .light))
+                .edgesIgnoringSafeArea(.all)
+        )
     }
 }
 
+struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
 
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView {
+        return UIVisualEffectView()
+    }
 
-//struct HalfModalView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HalfModalView()
-//    }
-//}
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) {
+        uiView.effect = effect
+    }
+}

@@ -18,8 +18,8 @@
 		2BE1B8732A9A7A3900CD2929 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE1B8722A9A7A3900CD2929 /* Preview Assets.xcassets */; };
 		2BE1B8752A9A7A3900CD2929 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1B8742A9A7A3900CD2929 /* Persistence.swift */; };
 		2BE1B8782A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1B8762A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld */; };
-		2BF48F8D2AA5B935004824C3 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF48F8C2AA5B935004824C3 /* HalfModalView.swift */; };
 		2BF48F8F2AA5B94E004824C3 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF48F8E2AA5B94E004824C3 /* ItemDetailView.swift */; };
+		2BF48F922AA5C47C004824C3 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF48F912AA5C47C004824C3 /* HalfModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +35,8 @@
 		2BE1B8722A9A7A3900CD2929 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2BE1B8742A9A7A3900CD2929 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		2BE1B8772A9A7A3900CD2929 /* Date_Tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Date_Tracker.xcdatamodel; sourceTree = "<group>"; };
-		2BF48F8C2AA5B935004824C3 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
 		2BF48F8E2AA5B94E004824C3 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
+		2BF48F912AA5C47C004824C3 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				2BF48F8E2AA5B94E004824C3 /* ItemDetailView.swift */,
-				2BF48F8C2AA5B935004824C3 /* HalfModalView.swift */,
+				2BF48F912AA5C47C004824C3 /* HalfModalView.swift */,
 			);
 			path = "Item Detail View";
 			sourceTree = "<group>";
@@ -207,12 +207,12 @@
 				2BCC2DE02A9B17B800D81239 /* Item+CoreDataProperties.swift in Sources */,
 				2BCC2DDF2A9B17B800D81239 /* Item+CoreDataClass.swift in Sources */,
 				2BE1B8752A9A7A3900CD2929 /* Persistence.swift in Sources */,
+				2BF48F922AA5C47C004824C3 /* HalfModalView.swift in Sources */,
 				2BF48F8F2AA5B94E004824C3 /* ItemDetailView.swift in Sources */,
 				2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */,
 				2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */,
 				2BE1B8782A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld in Sources */,
 				2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */,
-				2BF48F8D2AA5B935004824C3 /* HalfModalView.swift in Sources */,
 				2BE1B86C2A9A7A3800CD2929 /* Date_TrackerApp.swift in Sources */,
 				2B64122D2AA5797800CC7506 /* GlobalFunctions.swift in Sources */,
 			);

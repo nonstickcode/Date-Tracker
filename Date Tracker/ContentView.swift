@@ -26,86 +26,94 @@ struct ContentView: View {
     @State private var isEditMode: Bool = false
     
     
+    @State private var showOverlay: Bool = false
+    
+    
     
     var body: some View {
         NavigationView {
-            VStack {
-                headerView
-                
-                ScrollView {
-                    LazyVStack {
-                        Spacer()
-                        ForEach(sortedItems, id: \.self) { item in
-                            HStack {
-                                Button(action: {
-                                    self.selectedItem = item
-                                }) {
-                                    ItemButtonView(item: item)
-                                }
-                                
-                                
-                                // long press menu starts here ----------------------------------------------
-                                .contextMenu {
+            ZStack {
+                VStack {
+                    headerView
+                    ScrollView {
+                        LazyVStack {
+                            Spacer()
+                            ForEach(sortedItems, id: \.self) { item in
+                                HStack {
                                     Button(action: {
-                                        deleteItem(item: item)
+                                        self.selectedItem = item
+                                        self.showOverlay = true
                                     }) {
-                                        Label("Delete", systemImage: "trash")
+                                        ItemButtonView(item: item)
                                     }
-                                    Button(action: {
-                                        // add edit action here
-                                    }) {
-                                        Label("Edit", systemImage: "pencil")
+                                    // long press menu starts here ----------------------------------------------
+                                    .contextMenu {
+                                        Button(action: {
+                                            deleteItem(item: item)
+                                        }) {
+                                            Label("Delete", systemImage: "trash")
+                                        }
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Edit", systemImage: "pencil")
+                                        }
+                                        // long press menu ends here ----------------------------------------------
+                                        
                                     }
-                                    // long press menu ends here ----------------------------------------------
-                                    
+                                    if isEditMode {
+                                        Button(action: {
+                                            deleteItem(item: item)
+                                        }) {
+                                            Image(systemName: "delete.backward")
+                                                .font(.system(size: 24))
+                                        }
+                                        
+                                        .foregroundColor(.white)
+                                        .padding(.trailing, 20)
+                                    }
                                 }
-                                if isEditMode {
-                                    Button(action: {
-                                        deleteItem(item: item)
-                                    }) {
-                                        Image(systemName: "delete.backward")
-                                            .font(.system(size: 24))
-                                    }
-                                    
-                                    .foregroundColor(.white)
-                                    .padding(.trailing, 20)
-                                }
-                                
                             }
-                            
+                            if items.isEmpty {
+                                ItemButtonView(item: nil)
+                            }
                         }
-                        if items.isEmpty {
-                            ItemButtonView(item: nil)
+                        .padding(.bottom, 8)
+                    }
+                    .onChange(of: items.count) { newValue in
+                        if newValue == 0 {
+                            isEditMode = false
                         }
                     }
-                    .padding(.bottom, 8)
+                    .background(Color.gray.opacity(0.9).edgesIgnoringSafeArea(.all))
+                    
+                    Text("Select an event")
+                        .foregroundColor(.white)
+                        .padding(.top, 12)
+                        .frame(height: 25)
                 }
-                .onChange(of: items.count) { newValue in
-                    if newValue == 0 {
-                        isEditMode = false
-                    }
-                }
-                .background(Color.gray.opacity(0.9).edgesIgnoringSafeArea(.all))
+                .background(Color.accentColor.edgesIgnoringSafeArea(.all))
                 
-                Text("Select an event")
-                    .foregroundColor(.white)
-                    .padding(.top, 12)
-                    .frame(height: 25)
-            }
-            .background(Color.accentColor.edgesIgnoringSafeArea(.all))
-            .sheet(isPresented: $isPresentingForm) {
-                NewDataEntryForm()
-                    .environment(\.managedObjectContext, viewContext)
-            }
-            
-        }
-        .sheet(item: $selectedItem) { item in
+                if showOverlay, let selectedItem = selectedItem {
                     HalfModalView {
-                        ItemDetailView(item: item)
+                        ItemDetailView(item: selectedItem)
                     }
                     
+                        .transition(.move(edge: .bottom))
+                        .onTapGesture {
+                            withAnimation {
+                                showOverlay = false
+                            }
+                        }
                 }
+                
+            }
+            .onAppear {
+                showOverlay = false
+            }
+        }
     }
+    
     
     
     
@@ -122,13 +130,18 @@ struct ContentView: View {
             HStack {
                 Button(action: {
                     isEditMode = false // Disable edit mode when the '+' button is pressed.
-                    isPresentingForm.toggle()
+                    isPresentingForm = true
                 }) {
                     Image(systemName: "plus.app")
+                    
                         .foregroundColor(.white)
                         .font(.system(size: 24))
                         .padding(10)
                 }
+                .sheet(isPresented: $isPresentingForm) {
+                                NewDataEntryForm()
+                                    .environment(\.managedObjectContext, viewContext)
+                            }
                 
                 Button(isEditMode ? "Done" : "Edit") {
                     isEditMode.toggle()
@@ -156,10 +169,10 @@ struct ContentView: View {
     }
     
 }
-    
-    
-    
-  
+
+
+
+
 
 
 
