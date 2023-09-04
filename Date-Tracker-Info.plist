@@ -4,6 +4,9 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>BlackOpsOne-Regular.ttf</string>
+		<string>RobotoMono-Italic-VariableFont_wght.ttf</string>
+		<string>RobotoMono-VariableFont_wght.ttf</string>
 		<string>LobsterTwo-Bold.ttf</string>
 		<string>RobotoSlab-VariableFont_wght.ttf</string>
 	</array>

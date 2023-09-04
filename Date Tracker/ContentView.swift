@@ -95,7 +95,8 @@ struct ContentView: View {
                     )
                     
                     Text("Select an event")
-                        .foregroundColor(.white)
+                        .mainFooterTextStyle()
+                        .foregroundColor(.mainFooterTextColor)
                         .padding(.top, 12)
                         .frame(height: 25)
                 }
@@ -129,8 +130,8 @@ struct ContentView: View {
     private var headerView: some View {
         HStack {
             Text("Date Tracker")
-                .headerTopStyle()
-                
+                .mainHeaderStyle()
+                .foregroundColor(Color.mainHeaderTextColor)
                 .padding()
             Spacer()
             HStack {
@@ -140,10 +141,11 @@ struct ContentView: View {
                 }) {
                     Image(systemName: "plus.app")
                     
-                        .foregroundColor(.white)
+                        
                         .font(.system(size: 24))
                         .padding(10)
                 }
+                .foregroundColor(Color.mainHeaderTextColor)
                 .sheet(isPresented: $isPresentingForm) {
                                 NewDataEntryForm()
                                     .environment(\.managedObjectContext, viewContext)
@@ -152,7 +154,7 @@ struct ContentView: View {
                 Button(isEditMode ? "Done" : "Edit") {
                     isEditMode.toggle()
                 }
-                .foregroundColor(.white)
+                .foregroundColor(Color.mainHeaderTextColor)
             }
             .padding()
         }

@@ -48,8 +48,8 @@ struct NewDataEntryForm: View {
                 
                 //
                 Text("Add New Event")
-                    .font(.largeTitle)
-                    .bold()
+                    .formHeaderStyle()
+                    .foregroundColor(Color.formHeaderAndSaveButtonTextColor)
                     .padding(.bottom, 4)
                     .padding(.top, 8)
                 
@@ -72,15 +72,15 @@ struct NewDataEntryForm: View {
                     .padding(2)
                 
                 Form {
-                    Section(header: Text("Name of Person or Event")) {
+                    Section(header: Text("Name of Person or Event").formRegularStyle()) {
                         TextField("enter name here", text: $newEventName)
                     }
-                    Section(header: Text("Preferred pronoun for person or event")) {
+                    
+                    Section(header: Text("Preferred pronoun for person or event").formRegularStyle()) {
                         TextField("enter pronoun here", text: $newPreferredPronoun)
                     }
                     
-                    
-                    Section(header: Text("Event Date, upcoming or past")) {
+                    Section(header: Text("Event Date, upcoming or past").formRegularStyle()) {
                         VStack {
                             Picker("Month", selection: $selectedMonth) {
                                 ForEach(months, id: \.self) { month in
@@ -120,7 +120,7 @@ struct NewDataEntryForm: View {
                     
                     
                     
-                    Section(header: Text("Event Type")) {
+                    Section(header: Text("Event Type").formRegularStyle()) {
                         Picker("Select Event Type", selection: $newEventType) {
                             ForEach(newEventTypeOptions, id: \.self) {
                                 Text($0)
@@ -135,13 +135,12 @@ struct NewDataEntryForm: View {
                             Spacer()
                             Button(action: addItem) {
                                 Text("Save Event")
-                                    .font(.system(size: 18))
-                                    .bold()
+                                    .formSaveButtonStyle()
                                     .frame(minWidth: 0, maxWidth: .infinity)
                                     .padding()
                             }
-                            .background(Color.green)
-                            .foregroundColor(Color.white)
+                            .background(Color.formHeaderAndSaveButton)
+                            .foregroundColor(Color.formHeaderAndSaveButtonTextColor)
                             .cornerRadius(10)
                             Spacer()
                         }
@@ -166,7 +165,7 @@ struct NewDataEntryForm: View {
                 
                 // Alert End -----------------------------------------------------------------------
             }
-            .background(Color.green.opacity(0.5))
+            .background(Color.formHeaderAndSaveButton)
         }
         
     }
