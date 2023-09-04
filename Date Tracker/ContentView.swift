@@ -53,20 +53,17 @@ struct ContentView: View {
                                     }
                                     // long press menu ends here ----------------------------------------------
                                     
+                                }
+                                if isEditMode {
+                                    Button(action: {
+                                        deleteItem(item: item)
+                                    }) {
+                                        Image(systemName: "delete.backward")
+                                            .font(.system(size: 24))
+                                    }
                                     
-                                    
-                                    //                                if isEditMode {
-                                    //                                    Button("Delete") {
-                                    //                                        deleteItem(item: item)
-                                    //                                    }
-                                    //                                    .background(Color.red)
-                                    //                                    .foregroundColor(.white)
-                                    //                                }
-                                    
-                                    
-                                    
-                                    
-                                    
+                                    .foregroundColor(.white)
+                                    .padding(.trailing, 20)
                                 }
                                 
                             }
