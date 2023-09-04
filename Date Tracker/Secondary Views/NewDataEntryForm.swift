@@ -50,13 +50,13 @@ struct NewDataEntryForm: View {
                 Text("Add New Event")
                     .font(.largeTitle)
                     .bold()
-                    .padding(.bottom, 8)
+                    .padding(.bottom, 4)
                     .padding(.top, 8)
                 
                 Text("Swipe down to dismiss")
                     .font(.caption)
                     .foregroundColor(.secondary)
-                    .padding(.top, 8)
+                    .padding(.top, 4)
                     .gesture(
                         DragGesture()
                             .onChanged { value in

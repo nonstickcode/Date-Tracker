@@ -37,14 +37,7 @@ struct ItemDetailView: View {
                     .foregroundColor(.blue)
                 
             }
-//            .frame(maxWidth: .infinity)
-//            .background(Color.white)
-//            .cornerRadius(20)
-//            .padding(.horizontal)
         }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .background(Color.black.opacity(0.5).edgesIgnoringSafeArea(.all))
-        
     }
 }
 

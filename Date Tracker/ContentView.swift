@@ -85,14 +85,21 @@ struct ContentView: View {
                             isEditMode = false
                         }
                     }
-                    .background(Color.gray.opacity(0.9).edgesIgnoringSafeArea(.all))
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.green, Color.accentColor]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                        
+                    )
                     
                     Text("Select an event")
                         .foregroundColor(.white)
                         .padding(.top, 12)
                         .frame(height: 25)
                 }
-                .background(Color.accentColor.edgesIgnoringSafeArea(.all))
+                .background(Color.black.edgesIgnoringSafeArea(.all))
                 
                 if showOverlay, let selectedItem = selectedItem {
                     HalfModalView {
