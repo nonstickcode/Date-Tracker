@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6412292AA5788500CC7506 /* ItemButtonView.swift */; };
+		2B64122D2AA5797800CC7506 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */; };
 		2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */; };
 		2BCC2DDF2A9B17B800D81239 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC2DDD2A9B17B800D81239 /* Item+CoreDataClass.swift */; };
 		2BCC2DE02A9B17B800D81239 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC2DDE2A9B17B800D81239 /* Item+CoreDataProperties.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B6412292AA5788500CC7506 /* ItemButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemButtonView.swift; sourceTree = "<group>"; };
+		2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataEntryForm.swift; sourceTree = "<group>"; };
 		2BCC2DDD2A9B17B800D81239 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2BCC2DDE2A9B17B800D81239 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -53,6 +57,30 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
+		2B6412272AA51F5D00CC7506 /* Secondary Views */ = {
+			isa = PBXGroup;
+			children = (
+				2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */,
+			);
+			path = "Secondary Views";
+			sourceTree = "<group>";
+		};
+		2B6412282AA5784E00CC7506 /* Shared Components */ = {
+			isa = PBXGroup;
+			children = (
+				2B6412292AA5788500CC7506 /* ItemButtonView.swift */,
+			);
+			path = "Shared Components";
+			sourceTree = "<group>";
+		};
+		2B64122B2AA5794E00CC7506 /* Global Functions */ = {
+			isa = PBXGroup;
+			children = (
+				2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */,
+			);
+			path = "Global Functions";
+			sourceTree = "<group>";
+		};
 		2BE1B85F2A9A7A3800CD2929 = {
 			isa = PBXGroup;
 			children = (
@@ -74,7 +102,9 @@
 			children = (
 				2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */,
 				2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */,
-				2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */,
+				2B6412282AA5784E00CC7506 /* Shared Components */,
+				2B64122B2AA5794E00CC7506 /* Global Functions */,
+				2B6412272AA51F5D00CC7506 /* Secondary Views */,
 				2BE1B86F2A9A7A3900CD2929 /* Assets.xcassets */,
 				2B116CB92A9A7FA900E5CA8E /* Core Data */,
 				2BE1B8712A9A7A3900CD2929 /* Preview Content */,
@@ -166,7 +196,9 @@
 				2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */,
 				2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */,
 				2BE1B8782A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld in Sources */,
+				2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */,
 				2BE1B86C2A9A7A3800CD2929 /* Date_TrackerApp.swift in Sources */,
+				2B64122D2AA5797800CC7506 /* GlobalFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

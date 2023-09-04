@@ -67,6 +67,7 @@ struct NewDataEntryForm: View {
                             }
                     )
                 Image(systemName: "chevron.compact.down")
+                    .font(.system(size: 30))
                 // add .scaleEffect(.bounce) when ios 17 drops
                     .padding(2)
                 
@@ -206,9 +207,16 @@ struct NewDataEntryForm: View {
 
 struct NewDataEntryForm_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            NewDataEntryForm()
+        ZStack {
+            ContentView()  // Your main content view
+                .background(Color.gray.opacity(0.2))
+            
+            NewDataEntryForm()  // Your form
+                .background(Color.white)
+                .cornerRadius(20)
+                .offset(y: 10)  // Change this value to adjust the vertical position
         }
+        .previewLayout(.sizeThatFits)
     }
 }
 

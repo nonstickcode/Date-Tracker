@@ -24,69 +24,42 @@ struct ContentView: View {
     }
     
     
+    @State private var isEditMode: Bool = false
     
     var body: some View {
-        
         NavigationView {
-            
             VStack {
-                HStack {
-                    Text("Date Tracker")
-                        .foregroundColor(.white)
-                        .font(.largeTitle)
-                        .bold()
-                        .padding()
-                    Spacer()
-                    HStack {
-                        Button(action: {
-                            isPresentingForm.toggle()
-                        }) {
-                            Image(systemName: "plus")
-                                .foregroundColor(.white)
-                        }
-                        EditButton()
-                            .foregroundColor(.white)
-                    }
-                    .padding()
-                }
-                List {
-                    ForEach(sortedItems, id: \.self) { item in
-                        NavigationLink {
-                            VStack(spacing: 5) {
-                                Text("\(item.name!)'s \(item.eventType!) is \(item.eventDate!, formatter: dateFormatter)")
-                                
-                                Text("\(item.preferredPronoun!) \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")
-                                
-                                if yearsSinceEvent(item.eventDate) > 0 {
-                                    Text("It will be on a \(dayOfWeek(item.eventDate)) this year")
-                                } else {
-                                    Text("\(item.eventDate!, formatter: dateFormatter) will be a \(dayOfWeek(item.eventDate))")
+                headerView
+                
+                ScrollView {
+                    LazyVStack {
+                        ForEach(sortedItems, id: \.self) { item in
+                            HStack {
+                                NavigationLink(destination: itemDetailView(item: item)) {
+                                    ItemButtonView(item: item)
                                 }
                                 
-                                if yearsSinceEvent(item.eventDate) > 0 {
-                                    Text("Exact age is \(yearsSinceEvent(item.eventDate)) years old!")
-                                } else {
-                                    Text("\(daysUntilEvent(item.eventDate)) days is exactly \(daysConvertedToYears(daysUntilEvent(item.eventDate))) years")
+                                if isEditMode {
+                                    Button("Delete") {
+                                        deleteItem(item: item)
+                                    }
+                                    .background(Color.red)
+                                    .foregroundColor(.white)
                                 }
-                                Text("Event added to app: \(item.timestamp!, formatter: dateTimeFormatter)")
-                                    .font(.caption)
-                                    .padding(.top, 20)
-                                Text("ID: \(item.id!)")
-                                    .font(.caption)
-                                    .foregroundColor(.blue)
-                                
-                            }
-                        } label: {
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text("\(item.name!)'s \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")  // This is what is shown in Label for each item
-                                
-                                Text("\(dayOfWeek(item.eventDate)) \(item.eventDate!, formatter: shortDateFormatter)")
                             }
                         }
-                        
+                        if items.isEmpty {
+                            ItemButtonView(item: nil)
+                        }
                     }
-                    .onDelete(perform: deleteItems)
+                    .padding(.bottom, 8)
                 }
+                .onChange(of: items.count) { newValue in
+                    if newValue == 0 {
+                        isEditMode = false
+                    }
+                }
+                .background(Color.gray.opacity(0.7).edgesIgnoringSafeArea(.all))
                 
                 Text("Select an item")
                     .foregroundColor(.white)
@@ -100,112 +73,83 @@ struct ContentView: View {
     }
     
     
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            let itemsToDelete = offsets.map { sortedItems[$0] }
-            
-            for itemToDelete in itemsToDelete {
-                if let index = items.firstIndex(where: { $0.id == itemToDelete.id }) {
-                    viewContext.delete(items[index])
+    
+    
+    
+    private var headerView: some View {
+        HStack {
+            Text("Date Tracker")
+                .foregroundColor(.white)
+                .font(.largeTitle)
+                .bold()
+                .padding()
+            Spacer()
+            HStack {
+                Button(action: {
+                    isPresentingForm.toggle()
+                }) {
+                    Image(systemName: "plus")
+                        .foregroundColor(.white)
                 }
+                
+                Button(isEditMode ? "Done" : "Edit") {
+                    isEditMode.toggle()
+                }
+                .foregroundColor(.white)
             }
-            
+            .padding()
+        }
+    }
+    
+    
+    
+    
+    private func deleteItem(item: Item) {
+        withAnimation {
+            viewContext.delete(item)
             do {
                 try viewContext.save()
             } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                // Handle the error appropriately instead of crashing
+                print("Could not save context: \(error.localizedDescription)")
             }
         }
     }
-}
-
-
-private func daysUntilEvent(_ eventDate: Date?) -> Int {
-    guard let eventDate = eventDate else { return 0 }
     
-    let calendar = Calendar.current
-    var nextEventDate = eventDate
     
-    // Loop until nextEventDate is in the future
-    while nextEventDate < Date() {
-        if let newDate = calendar.date(byAdding: .year, value: 1, to: nextEventDate) {
-            nextEventDate = newDate
-        } else {
-            return 0  // Return 0 if we can't calculate the next event date
+    
+
+    
+    private func itemDetailView(item: Item) -> some View {
+        VStack(spacing: 5) {
+            Text("\(item.name!)'s \(item.eventType!) is \(item.eventDate!, formatter: dateFormatter)")
+            
+            Text("\(item.preferredPronoun!) \(item.eventType!) is in \(daysUntilEvent(item.eventDate)) days")
+            
+            if yearsSinceEvent(item.eventDate) > 0 {
+                Text("It will be on a \(dayOfWeek(item.eventDate)) this year")
+            } else {
+                Text("\(item.eventDate!, formatter: dateFormatter) will be a \(dayOfWeek(item.eventDate))")
+            }
+            
+            if yearsSinceEvent(item.eventDate) > 0 {
+                Text("Exact age is \(yearsSinceEvent(item.eventDate)) years old!")
+            } else {
+                Text("\(daysUntilEvent(item.eventDate)) days is exactly \(daysConvertedToYears(daysUntilEvent(item.eventDate))) years")
+            }
+            Text("Event added to app: \(item.timestamp!, formatter: dateTimeFormatter)")
+                .font(.caption)
+                .padding(.top, 20)
+            Text("ID: \(item.id!)")
+                .font(.caption)
+                .foregroundColor(.blue)
+            
         }
     }
-    
-    let components = calendar.dateComponents([.day], from: Date(), to: nextEventDate)
-    return components.day ?? 0
 }
 
 
-private func yearsSinceEvent(_ eventDate: Date?) -> Double {
-    guard let eventDate = eventDate else { return 0.0 }
-    
-    // Only proceed if eventDate is in the past
-    if eventDate >= Date() {
-        return 0.0
-    }
-    
-    let calendar = Calendar.current
-    let components = calendar.dateComponents([.day], from: eventDate, to: Date())
-    
-    guard let days = components.day else { return 0.0 }
-    
-    let exactYears = Double(days) / 365.25
-    
-    return exactYears
-    
-}
 
-private func daysConvertedToYears(_ days: Int) -> Double {
-    // Calculate the exact years, accounting for leap years
-    let exactYears = Double(days) / 365.25
-    return exactYears
-}
-
-private func dayOfWeek(_ eventDate: Date?) -> String {
-    guard let eventDate = eventDate else { return "Unknown" }
-    
-    let calendar = Calendar.current
-    var nextEventDate = eventDate
-    
-    // Loop until nextEventDate is in the future, similar to daysUntilEvent function
-    while nextEventDate < Date() {
-        if let newDate = calendar.date(byAdding: .year, value: 1, to: nextEventDate) {
-            nextEventDate = newDate
-        } else {
-            return "Unknown"  // Return "Unknown" if we can't calculate the next event date
-        }
-    }
-    
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEEE"  // "EEEE" returns the full name of the weekday (e.g., "Sunday")
-    return dateFormatter.string(from: nextEventDate)
-}
-
-
-private let dateTimeFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
-private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .medium
-    formatter.timeStyle = .none
-    return formatter
-}()
-
-private let shortDateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "MMMM dd"  // Month and day, without the year
-    return formatter
-}()
 
 
 struct ContentView_Previews: PreviewProvider {
