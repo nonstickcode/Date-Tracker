@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import CoreData
+
+import UserNotifications
 
 struct ItemButtonView: View {
     var item: Item?
@@ -16,25 +17,35 @@ struct ItemButtonView: View {
             .fill(Color.white)
             .frame(height: 60)
             .overlay(
-                VStack( spacing: 3) {
-                    if let item = item {
+                VStack(spacing: 3) {
+                    if let item = item, let eventDate = item.eventDate {
+                        let name = item.name ?? "Unknown"
+                        let eventType = item.eventType ?? "Unknown"
+                        let daysUntil = daysUntilEvent(eventDate)
+                        let formattedEventDate = dateFormatter.string(from: eventDate)
                         
-                        if daysUntilEvent(item.eventDate!) == 0 {
+                        if daysUntil == 0 {
                             HStack {
-                                Text("\(item.name ?? "Unknown")'s \(item.eventType ?? "Unknown") is Tomorrow!")
+                                Text("\(name)'s \(eventType) is Tomorrow!")
                                 Image(systemName: "party.popper")
+                                    .foregroundColor(.purple)
                             }
                             .bold()
-                        } else if daysUntilEvent(item.eventDate!) == 365 {
+                        } else if daysUntil == 365 {
                             HStack {
-                                Text("\(item.name ?? "Unknown")'s \(item.eventType ?? "Unknown") is Today!")
+                                Text("\(name)'s \(eventType) is Today!")
                                 Image(systemName: "party.popper.fill")
+                                    .foregroundColor(.purple)
                             }
                             .bold()
+                            .onAppear{
+                                self.scheduleNotification(for: item)
+                            }
                         } else {
-                            Text("\(item.name ?? "Unknown")'s \(item.eventType ?? "Unknown") is in \(daysUntilEvent(item.eventDate)) days")
+                            Text("\(name)'s \(eventType) is in \(daysUntil) days")
                         }
-                        Text("\(dayOfWeek(item.eventDate)) \(item.eventDate.map { dateFormatter.string(from: $0) } ?? "Unknown")")
+                        
+                        Text("\(dayOfWeek(eventDate)) \(formattedEventDate)")
                     } else {
                         Text("No data available.")
                             .bold()
@@ -47,9 +58,32 @@ struct ItemButtonView: View {
                         }
                     }
                 }
-                
             )
             .padding(.top, 8)
             .padding([.leading, .trailing], 16)
     }
+    
+    // Added for notifications on day of event ---------------------------------------
+    
+    func scheduleNotification(for item: Item) {
+        let content = UNMutableNotificationContent()
+        content.title = "\(item.name ?? "An event") is today!"
+        content.body = "Don't forget about \(item.eventType ?? "the event")."
+        content.sound = UNNotificationSound.default
+
+        // Schedule the notification for "now"
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: item.id ?? "defaultID", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling notification: \(error)")
+            }
+        }
+    }
+
+
+    // END of notifications on day of event ---------------------------------------
+    
 }

@@ -13,47 +13,64 @@ struct ItemDetailView: View {
     var body: some View {
         VStack {
             
-            VStack(spacing: 5) {
-                Text("\(item.name!)'s \(item.eventType!) is \(item.eventDate!, formatter: dateFormatter)")
-                
-                if daysUntilEvent(item.eventDate!) == 0 {
-                    HStack {
-                        Text("Party Time Tomorrow!")
-                        Image(systemName: "party.popper")
+            if let name = item.name, let eventType = item.eventType, let eventDate = item.eventDate {
+                VStack(spacing: 5) {
+                    Text("\(name)'s \(eventType) is \(eventDate, formatter: dateFormatter)")
+                    
+                    let daysUntil = daysUntilEvent(eventDate)
+                    
+                    if daysUntil == 0 {
+                        HStack {
+                            Text("Party Time Tomorrow!")
+                            Image(systemName: "party.popper")
+                                .foregroundColor(.purple)
+                        }
+                        .bold()
+                    } else if daysUntil == 365 {
+                        HStack {
+                            Text("Party Time Today!")
+                            Image(systemName: "party.popper.fill")
+                                .foregroundColor(.purple)
+                        }
+                        .bold()
+                    } else {
+                        Text("\(name)'s \(eventType) is in \(daysUntil) days")
                     }
-                    .bold()
-                } else if daysUntilEvent(item.eventDate!) == 365 {
-                    HStack {
-                        Text("Party Time Today!")
-                        Image(systemName: "party.popper.fill")
+                    
+                    let yearsSince = yearsSinceEvent(eventDate)
+                    
+                    if yearsSince > 0 {
+                        Text("It will be on a \(dayOfWeek(eventDate)) this year")
+                    } else {
+                        Text("\(eventDate, formatter: dateFormatter) will be a \(dayOfWeek(eventDate))")
                     }
-                    .bold()
-                } else {
-                    Text("\(item.name ?? "Unknown")'s \(item.eventType ?? "Unknown") is in \(daysUntilEvent(item.eventDate)) days")
+                    
+                    if yearsSince > 0 {
+                        Text("Exact age is \(yearsSince) years old!")
+                    } else {
+                        Text("\(daysUntil) days is exactly \(daysConvertedToYears(daysUntil)) years")
+                    }
+                    
+                    if let timestamp = item.timestamp {
+                        Text("Event added to app: \(timestamp, formatter: dateTimeFormatter)")
+                            .font(.caption)
+                            .padding(.top, 20)
+                    }
+                    
+                    if let id = item.id {
+                        Text("ID: \(id)")
+                            .font(.caption)
+                            .foregroundColor(.blue)
+                    }
+                    
                 }
-                
-                if yearsSinceEvent(item.eventDate) > 0 {
-                    Text("It will be on a \(dayOfWeek(item.eventDate)) this year")
-                } else {
-                    Text("\(item.eventDate!, formatter: dateFormatter) will be a \(dayOfWeek(item.eventDate))")
-                }
-                
-                if yearsSinceEvent(item.eventDate) > 0 {
-                    Text("Exact age is \(yearsSinceEvent(item.eventDate)) years old!")
-                } else {
-                    Text("\(daysUntilEvent(item.eventDate)) days is exactly \(daysConvertedToYears(daysUntilEvent(item.eventDate))) years")
-                }
-                Text("Event added to app: \(item.timestamp!, formatter: dateTimeFormatter)")
-                    .font(.caption)
-                    .padding(.top, 20)
-                Text("ID: \(item.id!)")
-                    .font(.caption)
-                    .foregroundColor(.blue)
-                
+            } else {
+                Text("No data available.")
             }
         }
     }
 }
+
 
 
 //struct ItemDetailView_Previews: PreviewProvider {
