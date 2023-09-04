@@ -184,7 +184,11 @@ struct NewDataEntryForm: View {
     
     
     private func addItem() {
-        
+        guard !newEventName.isEmpty else {
+            showAlert = true
+            return
+        }
+
         let newItem = Item(context: viewContext)
         let uuid = UUID().uuidString
         
@@ -195,23 +199,15 @@ struct NewDataEntryForm: View {
         newItem.eventDate = newEventDate
         newItem.eventType = newEventType
         
-        if newEventName.isEmpty {
-            showAlert = true
-            return
-        }
-        
         do {
             try viewContext.save()
-            self.presentationMode.wrappedValue.dismiss()  // line to dismiss the view after save
+            self.presentationMode.wrappedValue.dismiss()
         } catch {
             print("Error saving: \(error)")
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            
+            // Handle the error appropriately
         }
     }
+
 }
 
 

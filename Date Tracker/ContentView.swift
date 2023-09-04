@@ -22,7 +22,7 @@ struct ContentView: View {
     }
     
     @State private var isPresentingForm = false
-    @State private var selectedItem: Item?  
+    @State private var selectedItem: Item?
     @State private var isEditMode: Bool = false
     
     
@@ -32,93 +32,93 @@ struct ContentView: View {
     
     var body: some View {
         
-            ZStack {
-                VStack {
-                    headerView
-                    ScrollView {
-                        LazyVStack {
-                            Spacer()
-                            ForEach(sortedItems, id: \.self) { item in
-                                HStack {
+        ZStack {
+            VStack {
+                headerView
+                ScrollView {
+                    LazyVStack {
+                        Spacer()
+                        ForEach(sortedItems, id: \.self) { item in
+                            HStack {
+                                Button(action: {
+                                    self.selectedItem = item
+                                    self.showOverlay = true
+                                }) {
+                                    ItemButtonView(item: item)
+                                }
+                                // long press menu starts here ----------------------------------------------
+                                .contextMenu {
                                     Button(action: {
-                                        self.selectedItem = item
-                                        self.showOverlay = true
+                                        deleteItem(item: item)
                                     }) {
-                                        ItemButtonView(item: item)
+                                        Label("Delete", systemImage: "trash")
                                     }
-                                    // long press menu starts here ----------------------------------------------
-                                    .contextMenu {
-                                        Button(action: {
-                                            deleteItem(item: item)
-                                        }) {
-                                            Label("Delete", systemImage: "trash")
-                                        }
-                                        Button(action: {
-                                            // add edit action here
-                                        }) {
-                                            Label("Edit", systemImage: "pencil")
-                                        }
-                                        // long press menu ends here ----------------------------------------------
-                                        
+                                    Button(action: {
+                                        // add edit action here
+                                    }) {
+                                        Label("Edit", systemImage: "pencil")
                                     }
-                                    if isEditMode {
-                                        Button(action: {
-                                            deleteItem(item: item)
-                                        }) {
-                                            Image(systemName: "delete.backward")
-                                                .font(.system(size: 24))
-                                        }
-                                        
-                                        .foregroundColor(.white)
-                                        .padding(.trailing, 20)
+                                    // long press menu ends here ----------------------------------------------
+                                    
+                                }
+                                if isEditMode {
+                                    Button(action: {
+                                        deleteItem(item: item)
+                                    }) {
+                                        Image(systemName: "delete.backward")
+                                            .font(.system(size: 24))
                                     }
+                                    
+                                    .foregroundColor(.white)
+                                    .padding(.trailing, 20)
                                 }
                             }
-                            if items.isEmpty {
-                                ItemButtonView(item: nil)
-                            }
                         }
-                        .padding(.bottom, 8)
-                    }
-                    .onChange(of: items.count) { newValue in
-                        if newValue == 0 {
-                            isEditMode = false
+                        if items.isEmpty {
+                            ItemButtonView(item: nil)
                         }
                     }
-                    .background(
-                        LinearGradient(
-                            gradient: Gradient(colors: [Color.green, Color.accentColor]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                        
+                    .padding(.bottom, 8)
+                }
+                .onChange(of: items.count) { newValue in
+                    if newValue == 0 {
+                        isEditMode = false
+                    }
+                }
+                .background(
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.green, Color.accentColor]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
                     )
                     
-                    Text("Select an event")
-                        .mainFooterTextStyle()
-                        .padding(.top, 12)
-                        .frame(height: 25)
-                }
-                .background(Color.black.opacity(0.8).edgesIgnoringSafeArea(.all))
+                )
                 
-                if showOverlay, let selectedItem = selectedItem {
-                    HalfModalView {
-                        ItemDetailView(item: selectedItem)
+                Text("Select an event")
+                    .mainFooterTextStyle()
+                    .padding(.top, 12)
+                    .frame(height: 25)
+            }
+            .background(Color.black.opacity(0.8).edgesIgnoringSafeArea(.all))
+            
+            if showOverlay, let selectedItem = selectedItem {
+                HalfModalView {
+                    ItemDetailView(item: selectedItem)
+                }
+                
+                .transition(.move(edge: .bottom))
+                .onTapGesture {
+                    withAnimation {
+                        showOverlay = false
                     }
-                    
-                        .transition(.move(edge: .bottom))
-                        .onTapGesture {
-                            withAnimation {
-                                showOverlay = false
-                            }
-                        }
                 }
-                
             }
-            .onAppear {
-                showOverlay = false
-            }
+            
         }
+        .onAppear {
+            showOverlay = false
+        }
+    }
     
     
     
@@ -144,9 +144,9 @@ struct ContentView: View {
                 }
                 .foregroundColor(Color.mainHeaderTextColor)
                 .sheet(isPresented: $isPresentingForm) {
-                                NewDataEntryForm()
-                                    .environment(\.managedObjectContext, viewContext)
-                            }
+                    NewDataEntryForm()
+                        .environment(\.managedObjectContext, viewContext)
+                }
                 Button(isEditMode ? "Done" : "Edit") {
                     isEditMode.toggle()
                 }
