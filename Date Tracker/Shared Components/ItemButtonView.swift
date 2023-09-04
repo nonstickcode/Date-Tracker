@@ -27,34 +27,41 @@ struct ItemButtonView: View {
                         if daysUntil == 0 {
                             HStack {
                                 Text("\(name)'s \(eventType) is Tomorrow!")
+                                    .boldButtonTextStyle()
                                 Image(systemName: "party.popper")
                                     .foregroundColor(.purple)
                             }
-                            .bold()
+                            
                         } else if daysUntil == 365 {
                             HStack {
                                 Text("\(name)'s \(eventType) is Today!")
+                                    .boldButtonTextStyle()
                                 Image(systemName: "party.popper.fill")
                                     .foregroundColor(.purple)
                             }
-                            .bold()
+                            
                             .onAppear{
                                 self.scheduleNotification(for: item)
                             }
                         } else {
                             Text("\(name)'s \(eventType) is in \(daysUntil) days")
+                                .mainButtonTextStyle()
                         }
                         
                         Text("\(dayOfWeek(eventDate)) \(formattedEventDate)")
+                            .mainButtonTextStyle()
                     } else {
                         Text("No data available.")
-                            .bold()
+                            .emptyButtonTextStyle()
                         HStack {
                             
                             Text("Tap ")
+                                .emptyButtonTextStyle()
                             Image(systemName: "plus.app")
+                                .bold()
                                 .padding(-6)
                             Text(" to add new event.")
+                                .emptyButtonTextStyle()
                         }
                     }
                 }

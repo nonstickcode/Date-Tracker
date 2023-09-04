@@ -96,7 +96,6 @@ struct ContentView: View {
                     
                     Text("Select an event")
                         .mainFooterTextStyle()
-                        .foregroundColor(.mainFooterTextColor)
                         .padding(.top, 12)
                         .frame(height: 25)
                 }
@@ -131,7 +130,6 @@ struct ContentView: View {
         HStack {
             Text("Date Tracker")
                 .mainHeaderStyle()
-                .foregroundColor(Color.mainHeaderTextColor)
                 .padding()
             Spacer()
             HStack {

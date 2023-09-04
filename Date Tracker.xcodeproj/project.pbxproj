@@ -24,6 +24,8 @@
 		2BE814302AA669E4002EE172 /* RobotoMono-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8142E2AA669E4002EE172 /* RobotoMono-Italic-VariableFont_wght.ttf */; };
 		2BE814312AA669E4002EE172 /* RobotoMono-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BE8142F2AA669E4002EE172 /* RobotoMono-VariableFont_wght.ttf */; };
 		2BE814332AA673A3002EE172 /* BlackOpsOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BE814322AA673A3002EE172 /* BlackOpsOne-Regular.ttf */; };
+		2BE814362AA67C67002EE172 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BE814352AA67C67002EE172 /* Roboto-Regular.ttf */; };
+		2BE814382AA67DB6002EE172 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BE814372AA67DB6002EE172 /* Roboto-Bold.ttf */; };
 		2BF48F8F2AA5B94E004824C3 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF48F8E2AA5B94E004824C3 /* ItemDetailView.swift */; };
 		2BF48F922AA5C47C004824C3 /* HalfModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF48F912AA5C47C004824C3 /* HalfModalView.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,8 @@
 		2BE8142E2AA669E4002EE172 /* RobotoMono-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		2BE8142F2AA669E4002EE172 /* RobotoMono-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		2BE814322AA673A3002EE172 /* BlackOpsOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackOpsOne-Regular.ttf"; sourceTree = "<group>"; };
+		2BE814352AA67C67002EE172 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		2BE814372AA67DB6002EE172 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		2BF48F8E2AA5B94E004824C3 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		2BF48F912AA5C47C004824C3 /* HalfModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +156,8 @@
 		2BE814342AA6742C002EE172 /* Custom Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				2BE814372AA67DB6002EE172 /* Roboto-Bold.ttf */,
+				2BE814352AA67C67002EE172 /* Roboto-Regular.ttf */,
 				2BE814322AA673A3002EE172 /* BlackOpsOne-Regular.ttf */,
 				2BE8142E2AA669E4002EE172 /* RobotoMono-Italic-VariableFont_wght.ttf */,
 				2BE8142F2AA669E4002EE172 /* RobotoMono-VariableFont_wght.ttf */,
@@ -230,8 +236,10 @@
 			files = (
 				2BE1B8732A9A7A3900CD2929 /* Preview Assets.xcassets in Resources */,
 				2B9879A52AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf in Resources */,
+				2BE814362AA67C67002EE172 /* Roboto-Regular.ttf in Resources */,
 				2BE814312AA669E4002EE172 /* RobotoMono-VariableFont_wght.ttf in Resources */,
 				2BE8142D2AA6635B002EE172 /* LobsterTwo-Bold.ttf in Resources */,
+				2BE814382AA67DB6002EE172 /* Roboto-Bold.ttf in Resources */,
 				2BE814332AA673A3002EE172 /* BlackOpsOne-Regular.ttf in Resources */,
 				2BE1B8702A9A7A3900CD2929 /* Assets.xcassets in Resources */,
 				2BE814302AA669E4002EE172 /* RobotoMono-Italic-VariableFont_wght.ttf in Resources */,

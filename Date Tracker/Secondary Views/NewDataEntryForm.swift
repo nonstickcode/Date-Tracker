@@ -49,7 +49,6 @@ struct NewDataEntryForm: View {
                 //
                 Text("Add New Event")
                     .formHeaderStyle()
-                    .foregroundColor(Color.formHeaderAndSaveButtonTextColor)
                     .padding(.bottom, 4)
                     .padding(.top, 8)
                 
@@ -74,10 +73,12 @@ struct NewDataEntryForm: View {
                 Form {
                     Section(header: Text("Name of Person or Event").formRegularStyle()) {
                         TextField("enter name here", text: $newEventName)
+                            .font(.custom("RobotoMono-Italic", size: 14))
                     }
                     
                     Section(header: Text("Preferred pronoun for person or event").formRegularStyle()) {
                         TextField("enter pronoun here", text: $newPreferredPronoun)
+                            .font(.custom("RobotoMono-Italic", size: 14))
                     }
                     
                     Section(header: Text("Event Date, upcoming or past").formRegularStyle()) {
@@ -85,6 +86,7 @@ struct NewDataEntryForm: View {
                             Picker("Month", selection: $selectedMonth) {
                                 ForEach(months, id: \.self) { month in
                                     Text(month).tag(month)
+                                       
                                 }
                             }
                             
@@ -92,6 +94,7 @@ struct NewDataEntryForm: View {
                             Picker("Day", selection: $selectedDay) {
                                 ForEach(1..<32) { day in
                                     Text("\(day)").tag(day)
+                                        
                                 }
                             }
                             
@@ -99,6 +102,7 @@ struct NewDataEntryForm: View {
                             Picker("Year", selection: $selectedYear) {
                                 ForEach(1920..<2100) { year in
                                     Text(String(format: "%ld", locale: Locale(identifier: "en_US_POSIX"), year)).tag(year)
+                                        
                                     
                                 }
                             }
@@ -140,7 +144,6 @@ struct NewDataEntryForm: View {
                                     .padding()
                             }
                             .background(Color.formHeaderAndSaveButton)
-                            .foregroundColor(Color.formHeaderAndSaveButtonTextColor)
                             .cornerRadius(10)
                             Spacer()
                         }
