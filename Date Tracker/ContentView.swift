@@ -138,8 +138,7 @@ struct ContentView: View {
                     isPresentingForm = true
                 }) {
                     Image(systemName: "plus.app")
-                    
-                        
+                        .foregroundColor(Color.mainHeaderTextColor)
                         .font(.system(size: 24))
                         .padding(10)
                 }
@@ -148,10 +147,10 @@ struct ContentView: View {
                                 NewDataEntryForm()
                                     .environment(\.managedObjectContext, viewContext)
                             }
-                
                 Button(isEditMode ? "Done" : "Edit") {
                     isEditMode.toggle()
                 }
+                .font(.custom("Roboto-Regular", size: 16))
                 .foregroundColor(Color.mainHeaderTextColor)
             }
             .padding()

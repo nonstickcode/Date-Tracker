@@ -9,10 +9,17 @@ import SwiftUI
 
 extension Text {
     
+    // Content View Style Below -------------------------------------------
+    
     func mainHeaderStyle() -> Text {
         self
             .font(.custom("LobsterTwo-Bold", size: 36))
             .foregroundColor(.mainHeaderTextColor)
+    }
+    func mainHeaderEditButtonStyle() -> Text {
+        self
+            .font(.custom("Roboto-Regular", size: 16))  // not used this style is set manaully
+            .foregroundColor(Color.mainHeaderTextColor)
     }
     func mainFooterTextStyle() -> Text {
         self
@@ -21,6 +28,8 @@ extension Text {
     }
     
     //--------------------------------------------------------------------
+    
+    // Main List / Buttons Style Below -------------------------------------------
     
     func mainButtonTextStyle() -> Text {
         self
@@ -39,6 +48,11 @@ extension Text {
     }
     
     // ------------------------------------------------------------------
+    
+    
+    // Form View Style Below -------------------------------------------
+    
+    
     func formHeaderStyle() -> Text {
         self
             .font(.custom("BlackOpsOne-Regular", size: 36))
@@ -65,14 +79,34 @@ extension Text {
 
     //--------------------------------------------------------------------
     
+    // Detail View Style Below -------------------------------------------
+    
+    
+    func detailViewRegularStyle() -> Text {
+        self
+            .font(.custom("Roboto-Regular", size: 20))
+            .foregroundColor(.black)
+            
+    }
+    func detailViewBoldStyle() -> Text {
+        self
+            .font(.custom("Roboto-Bold", size: 20))
+            .foregroundColor(.accentColor)
+            
+    }
+    
+    
+    // --------------------------------------------------------------------
+    
 }
+
+// Custom Colors Below -------------------------------------------
 
 
 extension Color {
-    // accentColor is blue
+    // accentColor = is blue
     static let mainHeaderTextColor = Color.white
     static let mainFooterTextColor = Color.white
     static let formHeaderAndSaveButtonTextColor = Color.black
     static let formHeaderAndSaveButton = Color.green.opacity(0.8)
-    static let secondaryGray = Color.gray
 }
