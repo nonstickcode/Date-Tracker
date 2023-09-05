@@ -78,21 +78,20 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
-		2B6412272AA51F5D00CC7506 /* Secondary Views */ = {
+		2B6412272AA51F5D00CC7506 /* New Data Entry Form */ = {
 			isa = PBXGroup;
 			children = (
 				2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */,
-				2BF48F902AA5B959004824C3 /* Item Detail View */,
 			);
-			path = "Secondary Views";
+			path = "New Data Entry Form";
 			sourceTree = "<group>";
 		};
-		2B6412282AA5784E00CC7506 /* Shared Components */ = {
+		2B6412282AA5784E00CC7506 /* Item Button View */ = {
 			isa = PBXGroup;
 			children = (
 				2B6412292AA5788500CC7506 /* ItemButtonView.swift */,
 			);
-			path = "Shared Components";
+			path = "Item Button View";
 			sourceTree = "<group>";
 		};
 		2B64122B2AA5794E00CC7506 /* Global Functions */ = {
@@ -134,9 +133,10 @@
 				2B9879A62AA6603F00DB74FF /* Date-Tracker-Info.plist */,
 				2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */,
 				2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */,
-				2B6412282AA5784E00CC7506 /* Shared Components */,
+				2B6412282AA5784E00CC7506 /* Item Button View */,
 				2B64122B2AA5794E00CC7506 /* Global Functions */,
-				2B6412272AA51F5D00CC7506 /* Secondary Views */,
+				2BF48F902AA5B959004824C3 /* Item Detail View */,
+				2B6412272AA51F5D00CC7506 /* New Data Entry Form */,
 				2BE1B86F2A9A7A3900CD2929 /* Assets.xcassets */,
 				2B9879A72AA6607200DB74FF /* App Styles */,
 				2B116CB92A9A7FA900E5CA8E /* Core Data */,
