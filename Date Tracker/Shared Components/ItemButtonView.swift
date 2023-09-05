@@ -22,15 +22,23 @@ struct ItemButtonView: View {
                         let name = item.name ?? "Unknown"
                         let eventType = item.eventType ?? "Unknown"
                         let daysUntil = daysUntilEvent(eventDate)
-                        let formattedEventDate = dateFormatter.string(from: eventDate)
                         
-                        if daysUntil == 0 {
+                        
+                        if eventDate > Date() {  // Check if the event is in the future
+                            Text("\(name)'s \(eventType) is in \(daysUntil) days")
+                                .mainButtonTextStyle()
+                            Text("\(dayOfWeek(eventDate)) \(dateFormatter.string(from: eventDate))")
+                                .mainButtonTextStyle()
+                            
+                        } else if daysUntil == 0 {
                             HStack {
                                 Text("\(name)'s \(eventType) is Tomorrow!")
                                     .boldButtonTextStyle()
                                 Image(systemName: "party.popper")
                                     .foregroundColor(.purple)
                             }
+                            Text("\(dayOfWeek(eventDate)) \(shortDateFormatter.string(from: eventDate))")
+                                .mainButtonTextStyle()
                             
                         } else if daysUntil == 365 {
                             HStack {
@@ -39,17 +47,20 @@ struct ItemButtonView: View {
                                 Image(systemName: "party.popper.fill")
                                     .foregroundColor(.purple)
                             }
+                            Text("\(dayOfWeek(eventDate)) \(shortDateFormatter.string(from: eventDate))")
+                                .mainButtonTextStyle()
                             
-                            .onAppear{
-                                self.scheduleNotification(for: item)
-                            }
+                                .onAppear {
+                                    self.scheduleNotification(for: item)
+                                }
                         } else {
                             Text("\(name)'s \(eventType) is in \(daysUntil) days")
                                 .mainButtonTextStyle()
+                            Text("\(dayOfWeek(eventDate)) \(shortDateFormatter.string(from: eventDate))")
+                                .mainButtonTextStyle()
                         }
                         
-                        Text("\(dayOfWeek(eventDate)) \(formattedEventDate)")
-                            .mainButtonTextStyle()
+                        
                     } else {
                         Text("No data available.")
                             .emptyButtonTextStyle()
@@ -77,7 +88,7 @@ struct ItemButtonView: View {
         content.title = "\(item.name ?? "An event") is today!"
         content.body = "Don't forget about \(item.eventType ?? "the event")."
         content.sound = UNNotificationSound.default
-
+        
         // Schedule the notification for "now"
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         
@@ -89,8 +100,8 @@ struct ItemButtonView: View {
             }
         }
     }
-
-
+    
+    
     // END of notifications on day of event ---------------------------------------
     
 }
