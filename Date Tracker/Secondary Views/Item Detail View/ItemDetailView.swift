@@ -15,8 +15,13 @@ struct ItemDetailView: View {
             
             if let name = item.name, let eventType = item.eventType, let eventDate = item.eventDate {
                 VStack(spacing: 5) {
+                    
+                    // Line 1 of Text in view --------------------------------------------------------
+                    
                     Text("\(name)'s \(eventType) is \(eventDate, formatter: dateFormatter)")
                         .detailViewRegularStyle()
+                    
+                    // Line 2 of Text in view --------------------------------------------------------
                     
                     let daysUntil = daysUntilEvent(eventDate)
                     
@@ -43,6 +48,8 @@ struct ItemDetailView: View {
                             .detailViewRegularStyle()
                     }
                     
+                    // Line 3 of Text in view --------------------------------------------------------
+                    
                     let yearsSince = yearsSinceEvent(eventDate)
                     
                     if yearsSince > 0 {
@@ -53,6 +60,8 @@ struct ItemDetailView: View {
                             .detailViewRegularStyle()
                     }
                     
+                    // Line 4 of Text in view --------------------------------------------------------
+                    
                     if yearsSince > 0 {
                         Text("Exact age is \(yearsSince) years old!")
                             .detailViewRegularStyle()
@@ -61,17 +70,23 @@ struct ItemDetailView: View {
                             .detailViewRegularStyle()
                     }
                     
+                    // Line 5 of Text in view --------------------------------------------------------
+                    
                     if let timestamp = item.timestamp {
                         Text("Event added to app: \(timestamp, formatter: dateTimeFormatter)")
                             .font(.caption)
                             .padding(.top, 20)
                     }
                     
+                    // Line 6 of Text in view --------------------------------------------------------
+                    
                     if let id = item.id {
                         Text("ID: \(id)")
                             .font(.caption)
                             .foregroundColor(.blue)
                     }
+                    
+                    // End of Detailed view --------------------------------------------------------
                     
                 }
             } else {
