@@ -23,24 +23,9 @@ struct ItemButtonView: View {
                         let eventType = item.eventType ?? "Unknown"
                         let daysUntil = daysUntilEvent(eventDate)
                         
+                        // Option 1 of Button -------------------------------------------
                         
-                        if eventDate > Date() {  // Check if the event is in the future
-                            Text("\(name)'s \(eventType) is in \(daysUntil) days")
-                                .mainButtonTextStyle()
-                            Text("\(dayOfWeek(eventDate)) \(dateFormatter.string(from: eventDate))")
-                                .mainButtonTextStyle()
-                            
-                        } else if daysUntil == 0 {
-                            HStack {
-                                Text("\(name)'s \(eventType) is Tomorrow!")
-                                    .boldButtonTextStyle()
-                                Image(systemName: "party.popper")
-                                    .foregroundColor(.purple)
-                            }
-                            Text("\(dayOfWeek(eventDate)) \(shortDateFormatter.string(from: eventDate))")
-                                .mainButtonTextStyle()
-                            
-                        } else if daysUntil == 365 {
+                        if daysUntil == 365 && (eventType == "Birthday" || eventType == "Anniversary") {
                             HStack {
                                 Text("\(name)'s \(eventType) is Today!")
                                     .boldButtonTextStyle()
@@ -53,13 +38,65 @@ struct ItemButtonView: View {
                                 .onAppear {
                                     self.scheduleNotification(for: item)
                                 }
+                            
+                        // Option 2 of Button -------------------------------------------
+                            
+                        } else if daysUntil == 365 && (eventType == "Holiday" || eventType == "Vacation") {
+                                HStack {
+                                    Text("\(name)'s \(eventType) is Today!")
+                                        .boldButtonTextStyle()
+                                    Image(systemName: "party.popper.fill")
+                                        .foregroundColor(.purple)
+                                }
+                                Text("\(dayOfWeek(eventDate)) \(shortDateFormatter.string(from: eventDate))")
+                                    .mainButtonTextStyle()
+                                
+                                    .onAppear {
+                                        self.scheduleNotification(for: item)
+                                    }
+                            
+                        // Option 3 of Button -------------------------------------------
+                            
+                        } else if daysUntil == 0 && (eventType == "Birthday" || eventType == "Anniversary") {
+                            HStack {
+                                Text("\(name)'s \(eventType) is Tomorrow!")
+                                    .boldButtonTextStyle()
+                                Image(systemName: "party.popper")
+                                    .foregroundColor(.purple)
+                            }
+                            Text("\(dayOfWeek(eventDate)) \(shortDateFormatter.string(from: eventDate))")
+                                .mainButtonTextStyle()
+                         
+                        // Option 4 of Button -------------------------------------------
+                            
+                        } else if daysUntil == 0 && (eventType == "Holiday" || eventType == "Vacation") {
+                            HStack {
+                                Text("\(name)'s \(eventType) is Tomorrow!")
+                                    .boldButtonTextStyle()
+                                Image(systemName: "party.popper")
+                                    .foregroundColor(.purple)
+                            }
+                            Text("\(dayOfWeek(eventDate)) \(shortDateFormatter.string(from: eventDate))")
+                                .mainButtonTextStyle()
+                            
+                        // Option 5 of Button -------------------------------------------
+                            
+//                        } else if eventDate > Date() {  // Check if the event is in the future
+//                            Text("\(name)'s \(eventType) is in \(daysUntil) days")
+//                                .mainButtonTextStyle()
+//                            Text("\(dayOfWeek(eventDate)) \(dateFormatter.string(from: eventDate))")
+//                                .mainButtonTextStyle()
+                            
+                            // Option 4 of Button -------------------------------------------
+                            
                         } else {
                             Text("\(name)'s \(eventType) is in \(daysUntil) days")
                                 .mainButtonTextStyle()
-                            Text("\(dayOfWeek(eventDate)) \(shortDateFormatter.string(from: eventDate))")
+                            Text("\(dayOfWeek(eventDate)) \(dateFormatter.string(from: eventDate))")
                                 .mainButtonTextStyle()
                         }
                         
+                        // Empty Data Button Placeholder -----------------------
                         
                     } else {
                         Text("No data available.")
@@ -75,6 +112,8 @@ struct ItemButtonView: View {
                                 .emptyButtonTextStyle()
                         }
                     }
+                    
+                    // End of Empty Data Button Placeholder -----------------------
                 }
             )
             .padding(.top, 8)
