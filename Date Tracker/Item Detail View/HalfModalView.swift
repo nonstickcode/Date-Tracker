@@ -4,7 +4,7 @@ struct HalfModalView<Content: View>: View {
     let content: Content
     
     @State private var contentWidth: CGFloat = 0
-    let padding: CGFloat = 25
+    let padding: CGFloat = 35
     let cornerRadius: CGFloat = 20
     
     init(@ViewBuilder content: () -> Content) {
