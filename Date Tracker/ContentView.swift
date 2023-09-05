@@ -18,7 +18,28 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
     
     private var sortedItems: [Item] {
-        return items.sorted { daysUntilEvent($0.eventDate) < daysUntilEvent($1.eventDate) } // This is what decides the order of the list after the one above does then lets daysUntilEvent sort it
+        return items.sorted { item1, item2 in
+            let daysUntil1 = daysUntilEvent(item1.eventDate)
+            let daysUntil2 = daysUntilEvent(item2.eventDate)
+            
+            if daysUntil1 == 365 && daysUntil2 != 365 {
+                return true
+            }
+            
+            if daysUntil1 != 365 && daysUntil2 == 365 {
+                return false
+            }
+            
+            if daysUntil1 == 0 && daysUntil2 != 0 && daysUntil2 != 365 {
+                return true
+            }
+            
+            if daysUntil1 != 0 && daysUntil2 == 0 && daysUntil1 != 365 {
+                return false
+            }
+            
+            return daysUntil1 < daysUntil2
+        }
     }
     
     @State private var isPresentingForm = false
