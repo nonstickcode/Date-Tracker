@@ -3,6 +3,10 @@ import SwiftUI
 struct HalfModalView<Content: View>: View {
     let content: Content
     
+    @State private var contentWidth: CGFloat = 0
+    let padding: CGFloat = 25
+    let cornerRadius: CGFloat = 20
+    
     init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
@@ -11,14 +15,27 @@ struct HalfModalView<Content: View>: View {
         GeometryReader { geometry in
             VStack {
                 Spacer()
-                VStack {
-                    self.content
+                HStack {
+                    Spacer()
+                    VStack {
+                        self.content
+                            .fixedSize(horizontal: true, vertical: false)
+                            .background(
+                                GeometryReader { proxy in
+                                    Color.clear.onAppear {
+                                        self.contentWidth = proxy.size.width
+                                    }
+                                }
+                            )
+                    }
+                    .padding(padding)
+                    .shadow(radius: 50)
+                    .frame(width: contentWidth + padding * 2)
+                    .background(Color.white)
+                    .cornerRadius(cornerRadius)
+                    .frame(minHeight: 0, maxHeight: .infinity)
+                    Spacer()
                 }
-                .padding(20)
-                .shadow(radius: 50)
-                .frame(width: geometry.size.width)
-                .background(Color.white)
-                .frame(minHeight: 0, maxHeight: .infinity)
                 Spacer()
             }
         }
