@@ -10,6 +10,11 @@ import SwiftUI
 struct ItemDetailView: View {
     var item: Item
     
+    
+     
+    
+    
+    
     var body: some View {
         VStack {
             
@@ -25,7 +30,7 @@ struct ItemDetailView: View {
                     
                     let daysUntil = daysUntilEvent(eventDate)
                     
-                    if daysUntil == 0 {
+                    if daysUntil == 0 && (eventType == "Birthday" || eventType == "Anniversary") {
                         HStack {
                             Text("Party Time Tomorrow!")
                                 .detailViewBoldStyle()
@@ -34,11 +39,29 @@ struct ItemDetailView: View {
                                 .bold()
                         }
                         
-                    } else if daysUntil == 365 {
+                    } else if daysUntil == 365 && (eventType == "Birthday" || eventType == "Anniversary") {
                         HStack {
                             Text("Party Time Today!")
                                 .detailViewBoldStyle()
                             Image(systemName: "party.popper.fill")
+                                .foregroundColor(.purple)
+                                .bold()
+                        }
+                        
+                    } else if daysUntil == 0 && (eventType == "Vacation" || eventType == "Holiday") {
+                        HStack {
+                            Text("\(name) is Tomorrow!")
+                                .detailViewBoldStyle()
+                            Image(systemName: "calendar.badge.exclamationmark")
+                                .foregroundColor(.purple)
+                                .bold()
+                        }
+                        
+                    } else if daysUntil == 365 && (eventType == "Vacation" || eventType == "Holiday") {
+                        HStack {
+                            Text("\(name) is Today!")
+                                .detailViewBoldStyle()
+                            Image(systemName: "calendar.badge.exclamationmark")
                                 .foregroundColor(.purple)
                                 .bold()
                         }
