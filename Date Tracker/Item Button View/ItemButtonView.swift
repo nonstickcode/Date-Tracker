@@ -57,11 +57,11 @@ struct ItemButtonView: View {
         if daysUntil == 365 && (eventType == "Birthday" || eventType == "Anniversary") {
             return ("\(name)'s \(eventType) is Today!", AnyView(Image(systemName: "party.popper.fill").foregroundColor(.purple)))
         } else if daysUntil == 365 && (eventType == "Holiday" || eventType == "Vacation") {
-            return ("\(name)'s \(eventType) is Today!", AnyView(Image(systemName: "party.popper.fill").foregroundColor(.purple)))
+            return ("\(name)'s \(eventType) is Today!", AnyView(Image(systemName: "calendar.badge.exclamationmark").foregroundColor(.purple)))
         } else if daysUntil == 0 && (eventType == "Birthday" || eventType == "Anniversary") {
             return ("\(name)'s \(eventType) is Tomorrow!", AnyView(Image(systemName: "party.popper").foregroundColor(.purple)))
         } else if daysUntil == 0 && (eventType == "Holiday" || eventType == "Vacation") {
-            return ("\(name)'s \(eventType) is Tomorrow!", AnyView(Image(systemName: "party.popper").foregroundColor(.purple)))
+            return ("\(name)'s \(eventType) is Tomorrow!", AnyView(Image(systemName: "calendar.badge.clock").foregroundColor(.purple)))
         } else {
             return ("\(name)'s \(eventType) is in \(daysUntil) days", AnyView(EmptyView()))
         }

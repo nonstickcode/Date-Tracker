@@ -52,7 +52,7 @@ struct ItemDetailView: View {
                         HStack {
                             Text("\(name) is Tomorrow!")
                                 .detailViewBoldStyle()
-                            Image(systemName: "calendar.badge.exclamationmark")
+                            Image(systemName: "calendar.badge.clock")
                                 .foregroundColor(.purple)
                                 .bold()
                         }

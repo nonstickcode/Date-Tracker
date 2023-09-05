@@ -49,34 +49,27 @@ extension Text {
     
     // ------------------------------------------------------------------
     
-    
     // Form View Style Below -------------------------------------------
-    
     
     func formHeaderStyle() -> Text {
         self
             .font(.custom("BlackOpsOne-Regular", size: 36))
             .foregroundColor(.formHeaderAndSaveButtonForeground)
-            
     }
     func formRegularStyle() -> Text {
         self
             .font(.custom("RobotoMono-Bold", size: 12))
-            
     }
     func formItalicsStyle() -> Text {
         self
             .font(.custom("RobotoMono-Italic", size: 14))  // unused, cannot figure out how to change TextField style other than .font(.custom("RobotoMono-Italic", size: 16))
-            
     }
     func formSaveButtonStyle() -> Text {
         self
             .font(.custom("BlackOpsOne-Regular", size: 32))
             .foregroundColor(.formHeaderAndSaveButtonForeground)
-            
     }
     
-
     //--------------------------------------------------------------------
     
     // Detail View Style Below -------------------------------------------
@@ -86,15 +79,12 @@ extension Text {
         self
             .font(.custom("Roboto-Regular", size: 20))
             .foregroundColor(.black)
-            
     }
     func detailViewBoldStyle() -> Text {
         self
             .font(.custom("Roboto-Bold", size: 20))
             .foregroundColor(.accentColor)
-            
     }
-    
     
     // --------------------------------------------------------------------
     
@@ -102,9 +92,8 @@ extension Text {
 
 // Custom Colors Below -------------------------------------------
 
-
 extension Color {
-    // accentColor = is blue
+    // App accentColor = is blue
     static let mainHeaderTextColor = Color.white
     static let mainFooterTextColor = Color.white
     static let formHeaderAndSaveButtonForeground = Color.black
