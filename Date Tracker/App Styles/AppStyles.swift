@@ -94,8 +94,21 @@ extension Text {
 
 extension Color {
     // App accentColor = is blue
+    static let mainHeaderBackground = Color.black.opacity(0.8)
     static let mainHeaderTextColor = Color.white
     static let mainFooterTextColor = Color.white
     static let formHeaderAndSaveButtonForeground = Color.black
     static let formHeaderAndSaveButtonBackground = Color.green.opacity(0.8)
+}
+
+extension View {
+    func mainGradientBackground() -> some View {
+        self.background(
+            LinearGradient(
+                gradient: Gradient(colors: [Color.green, Color.accentColor]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+    }
 }
