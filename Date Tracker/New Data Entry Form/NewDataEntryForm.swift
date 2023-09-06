@@ -16,7 +16,8 @@ struct NewDataEntryForm: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State private var moveDown = false
+    @State private var moveDown1 = false  // For text animation
+    @State private var moveDown2 = false  // For chevron icon animation
     
     @State private var showAlert = false
     
@@ -68,14 +69,18 @@ struct NewDataEntryForm: View {
                             }
                         }
                 )
-            Image(systemName: "chevron.compact.down")
-            // add .scaleEffect(.bounce) when ios 17 drops
+                .offset(y: moveDown1 ? 5 : -5)
+                .onAppear {
+                    startMoving1()
+                }
+            
+            Image(systemName: "chevron.compact.down") // add .scaleEffect(.bounce) when ios 17 drops
                 .padding(4)
                 .font(.system(size: 30))
-                                .offset(y: moveDown ? 10 : 0)
-                                .onAppear {
-                                    startMoving()
-                                }
+                .offset(y: moveDown2 ? 5 : -5)
+                .onAppear {
+                    startMoving2()
+                }
             
             Form {
                 Section(header: Text("Name of Person or Event").formRegularStyle()) {
@@ -223,11 +228,16 @@ struct NewDataEntryForm: View {
     
     
     
-    private func startMoving() {
-        withAnimation(Animation.linear(duration: 2.0).repeatForever(autoreverses: false)) {
-                moveDown.toggle()
-            }
+    private func startMoving1() {
+        withAnimation(Animation.linear(duration: 2.0).repeatForever(autoreverses: false)) {  // For text animation
+            moveDown1.toggle()
         }
+    }
+    private func startMoving2() {
+        withAnimation(Animation.linear(duration: 2.0).repeatForever(autoreverses: false)) {  // For chevron icon animation
+            moveDown2.toggle()
+        }
+    }
     
     
     
