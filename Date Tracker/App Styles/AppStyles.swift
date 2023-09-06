@@ -43,7 +43,7 @@ extension Text {
     }
     func emptyButtonTextStyle() -> Text {
         self
-            .font(.custom("Roboto-Regular", size: 16))
+            .font(.custom("Roboto-Italic", size: 16))
             .foregroundColor(.black)
     }
     

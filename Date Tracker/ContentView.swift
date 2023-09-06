@@ -79,6 +79,7 @@ struct ContentView: View {
                                         deleteItem(item: item)
                                     }) {
                                         Label("Delete", systemImage: "trash")
+                                            .foregroundColor(.red)
                                     }
                                     Button(action: {
                                         // add edit action here
@@ -177,6 +178,7 @@ struct ContentView: View {
                 }
                 .font(.custom("Roboto-Regular", size: 16))
                 .foregroundColor(Color.mainHeaderTextColor)
+                .frame(minWidth: 40, maxWidth: 40, minHeight: 40, maxHeight: 40)  // Explicitly set frame
             }
             .padding()
         }

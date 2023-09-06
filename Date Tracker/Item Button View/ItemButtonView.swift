@@ -4,7 +4,6 @@ struct ItemButtonView: View {
     var item: Item?
     
     @Binding var noDataPresent: Bool
-
     
     var body: some View {
         RoundedRectangle(cornerRadius: 8)
@@ -43,9 +42,11 @@ struct ItemButtonView: View {
         }
     }
    
+
     
     private var noDataView: some View {
         VStack {
+            Spacer()
             Text("No data available.")
                 .emptyButtonTextStyle()
             HStack {
@@ -57,6 +58,7 @@ struct ItemButtonView: View {
                 Text(" to add new event.")
                     .emptyButtonTextStyle()
             }
+            Spacer()
         }
     }
     
