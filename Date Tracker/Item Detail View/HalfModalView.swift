@@ -3,7 +3,7 @@ import SwiftUI
 struct HalfModalView<Content: View>: View {
     let content: Content
     
-    let padding: CGFloat = 10
+    let padding: CGFloat = 25
     let cornerRadius: CGFloat = 20
        
     init(@ViewBuilder content: () -> Content) {
