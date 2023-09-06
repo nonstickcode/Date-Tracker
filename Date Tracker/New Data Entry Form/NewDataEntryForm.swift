@@ -69,10 +69,10 @@ struct NewDataEntryForm: View {
                             }
                         }
                 )
-                .offset(y: moveDown1 ? 5 : -5)
-                .onAppear {
-                    startMoving1()
-                }
+//                .offset(y: moveDown1 ? 5 : -5)
+//                .onAppear {
+//                    startMoving1()
+//                }
             
             Image(systemName: "chevron.compact.down") // add .scaleEffect(.bounce) when ios 17 drops
                 .padding(4)
