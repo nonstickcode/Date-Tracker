@@ -3,6 +3,9 @@ import SwiftUI
 struct ItemButtonView: View {
     var item: Item?
     
+    @Binding var noDataPresent: Bool
+
+    
     var body: some View {
         RoundedRectangle(cornerRadius: 8)
             .fill(Color.white)
@@ -29,9 +32,17 @@ struct ItemButtonView: View {
                     }
                 }
             )
+            .onAppear(perform: checkForData)
             .padding(.top, 8)
             .padding([.leading, .trailing], 16)
     }
+    
+    private func checkForData() {
+        if item == nil {
+            noDataPresent = true
+        }
+    }
+   
     
     private var noDataView: some View {
         VStack {

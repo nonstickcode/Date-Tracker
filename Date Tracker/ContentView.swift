@@ -17,6 +17,8 @@ struct ContentView: View {
     
     private var items: FetchedResults<Item>
     
+    // Sort function below ----------------------------------------------------------------
+    
     private var sortedItems: [Item] {
         return items.sorted { item1, item2 in
             let daysUntil1 = daysUntilEvent(item1.eventDate)
@@ -42,6 +44,8 @@ struct ContentView: View {
         }
     }
     
+    // Sort function above ----------------------------------------------------------------
+    
     @State private var isPresentingForm = false
     @State private var selectedItem: Item?
     @State private var isEditMode: Bool = false
@@ -49,6 +53,8 @@ struct ContentView: View {
     
     @State private var showOverlay: Bool = false
     
+    
+    @State private var noDataPresent: Bool = false // State variable
     
     
     var body: some View {
@@ -65,7 +71,7 @@ struct ContentView: View {
                                     self.selectedItem = item
                                     self.showOverlay = true
                                 }) {
-                                    ItemButtonView(item: item)
+                                    ItemButtonView(item: item, noDataPresent: $noDataPresent)
                                 }
                                 // long press menu starts here ----------------------------------------------
                                 .contextMenu {
@@ -96,7 +102,7 @@ struct ContentView: View {
                             }
                         }
                         if items.isEmpty {
-                            ItemButtonView(item: nil)
+                            ItemButtonView(item: nil, noDataPresent: $noDataPresent)
                         }
                     }
                     .padding(.bottom, 8)
@@ -104,6 +110,9 @@ struct ContentView: View {
                 .onChange(of: items.count) { newValue in
                     if newValue == 0 {
                         isEditMode = false
+                        noDataPresent = true
+                    } else {
+                        noDataPresent = false
                     }
                 }
                 .mainGradientBackground()
@@ -155,6 +164,8 @@ struct ContentView: View {
                         .foregroundColor(Color.mainHeaderTextColor)
                         .font(.system(size: 24))
                         .padding(10)
+                        .scaleEffect(noDataPresent ? 1.4 : 1.0)
+                            .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
                 }
                 .foregroundColor(Color.mainHeaderTextColor)
                 .sheet(isPresented: $isPresentingForm) {
