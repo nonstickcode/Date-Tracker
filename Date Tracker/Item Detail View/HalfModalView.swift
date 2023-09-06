@@ -3,48 +3,40 @@ import SwiftUI
 struct HalfModalView<Content: View>: View {
     let content: Content
     
-    @State private var contentWidth: CGFloat = 0
-    let padding: CGFloat = 35
+    let padding: CGFloat = 10
     let cornerRadius: CGFloat = 20
-    
+       
     init(@ViewBuilder content: () -> Content) {
-        self.content = content()
+           self.content = content()
     }
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                Spacer()
-                HStack {
+            GeometryReader { geometry in
+                VStack {
                     Spacer()
-                    VStack {
-                        self.content
-                            .fixedSize(horizontal: true, vertical: false)
-                            .background(
-                                GeometryReader { proxy in
-                                    Color.clear.onAppear {
-                                        self.contentWidth = proxy.size.width
-                                    }
-                                }
-                            )
+                    HStack {
+                        Spacer()
+                        VStack {
+                            self.content
+                        }
+                        .padding(padding)
+                        .shadow(radius: 50)
+                        .background(Color.white)
+                        .cornerRadius(cornerRadius)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: geometry.size.width - 2 * padding, maxHeight: .infinity)
+                        .lineLimit(nil)
+                        Spacer()
                     }
-                    .padding(padding)
-                    .shadow(radius: 50)
-                    .frame(width: contentWidth + padding * 2)
-                    .background(Color.white)
-                    .cornerRadius(cornerRadius)
-                    .frame(minHeight: 0, maxHeight: .infinity)
                     Spacer()
                 }
-                Spacer()
             }
+            .background(
+                VisualEffectView(effect: UIBlurEffect(style: .light))
+                    .edgesIgnoringSafeArea(.all)
+            )
         }
-        .background(
-            VisualEffectView(effect: UIBlurEffect(style: .light))
-                .edgesIgnoringSafeArea(.all)
-        )
     }
-}
 
 struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?

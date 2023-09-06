@@ -86,12 +86,17 @@ struct NewDataEntryForm: View {
                 Section(header: Text("Name of Person or Event").formRegularStyle()) {
                     TextField("enter name here", text: $newEventName)
                         .font(.custom("RobotoMono-Italic", size: 14))
+                        .onChange(of: newEventName) { newValue in
+                                    if newEventName.count > 40 { // Limit to 40 characters
+                                        newEventName = String(newEventName.prefix(40))
+                                    }
+                                }
                 }
                 
-                Section(header: Text("Preferred pronoun for person or event").formRegularStyle()) {
-                    TextField("enter pronoun here", text: $newPreferredPronoun)
-                        .font(.custom("RobotoMono-Italic", size: 14))
-                }
+//                Section(header: Text("Preferred pronoun for person or event").formRegularStyle()) {
+//                    TextField("enter pronoun here", text: $newPreferredPronoun)
+//                        .font(.custom("RobotoMono-Italic", size: 14))
+//                }
                 
                 Section(header: Text("Event Date, upcoming or past").formRegularStyle()) {
                     VStack {
