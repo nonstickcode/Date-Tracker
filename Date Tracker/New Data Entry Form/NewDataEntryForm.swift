@@ -16,6 +16,8 @@ struct NewDataEntryForm: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @State private var moveDown = false
+    
     @State private var showAlert = false
     
     @State private var newEventName: String = ""
@@ -67,9 +69,13 @@ struct NewDataEntryForm: View {
                         }
                 )
             Image(systemName: "chevron.compact.down")
-                .font(.system(size: 30))
             // add .scaleEffect(.bounce) when ios 17 drops
-                .padding(2)
+                .padding(4)
+                .font(.system(size: 30))
+                                .offset(y: moveDown ? 10 : 0)
+                                .onAppear {
+                                    startMoving()
+                                }
             
             Form {
                 Section(header: Text("Name of Person or Event").formRegularStyle()) {
@@ -213,6 +219,19 @@ struct NewDataEntryForm: View {
             // Handle the error appropriately
         }
     }
+    
+    
+    
+    
+    private func startMoving() {
+        withAnimation(Animation.linear(duration: 2.0).repeatForever(autoreverses: false)) {
+                moveDown.toggle()
+            }
+        }
+    
+    
+    
+    
     
 }
 
