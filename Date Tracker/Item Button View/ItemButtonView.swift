@@ -57,14 +57,14 @@ struct ItemButtonView: View {
         VStack {
             Spacer()
             Text("No data available.")
-                .emptyButtonTextStyle()
+                .emptyButtonBoldTextStyle()
             HStack {
-                Text("Tap ")
+                Text("Tap the ")
                     .emptyButtonTextStyle()
                 Image(systemName: "plus.app")
                     .bold()
                     .padding(-6)
-                Text(" to add new event.")
+                Text(" to add a new event.")
                     .emptyButtonTextStyle()
             }
             Spacer()

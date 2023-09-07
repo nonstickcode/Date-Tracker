@@ -13,17 +13,17 @@ extension Text {
     
     func mainHeaderStyle() -> Text {
         self
-            .font(.custom("LobsterTwo-Bold", size: 36))
+            .font(.custom("Pacifico-Regular", size: 36))
             .foregroundColor(.mainHeaderTextColor)
     }
     func mainHeaderEditButtonStyle() -> Text {
         self
-            .font(.custom("Roboto-Regular", size: 16))  // not used this style is set manaully
+            .font(.custom("Quicksand-Bold", size: 16))  // not used this style is set manaully
             .foregroundColor(Color.mainHeaderTextColor)
     }
     func mainFooterTextStyle() -> Text {
         self
-            .font(.custom("RobotoSlab-Regular", size: 16))
+            .font(.custom("Pacifico-Regular", size: 16))
             .foregroundColor(.mainFooterTextColor)
     }
     
@@ -33,21 +33,42 @@ extension Text {
     
     func mainButtonTextStyle() -> Text {
         self
-            .font(.custom("Roboto-Regular", size: 16))
+            .font(.custom("Quicksand-Regular", size: 16))
             .foregroundColor(.accentColor)
     }
     func boldButtonTextStyle() -> Text {
         self
-            .font(.custom("Roboto-Bold", size: 16))
+            .font(.custom("Quicksand-Bold", size: 16))
             .foregroundColor(.accentColor)
     }
     func emptyButtonTextStyle() -> Text {
         self
-            .font(.custom("Roboto-Italic", size: 16))
+            .font(.custom("Quicksand-Regular", size: 16))
+            .foregroundColor(.black)
+    }
+    func emptyButtonBoldTextStyle() -> Text {
+        self
+            .font(.custom("Quicksand-Bold", size: 16))
             .foregroundColor(.black)
     }
     
     // ------------------------------------------------------------------
+    
+    // Detail View Style Below -------------------------------------------
+    
+    
+    func detailViewRegularStyle() -> Text {
+        self
+            .font(.custom("Quicksand-Regular", size: 16))
+            .foregroundColor(.black)
+    }
+    func detailViewBoldStyle() -> Text {
+        self
+            .font(.custom("Quicksand-Bold", size: 16))
+            .foregroundColor(.accentColor)
+    }
+    
+    // --------------------------------------------------------------------
     
     // Form View Style Below -------------------------------------------
     
@@ -72,21 +93,7 @@ extension Text {
     
     //--------------------------------------------------------------------
     
-    // Detail View Style Below -------------------------------------------
-    
-    
-    func detailViewRegularStyle() -> Text {
-        self
-            .font(.custom("Roboto-Regular", size: 20))
-            .foregroundColor(.black)
-    }
-    func detailViewBoldStyle() -> Text {
-        self
-            .font(.custom("Roboto-Bold", size: 20))
-            .foregroundColor(.accentColor)
-    }
-    
-    // --------------------------------------------------------------------
+
     
 }
 

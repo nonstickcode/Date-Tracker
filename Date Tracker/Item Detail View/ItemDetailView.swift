@@ -115,7 +115,7 @@ struct ItemDetailView: View {
         } else if daysUntil == 1 && (eventType == "Holiday" || eventType == "Vacation") {
             return ButtonContent (text: "\(name) is Tomorrow!", imageView: AnyView(Image(systemName: "calendar.badge.clock").foregroundColor(.purple)))
         } else {
-            return ButtonContent (text: "\(name)'s \(eventType) is in \(daysUntil) days", imageView: AnyView(EmptyView()))
+            return ButtonContent (text: "This event is in \(daysUntil) days", imageView: AnyView(EmptyView()))
         }
     }
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B049D102AAA3DCF009E7499 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B049D0F2AAA3DCF009E7499 /* Pacifico-Regular.ttf */; };
+		2B049D122AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B049D112AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf */; };
 		2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6412292AA5788500CC7506 /* ItemButtonView.swift */; };
 		2B64122D2AA5797800CC7506 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */; };
 		2B9879A52AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B049D0F2AAA3DCF009E7499 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
+		2B049D112AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		2B6412292AA5788500CC7506 /* ItemButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemButtonView.swift; sourceTree = "<group>"; };
 		2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-VariableFont_wght.ttf"; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 		2BE814342AA6742C002EE172 /* Custom Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				2B049D112AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf */,
+				2B049D0F2AAA3DCF009E7499 /* Pacifico-Regular.ttf */,
 				2BA9F3832AA933E6008EA520 /* Roboto-Italic.ttf */,
 				2BE814372AA67DB6002EE172 /* Roboto-Bold.ttf */,
 				2BE814352AA67C67002EE172 /* Roboto-Regular.ttf */,
@@ -238,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BE1B8732A9A7A3900CD2929 /* Preview Assets.xcassets in Resources */,
+				2B049D122AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf in Resources */,
 				2B9879A52AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf in Resources */,
 				2BE814362AA67C67002EE172 /* Roboto-Regular.ttf in Resources */,
 				2BE814312AA669E4002EE172 /* RobotoMono-VariableFont_wght.ttf in Resources */,
@@ -247,6 +254,7 @@
 				2BA9F3842AA933E6008EA520 /* Roboto-Italic.ttf in Resources */,
 				2BE1B8702A9A7A3900CD2929 /* Assets.xcassets in Resources */,
 				2BE814302AA669E4002EE172 /* RobotoMono-Italic-VariableFont_wght.ttf in Resources */,
+				2B049D102AAA3DCF009E7499 /* Pacifico-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

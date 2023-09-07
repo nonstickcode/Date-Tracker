@@ -164,7 +164,7 @@ struct ContentView: View {
                     Image(systemName: "plus.app")
                         .foregroundColor(Color.mainHeaderTextColor)
                         .font(.system(size: 24))
-                        .padding(10)
+                        .padding(5)
                         .scaleEffect(noDataPresent ? 1.4 : 1.0)
                             .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
                 }
@@ -176,9 +176,9 @@ struct ContentView: View {
                 Button(isEditMode ? "Done" : "Edit") {
                     isEditMode.toggle()
                 }
-                .font(.custom("Roboto-Regular", size: 16))
+                .font(.custom("Quicksand-Bold", size: 16))
                 .foregroundColor(Color.mainHeaderTextColor)
-                .frame(minWidth: 40, maxWidth: 40, minHeight: 40, maxHeight: 40)  // Explicitly set frame
+                .frame(minWidth: 50, maxWidth: 50, minHeight: 40, maxHeight: 40)  // Explicitly set frame
             }
             .padding()
         }
