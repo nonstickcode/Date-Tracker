@@ -2,7 +2,7 @@
 //  Item+CoreDataProperties.swift
 //  Date Tracker
 //
-//  Created by Cody McRoy on 8/26/23.
+//  Created by Cody McRoy on 9/7/23.
 //
 //
 
@@ -22,6 +22,8 @@ extension Item {
     @NSManaged public var name: String?
     @NSManaged public var preferredPronoun: String?
     @NSManaged public var timestamp: Date?
+    @NSManaged public var taggedForDelete: Bool
+    @NSManaged public var dateEventTaggedForDelete: Date?
 
 }
 

@@ -10,14 +10,14 @@
 		2B049D102AAA3DCF009E7499 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B049D0F2AAA3DCF009E7499 /* Pacifico-Regular.ttf */; };
 		2B049D122AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B049D112AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf */; };
 		2B049D152AAA538B009E7499 /* DeleteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049D142AAA538B009E7499 /* DeleteManager.swift */; };
+		2B049D202AAA6C88009E7499 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049D1E2AAA6C88009E7499 /* Item+CoreDataClass.swift */; };
+		2B049D212AAA6C88009E7499 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049D1F2AAA6C88009E7499 /* Item+CoreDataProperties.swift */; };
 		2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6412292AA5788500CC7506 /* ItemButtonView.swift */; };
 		2B64122D2AA5797800CC7506 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */; };
 		2B9879A52AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */; };
 		2B9879A92AA660BC00DB74FF /* AppStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9879A82AA660BC00DB74FF /* AppStyles.swift */; };
 		2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */; };
 		2BA9F3842AA933E6008EA520 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA9F3832AA933E6008EA520 /* Roboto-Italic.ttf */; };
-		2BCC2DDF2A9B17B800D81239 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC2DDD2A9B17B800D81239 /* Item+CoreDataClass.swift */; };
-		2BCC2DE02A9B17B800D81239 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC2DDE2A9B17B800D81239 /* Item+CoreDataProperties.swift */; };
 		2BE1B86C2A9A7A3800CD2929 /* Date_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */; };
 		2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */; };
 		2BE1B8702A9A7A3900CD2929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE1B86F2A9A7A3900CD2929 /* Assets.xcassets */; };
@@ -38,6 +38,8 @@
 		2B049D0F2AAA3DCF009E7499 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
 		2B049D112AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		2B049D142AAA538B009E7499 /* DeleteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteManager.swift; sourceTree = "<group>"; };
+		2B049D1E2AAA6C88009E7499 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2B049D1F2AAA6C88009E7499 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2B6412292AA5788500CC7506 /* ItemButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemButtonView.swift; sourceTree = "<group>"; };
 		2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-VariableFont_wght.ttf"; sourceTree = "<group>"; };
@@ -45,8 +47,6 @@
 		2B9879A82AA660BC00DB74FF /* AppStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyles.swift; sourceTree = "<group>"; };
 		2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataEntryForm.swift; sourceTree = "<group>"; };
 		2BA9F3832AA933E6008EA520 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
-		2BCC2DDD2A9B17B800D81239 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2BCC2DDE2A9B17B800D81239 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2BE1B8682A9A7A3800CD2929 /* Date Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Date Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date_TrackerApp.swift; sourceTree = "<group>"; };
 		2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,8 +86,6 @@
 		2B116CB92A9A7FA900E5CA8E /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				2BCC2DDD2A9B17B800D81239 /* Item+CoreDataClass.swift */,
-				2BCC2DDE2A9B17B800D81239 /* Item+CoreDataProperties.swift */,
 				2BE1B8742A9A7A3900CD2929 /* Persistence.swift */,
 				2BE1B8762A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld */,
 			);
@@ -131,6 +129,8 @@
 		2BE1B85F2A9A7A3800CD2929 = {
 			isa = PBXGroup;
 			children = (
+				2B049D1E2AAA6C88009E7499 /* Item+CoreDataClass.swift */,
+				2B049D1F2AAA6C88009E7499 /* Item+CoreDataProperties.swift */,
 				2BE1B86A2A9A7A3800CD2929 /* Date Tracker */,
 				2BE1B8692A9A7A3800CD2929 /* Products */,
 			);
@@ -276,14 +276,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BCC2DE02A9B17B800D81239 /* Item+CoreDataProperties.swift in Sources */,
-				2BCC2DDF2A9B17B800D81239 /* Item+CoreDataClass.swift in Sources */,
 				2BE1B8752A9A7A3900CD2929 /* Persistence.swift in Sources */,
 				2B9879A92AA660BC00DB74FF /* AppStyles.swift in Sources */,
 				2BF48F922AA5C47C004824C3 /* HalfModalView.swift in Sources */,
 				2BF48F8F2AA5B94E004824C3 /* ItemDetailView.swift in Sources */,
 				2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */,
+				2B049D212AAA6C88009E7499 /* Item+CoreDataProperties.swift in Sources */,
 				2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */,
+				2B049D202AAA6C88009E7499 /* Item+CoreDataClass.swift in Sources */,
 				2BE1B8782A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld in Sources */,
 				2B049D152AAA538B009E7499 /* DeleteManager.swift in Sources */,
 				2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */,

@@ -221,6 +221,10 @@ struct NewDataEntryForm: View {
         newItem.eventDate = newEventDate
         newItem.eventType = newEventType
         
+        newItem.taggedForDelete = false
+        
+        
+        
         do {
             try viewContext.save()
             self.presentationMode.wrappedValue.dismiss()
