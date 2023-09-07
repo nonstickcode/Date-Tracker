@@ -15,11 +15,12 @@ struct ContentView: View {
     @State private var itemToDelete: Item?
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: false)],  // This is what decides the order of the list when fetched
+        entity: Item.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: false)],
+        predicate: NSPredicate(format: "taggedForDelete == %@", NSNumber(value: false)),
         animation: .default)
-    
     private var items: FetchedResults<Item>
-    
+
     // Sort function below ----------------------------------------------------------------
     
     private var sortedItems: [Item] {
@@ -78,11 +79,11 @@ struct ContentView: View {
                                 }
                                 // long press menu starts here ----------------------------------------------
                                 .contextMenu {
+                                    
                                     Button(action: {
-                                        deleteItem(item: item)
+                                        // add edit action here
                                     }) {
-                                        Label("Delete", systemImage: "trash")
-                                            .foregroundColor(.red)
+                                        Label("Share", systemImage: "square.and.arrow.up")
                                     }
                                     Button(action: {
                                         // add edit action here
@@ -108,6 +109,12 @@ struct ContentView: View {
                                         // add edit action here
                                     }) {
                                         Label("Coming Soon", systemImage: "questionmark.folder")
+                                    }
+                                    Button(action: {
+                                        deleteItem(item: item)
+                                    }) {
+                                        Label("Delete", systemImage: "trash")
+                                            .foregroundColor(.red)
                                     }
                                     // long press menu ends here ----------------------------------------------
                                     

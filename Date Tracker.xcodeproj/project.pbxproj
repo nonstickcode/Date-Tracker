@@ -86,6 +86,8 @@
 		2B116CB92A9A7FA900E5CA8E /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				2B049D1E2AAA6C88009E7499 /* Item+CoreDataClass.swift */,
+				2B049D1F2AAA6C88009E7499 /* Item+CoreDataProperties.swift */,
 				2BE1B8742A9A7A3900CD2929 /* Persistence.swift */,
 				2BE1B8762A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld */,
 			);
@@ -129,8 +131,6 @@
 		2BE1B85F2A9A7A3800CD2929 = {
 			isa = PBXGroup;
 			children = (
-				2B049D1E2AAA6C88009E7499 /* Item+CoreDataClass.swift */,
-				2B049D1F2AAA6C88009E7499 /* Item+CoreDataProperties.swift */,
 				2BE1B86A2A9A7A3800CD2929 /* Date Tracker */,
 				2BE1B8692A9A7A3800CD2929 /* Products */,
 			);
