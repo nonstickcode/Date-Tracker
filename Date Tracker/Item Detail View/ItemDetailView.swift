@@ -18,98 +18,44 @@ struct ItemDetailView: View {
     var body: some View {
         VStack {
             
-            if let name = item.name, let eventType = item.eventType, let eventDate = item.eventDate {
+            if let eventDate = item.eventDate {
                 VStack(spacing: 5) {
+                    
+                    let firstLine = detailsFirstLine(for: item, on: eventDate)
+                    let secondLine = detailsSecondLine(for: item, on: eventDate)
+                    let thirdLine = detailsThirdLine(for: item, on: eventDate)
+                    let fourthLine = detailsFourthLine(for: item, on: eventDate)
                     
                     // Line 1 of Text in view --------------------------------------------------------
                     
-                    Text("\(name)'s \(eventType) is \(eventDate, formatter: dateFormatter)")
-                        .detailViewRegularStyle()
+                    HStack {
+                        Text(firstLine.text)
+                            .detailViewRegularStyle()
+                        firstLine.imageView
+                    }
                     
                     // Line 2 of Text in view --------------------------------------------------------
                     
-                    let daysUntil = daysUntilEvent(eventDate)
-                    
-                    if daysUntil == 365 && (eventType == "Birthday" || eventType == "Anniversary") {
-                        HStack {
-                            Text("\(name)'s \(eventType) was yesterday!")
-                                .detailViewBoldStyle()
-                            Image(systemName: "figure.wave.circle")
-                                .foregroundColor(.brown)
-                                .bold()
-                        }
-                        
-                    } else if daysUntil == 365 && (eventType == "Vacation" || eventType == "Holiday") {
-                        HStack {
-                            Text("\(name)'s \(eventType) was yesterday!")
-                                .detailViewBoldStyle()
-                            Image(systemName: "figure.wave.circle.fill")
-                                .foregroundColor(.brown)
-                                .bold()
-                        }
-                        
-                    } else if daysUntil == 0 && (eventType == "Birthday" || eventType == "Anniversary") {
-                        HStack {
-                            Text("Party Time Today!")
-                                .detailViewBoldStyle()
-                            Image(systemName: "party.popper.fill")
-                                .foregroundColor(.purple)
-                                .bold()
-                        }
-                        
-                    } else if daysUntil == 0 && (eventType == "Vacation" || eventType == "Holiday") {
-                        HStack {
-                            Text("\(name) is Today!")
-                                .detailViewBoldStyle()
-                            Image(systemName: "calendar.badge.exclamationmark")
-                                .foregroundColor(.purple)
-                                .bold()
-                        }
-                        
-                    } else if daysUntil == 1 && (eventType == "Birthday" || eventType == "Anniversary") {
-                        HStack {
-                            Text("Party Time Tomorrow!")
-                                .detailViewBoldStyle()
-                            Image(systemName: "party.popper")
-                                .foregroundColor(.purple)
-                                .bold()
-                        }
-                        
-                    } else if daysUntil == 1 && (eventType == "Vacation" || eventType == "Holiday") {
-                        HStack {
-                            Text("\(name) is Tomorrow!")
-                                .detailViewBoldStyle()
-                            Image(systemName: "calendar.badge.clock")
-                                .foregroundColor(.purple)
-                                .bold()
-                        }
-                        
-                        
-                    } else {
-                        Text("\(name)'s \(eventType) is in \(daysUntil) days")
-                            .detailViewRegularStyle()
+                    HStack {
+                        Text(secondLine.text)
+                            .detailViewBoldStyle()
+                        secondLine.imageView
                     }
                     
                     // Line 3 of Text in view --------------------------------------------------------
                     
-                    let yearsSince = yearsSinceEvent(eventDate)
-                    
-                    if yearsSince > 0 {
-                        Text("It will be on a \(dayOfWeek(eventDate)) this year")
+                    HStack {
+                        Text(thirdLine.text)
                             .detailViewRegularStyle()
-                    } else {
-                        Text("\(eventDate, formatter: dateFormatter) will be a \(dayOfWeek(eventDate))")
-                            .detailViewRegularStyle()
+                        thirdLine.imageView
                     }
                     
                     // Line 4 of Text in view --------------------------------------------------------
                     
-                    if yearsSince > 0 {
-                        Text("Exact age is \(yearsSince) years old!")
+                    HStack {
+                        Text(fourthLine.text)
                             .detailViewRegularStyle()
-                    } else {
-                        Text("\(daysUntil) days is exactly \(daysConvertedToYears(daysUntil)) years")
-                            .detailViewRegularStyle()
+                        fourthLine.imageView
                     }
                     
                     // Line 5 of Text in view --------------------------------------------------------
@@ -137,12 +83,69 @@ struct ItemDetailView: View {
             }
         }
     }
+    
+    
+    
+    private func detailsFirstLine(for item: Item, on eventDate: Date) -> ButtonContent {
+        let name = item.name ?? "Unknown"
+        let eventType = item.eventType ?? "Unknown"
+        let isFutureEvent = eventDate > Date()
+        let dateFormatterString = isFutureEvent ? dateFormatter.string(from: eventDate) : shortDateFormatter.string(from: eventDate)
+        
+        
+        return ButtonContent (text: "\(name)'s \(eventType) is \(dateFormatterString)", imageView: AnyView(EmptyView()))
+    }
+    
+    
+    private func detailsSecondLine(for item: Item, on eventDate: Date) -> ButtonContent {
+        let name = item.name ?? "Unknown"
+        let eventType = item.eventType ?? "Unknown"
+        let daysUntil = daysUntilEvent(eventDate)
+        
+        if daysUntil == 365 && (eventType == "Birthday" || eventType == "Anniversary") {
+            return ButtonContent (text: "\(name)'s \(eventType) was yesterday!", imageView:  AnyView(Image(systemName: "figure.wave.circle").foregroundColor(.brown)))
+        } else if daysUntil == 365 && (eventType == "Holiday" || eventType == "Vacation") {
+            return ButtonContent (text: "\(name)'s \(eventType) was yesterday!", imageView: AnyView(Image(systemName: "figure.wave.circle.fill").foregroundColor(.brown)))
+        } else if daysUntil == 0 && (eventType == "Birthday" || eventType == "Anniversary") {
+            return ButtonContent (text: "Party Time Today!", imageView: AnyView(Image(systemName: "party.popper.fill").foregroundColor(.purple)))
+        } else if daysUntil == 0 && (eventType == "Holiday" || eventType == "Vacation") {
+            return ButtonContent (text: "\(name)'s \(eventType) is Today!", imageView: AnyView(Image(systemName: "calendar.badge.exclamationmark").foregroundColor(.purple)))
+        } else if daysUntil == 1 && (eventType == "Birthday" || eventType == "Anniversary") {
+            return ButtonContent (text: "Party Time Tomorrow!", imageView: AnyView(Image(systemName: "party.popper").foregroundColor(.purple)))
+        } else if daysUntil == 1 && (eventType == "Holiday" || eventType == "Vacation") {
+            return ButtonContent (text: "\(name) is Tomorrow!", imageView: AnyView(Image(systemName: "calendar.badge.clock").foregroundColor(.purple)))
+        } else {
+            return ButtonContent (text: "\(name)'s \(eventType) is in \(daysUntil) days", imageView: AnyView(EmptyView()))
+        }
+    }
+    
+    
+    private func detailsThirdLine(for item: Item, on eventDate: Date) -> ButtonContent {
+        let yearsSince = yearsSinceEvent(eventDate)
+        let isFutureEvent = eventDate > Date()
+        let dateFormatterString = isFutureEvent ? dateFormatter.string(from: eventDate) : shortDateFormatter.string(from: eventDate)
+        
+        if yearsSince > 0 {
+            return ButtonContent (text: "It will be on a \(dayOfWeek(eventDate)) this year", imageView:  AnyView(EmptyView()))
+        } else {
+            return ButtonContent (text: "\(dateFormatterString) will be a \(dayOfWeek(eventDate))", imageView: AnyView(EmptyView()))
+        }
+    }
+    
+    
+    private func detailsFourthLine(for item: Item, on eventDate: Date) -> ButtonContent {
+        let daysUntil = daysUntilEvent(eventDate)
+        let yearsSince = yearsSinceEvent(eventDate)
+        
+        if yearsSince > 0 {
+            return ButtonContent (text: "Exact age is \(yearsSince) years old!", imageView:  AnyView(EmptyView()))
+        } else {
+            return ButtonContent (text: "\(daysUntil) days is exactly \(daysConvertedToYears(daysUntil)) years", imageView: AnyView(EmptyView()))
+        }
+    }
+    
+    
+    
+    
 }
 
-
-
-//struct ItemDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ItemDetailView()
-//    }
-//}
