@@ -168,9 +168,7 @@ struct ContentView: View {
             }
             
         }
-        .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: { item in
-            deleteConfirmed(item: item, with: viewContext)
-        })
+        .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: softDeleteConfirmed, context: viewContext)
         .onAppear {
             showOverlay = false
         }

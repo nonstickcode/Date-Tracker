@@ -11,7 +11,8 @@ import CoreData
 struct DeletionAlertModifier: ViewModifier {
     @Binding var showingAlert: Bool
     @Binding var itemToDelete: Item?
-    let deleteConfirmed: (Item) -> Void
+    let deleteConfirmed: (Item, NSManagedObjectContext) -> Void
+    let context: NSManagedObjectContext
     
     func body(content: Content) -> some View {
         content
@@ -20,7 +21,7 @@ struct DeletionAlertModifier: ViewModifier {
                       message: Text("Are you sure you want to delete this item?"),
                       primaryButton: .destructive(Text("Delete")) {
                         guard let item = itemToDelete else { return }
-                        deleteConfirmed(item)
+                        deleteConfirmed(item, context)
                       },
                       secondaryButton: .cancel())
             }
@@ -28,19 +29,21 @@ struct DeletionAlertModifier: ViewModifier {
 }
 
 extension View {
-    func deletionAlert(showingAlert: Binding<Bool>, itemToDelete: Binding<Item?>, deleteConfirmed: @escaping (Item) -> Void) -> some View {
-        self.modifier(DeletionAlertModifier(showingAlert: showingAlert, itemToDelete: itemToDelete, deleteConfirmed: deleteConfirmed))
+    func deletionAlert(showingAlert: Binding<Bool>, itemToDelete: Binding<Item?>, deleteConfirmed: @escaping (Item, NSManagedObjectContext) -> Void, context: NSManagedObjectContext) -> some View {
+        self.modifier(DeletionAlertModifier(showingAlert: showingAlert, itemToDelete: itemToDelete, deleteConfirmed: deleteConfirmed, context: context))
     }
 }
+
 
 func prepareForDeletion(item: Item, with context: NSManagedObjectContext, showingAlert: inout Bool, itemToDelete: inout Item?) {
     itemToDelete = item
     showingAlert = true
 }
 
-func deleteConfirmed(item: Item, with context: NSManagedObjectContext) {
+func softDeleteConfirmed(item: Item, with context: NSManagedObjectContext) {
     withAnimation {
-        context.delete(item)
+        item.taggedForDelete = true
+        item.dateEventTaggedForDelete = Date()
         do {
             try context.save()
         } catch {
@@ -48,3 +51,31 @@ func deleteConfirmed(item: Item, with context: NSManagedObjectContext) {
         }
     }
 }
+
+// Clean up function ------------------------------------------------------------------------------------------------
+
+func cleanUpItems(with context: NSManagedObjectContext) {
+    let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "taggedForDelete == %@", NSNumber(value: true))
+    
+    do {
+        let items = try context.fetch(fetchRequest)
+        
+        let currentDate = Date()
+        
+        for item in items {
+            if let taggedDate = item.dateEventTaggedForDelete {
+                if Calendar.current.dateComponents([.day], from: taggedDate, to: currentDate).day! >= 30 {
+                    context.delete(item)
+                }
+            }
+        }
+        
+        try context.save()
+        
+    } catch {
+        print("Could not fetch or delete items: \(error.localizedDescription)")
+    }
+}
+
+// Clean up function end --------------------------------------------------------------------------------------------
