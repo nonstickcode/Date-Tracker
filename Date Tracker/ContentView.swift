@@ -11,6 +11,9 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State private var showingDeleteAlert = false
+    @State private var itemToDelete: Item?
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: false)],  // This is what decides the order of the list when fetched
         animation: .default)
@@ -116,7 +119,6 @@ struct ContentView: View {
                                         Image(systemName: "delete.backward")
                                             .font(.system(size: 24))
                                     }
-                                    
                                     .foregroundColor(.mainHeaderTextColor)
                                     .padding(.trailing, 20)
                                 }
@@ -159,6 +161,9 @@ struct ContentView: View {
             }
             
         }
+        .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: { item in
+            deleteConfirmed(item: item, with: viewContext)
+        })
         .onAppear {
             showOverlay = false
         }
@@ -207,18 +212,11 @@ struct ContentView: View {
     
     
     
-    
     private func deleteItem(item: Item) {
-        withAnimation {
-            viewContext.delete(item)
-            do {
-                try viewContext.save()
-            } catch {
-                // Handle the error appropriately instead of crashing
-                print("Could not save context: \(error.localizedDescription)")
-            }
-        }
+        prepareForDeletion(item: item, with: viewContext, showingAlert: &showingDeleteAlert, itemToDelete: &itemToDelete)
+
     }
+
     
 }
 

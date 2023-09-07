@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B049D102AAA3DCF009E7499 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B049D0F2AAA3DCF009E7499 /* Pacifico-Regular.ttf */; };
 		2B049D122AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B049D112AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf */; };
+		2B049D152AAA538B009E7499 /* DeleteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049D142AAA538B009E7499 /* DeleteManager.swift */; };
 		2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6412292AA5788500CC7506 /* ItemButtonView.swift */; };
 		2B64122D2AA5797800CC7506 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */; };
 		2B9879A52AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		2B049D0F2AAA3DCF009E7499 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
 		2B049D112AAA3E03009E7499 /* Quicksand-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		2B049D142AAA538B009E7499 /* DeleteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteManager.swift; sourceTree = "<group>"; };
 		2B6412292AA5788500CC7506 /* ItemButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemButtonView.swift; sourceTree = "<group>"; };
 		2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-VariableFont_wght.ttf"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */,
+				2B049D142AAA538B009E7499 /* DeleteManager.swift */,
 			);
 			path = "Global Functions";
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */,
 				2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */,
 				2BE1B8782A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld in Sources */,
+				2B049D152AAA538B009E7499 /* DeleteManager.swift in Sources */,
 				2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */,
 				2BE1B86C2A9A7A3800CD2929 /* Date_TrackerApp.swift in Sources */,
 				2B64122D2AA5797800CC7506 /* GlobalFunctions.swift in Sources */,
