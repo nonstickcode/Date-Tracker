@@ -11,7 +11,7 @@ struct ItemDetailView: View {
     var item: Item
     
     
-     
+    
     
     
     
@@ -30,16 +30,25 @@ struct ItemDetailView: View {
                     
                     let daysUntil = daysUntilEvent(eventDate)
                     
-                    if daysUntil == 0 && (eventType == "Birthday" || eventType == "Anniversary") {
+                    if daysUntil == 365 && (eventType == "Birthday" || eventType == "Anniversary") {
                         HStack {
-                            Text("Party Time Tomorrow!")
+                            Text("\(name)'s \(eventType) was yesterday!")
                                 .detailViewBoldStyle()
-                            Image(systemName: "party.popper")
-                                .foregroundColor(.purple)
+                            Image(systemName: "figure.wave.circle")
+                                .foregroundColor(.brown)
                                 .bold()
                         }
                         
-                    } else if daysUntil == 365 && (eventType == "Birthday" || eventType == "Anniversary") {
+                    } else if daysUntil == 365 && (eventType == "Vacation" || eventType == "Holiday") {
+                        HStack {
+                            Text("\(name)'s \(eventType) was yesterday!")
+                                .detailViewBoldStyle()
+                            Image(systemName: "figure.wave.circle.fill")
+                                .foregroundColor(.brown)
+                                .bold()
+                        }
+                        
+                    } else if daysUntil == 0 && (eventType == "Birthday" || eventType == "Anniversary") {
                         HStack {
                             Text("Party Time Today!")
                                 .detailViewBoldStyle()
@@ -50,6 +59,24 @@ struct ItemDetailView: View {
                         
                     } else if daysUntil == 0 && (eventType == "Vacation" || eventType == "Holiday") {
                         HStack {
+                            Text("\(name) is Today!")
+                                .detailViewBoldStyle()
+                            Image(systemName: "calendar.badge.exclamationmark")
+                                .foregroundColor(.purple)
+                                .bold()
+                        }
+                        
+                    } else if daysUntil == 1 && (eventType == "Birthday" || eventType == "Anniversary") {
+                        HStack {
+                            Text("Party Time Tomorrow!")
+                                .detailViewBoldStyle()
+                            Image(systemName: "party.popper")
+                                .foregroundColor(.purple)
+                                .bold()
+                        }
+                        
+                    } else if daysUntil == 1 && (eventType == "Vacation" || eventType == "Holiday") {
+                        HStack {
                             Text("\(name) is Tomorrow!")
                                 .detailViewBoldStyle()
                             Image(systemName: "calendar.badge.clock")
@@ -57,14 +84,6 @@ struct ItemDetailView: View {
                                 .bold()
                         }
                         
-                    } else if daysUntil == 365 && (eventType == "Vacation" || eventType == "Holiday") {
-                        HStack {
-                            Text("\(name) is Today!")
-                                .detailViewBoldStyle()
-                            Image(systemName: "calendar.badge.exclamationmark")
-                                .foregroundColor(.purple)
-                                .bold()
-                        }
                         
                     } else {
                         Text("\(name)'s \(eventType) is in \(daysUntil) days")

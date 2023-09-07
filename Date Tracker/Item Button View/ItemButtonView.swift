@@ -77,15 +77,15 @@ struct ItemButtonView: View {
         let daysUntil = daysUntilEvent(eventDate)
         
         if daysUntil == 365 && (eventType == "Birthday" || eventType == "Anniversary") {
-            return ButtonContent (text: "\(name)'s \(eventType) was yesterday!", imageView: AnyView(Image(systemName: "figure.wave.circle").foregroundColor(.purple)))
+            return ButtonContent (text: "\(name)'s \(eventType) was yesterday!", imageView: AnyView(Image(systemName: "figure.wave.circle").foregroundColor(.brown)))
         } else if daysUntil == 365 && (eventType == "Holiday" || eventType == "Vacation") {
             return ButtonContent (text: "\(name)'s \(eventType) was yesterday!", imageView: AnyView(Image(systemName: "figure.wave.circle.fill").foregroundColor(.purple)))
         } else if daysUntil == 0 && (eventType == "Birthday" || eventType == "Anniversary") {
-            return ButtonContent (text: "\(name)'s \(eventType) is Today!", imageView: AnyView(Image(systemName: "party.popper").foregroundColor(.purple)))
+            return ButtonContent (text: "\(name)'s \(eventType) is Today!", imageView: AnyView(Image(systemName: "party.popper.fill").foregroundColor(.purple)))
         } else if daysUntil == 0 && (eventType == "Holiday" || eventType == "Vacation") {
             return ButtonContent (text: "\(name)'s \(eventType) is Today!", imageView: AnyView(Image(systemName: "calendar.badge.exclamationmark").foregroundColor(.purple)))
         } else if daysUntil == 1 && (eventType == "Birthday" || eventType == "Anniversary") {
-            return ButtonContent (text: "\(name)'s \(eventType) is Tomorrow!", imageView: AnyView(Image(systemName: "party.popper.fill").foregroundColor(.purple)))
+            return ButtonContent (text: "\(name)'s \(eventType) is Tomorrow!", imageView: AnyView(Image(systemName: "party.popper").foregroundColor(.purple)))
         } else if daysUntil == 1 && (eventType == "Holiday" || eventType == "Vacation") {
             return ButtonContent (text: "\(name)'s \(eventType) is Tomorrow!", imageView: AnyView(Image(systemName: "calendar.badge.clock").foregroundColor(.purple)))
         } else {
