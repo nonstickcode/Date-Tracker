@@ -89,8 +89,8 @@ struct ItemDetailView: View {
     private func detailsFirstLine(for item: Item, on eventDate: Date) -> ButtonContent {
         let name = item.name ?? "Unknown"
         let eventType = item.eventType ?? "Unknown"
-        let isFutureEvent = eventDate > Date()
-        let dateFormatterString = isFutureEvent ? dateFormatter.string(from: eventDate) : shortDateFormatter.string(from: eventDate)
+        
+        let dateFormatterString = dateFormatter.string(from: eventDate)  // always want to show the year in the date on first line of details view
         
         
         return ButtonContent (text: "\(name)'s \(eventType) is \(dateFormatterString)", imageView: AnyView(EmptyView()))
