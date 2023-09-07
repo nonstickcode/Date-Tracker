@@ -86,6 +86,26 @@ struct ContentView: View {
                                     }) {
                                         Label("Edit", systemImage: "pencil")
                                     }
+                                    Button(action: {
+                                        // add edit action here
+                                    }) {
+                                        Label("Settings", systemImage: "gear")
+                                    }
+                                    Button(action: {
+                                        // add edit action here
+                                    }) {
+                                        Label("Coming Soon", systemImage: "questionmark.folder")
+                                    }
+                                    Button(action: {
+                                        // add edit action here
+                                    }) {
+                                        Label("Coming Soon", systemImage: "questionmark.folder")
+                                    }
+                                    Button(action: {
+                                        // add edit action here
+                                    }) {
+                                        Label("Coming Soon", systemImage: "questionmark.folder")
+                                    }
                                     // long press menu ends here ----------------------------------------------
                                     
                                 }
