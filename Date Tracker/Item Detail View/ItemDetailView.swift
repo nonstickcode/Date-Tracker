@@ -103,6 +103,7 @@ struct ItemDetailView: View {
                     .detailViewRegularStyle()
             }
         }
+        
     }
     
     

@@ -65,7 +65,7 @@ func cleanUpItems(with context: NSManagedObjectContext) {
         
         for item in items {
             if let taggedDate = item.dateEventTaggedForDelete {
-                if Calendar.current.dateComponents([.day], from: taggedDate, to: currentDate).day! >= 30 {
+                if Calendar.current.dateComponents([.day], from: taggedDate, to: currentDate).day! >= 1 { // sets days to wait for delete
                     context.delete(item)
                 }
             }

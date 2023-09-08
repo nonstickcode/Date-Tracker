@@ -30,12 +30,15 @@ struct HalfModalView<Content: View>: View {
                     }
                     Spacer()
                 }
+                
             }
+        
             .background(
                 VisualEffectView(effect: UIBlurEffect(style: .light))
                     .edgesIgnoringSafeArea(.all)
             )
         }
+    
     }
 
 struct VisualEffectView: UIViewRepresentable {

@@ -171,6 +171,7 @@ struct ContentView: View {
                 showOverlay = false
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     

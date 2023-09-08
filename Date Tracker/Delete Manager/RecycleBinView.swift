@@ -182,6 +182,7 @@ struct RecycleBinView: View {
                 showOverlay = false
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     
@@ -192,47 +193,32 @@ struct RecycleBinView: View {
     
     private var headerView: some View {
         HStack {
-            Text("Recycle Bin")
-                .mainHeaderStyle()
-                .padding()
-//            Spacer()
-//            HStack {
+            HStack {
                 
-//                NavigationLink(destination: RecycleBinView().environment(\.managedObjectContext, viewContext)) {
-//                    Image(systemName: "trash")
-//                        .foregroundColor(Color.mainHeaderTextColor)
-//                        .font(.system(size: 24))
-//                        .padding(5)
-//                }
-                
+                NavigationLink(destination: ContentView().environment(\.managedObjectContext, viewContext)) {
+                    Image(systemName: "arrowshape.backward")
+                        .foregroundColor(Color.mainHeaderTextColor)
+                        .font(.system(size: 36))
+                        .padding(5)
+                }
+            }
+            .frame(minWidth: 30, maxWidth: 30)  // Explicitly set frame
+            HStack {
                 
                 
+                Spacer()
                 
-//                Button(action: {
-//                    isEditMode = false // Disable edit mode when the '+' button is pressed.
-//                    isPresentingForm = true
-//                }) {
-//                    Image(systemName: "plus.app")
-//                        .foregroundColor(Color.mainHeaderTextColor)
-//                        .font(.system(size: 24))
-//                        .padding(5)
-//                        .scaleEffect(noDataPresent ? 1.4 : 1.0)
-//                        .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
-//                }
-//                .foregroundColor(Color.mainHeaderTextColor)
-//                .sheet(isPresented: $isPresentingForm) {
-//                    NewDataEntryForm()
-//                        .environment(\.managedObjectContext, viewContext)
-//                }
-//                Button(isEditMode ? "Done" : "Edit") {
-//                    isEditMode.toggle()
-//                }
-//                .font(.custom("Quicksand-Bold", size: 16))
-//                .foregroundColor(Color.mainHeaderTextColor)
-//                .frame(minWidth: 50, maxWidth: 50, minHeight: 40, maxHeight: 40)  // Explicitly set frame
-//            }
-//            .padding()
+                Text("Recycle Bin")
+                    .mainHeaderStyle()
+                    .padding()
+                Spacer ()
+            }
+            HStack {
+                Spacer()
+            }
+            .frame(minWidth: 30, maxWidth: 30)  // Explicitly set frame
         }
+        .padding()
         .frame(height: 60)
     }
     
