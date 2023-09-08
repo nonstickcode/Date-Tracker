@@ -192,7 +192,7 @@ struct ContentView: View {
                 if isEditMode {
                     NavigationLink(destination: RecycleBinView().environment(\.managedObjectContext, viewContext)) {
                         Image(systemName: "trash.slash")
-                            .foregroundColor(Color.green)
+                            .foregroundColor(Color.accentColor)
                             .font(.system(size: 24))
                             .padding(5)
                     }

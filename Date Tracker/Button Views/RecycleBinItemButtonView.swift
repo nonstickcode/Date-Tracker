@@ -23,8 +23,8 @@ struct RecycleBinItemButtonView: View {
                         
                         HStack {
                             Text("\(item.name ?? "") \(item.eventType ?? "") event")
-                                .boldButtonTextStyle()
-                            
+                                .mainButtonTextStyle()
+                                                            
                         }
                         
                         HStack {

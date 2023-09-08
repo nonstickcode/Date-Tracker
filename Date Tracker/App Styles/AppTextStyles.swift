@@ -1,11 +1,14 @@
 //
-//  AppStyles.swift
+//  AppTextStyles.swift
 //  Date Tracker
 //
-//  Created by Cody McRoy on 9/4/23.
+//  Created by Cody McRoy on 9/8/23.
 //
 
 import SwiftUI
+
+
+
 
 extension Text {
     
@@ -29,36 +32,6 @@ extension Text {
     
     //--------------------------------------------------------------------
     
-    // Main List / Buttons Style Below -------------------------------------------
-    
-    func mainButtonTextStyle() -> Text {
-        self
-            .font(.custom("Quicksand-Regular", size: 16))
-            .foregroundColor(.accentColor)
-    }
-    func boldButtonTextStyle() -> Text {
-        self
-            .font(.custom("Quicksand-Bold", size: 16))
-            .foregroundColor(.accentColor)
-    }
-    func boldButtonRedTextStyle() -> Text {
-        self
-            .font(.custom("Quicksand-Bold", size: 16))
-            .foregroundColor(.red)
-    }
-    func emptyButtonTextStyle() -> Text {
-        self
-            .font(.custom("Quicksand-Regular", size: 16))
-            .foregroundColor(.black)
-    }
-    func emptyButtonBoldTextStyle() -> Text {
-        self
-            .font(.custom("Quicksand-Bold", size: 16))
-            .foregroundColor(.black)
-    }
-    
-    // ------------------------------------------------------------------
-    
     // Detail View Style Below -------------------------------------------
     
     
@@ -74,7 +47,7 @@ extension Text {
     }
     
     // --------------------------------------------------------------------
-    
+
     // Form View Style Below -------------------------------------------
     
     func formHeaderStyle() -> Text {
@@ -96,31 +69,11 @@ extension Text {
             .foregroundColor(.formHeaderAndSaveButtonForeground)
     }
     
-    //--------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    
+    
+    
     
 
     
-}
-
-// Custom Colors Below -------------------------------------------
-
-extension Color {
-    // App accentColor = is blue
-    static let mainHeaderBackground = Color.black.opacity(0.8)
-    static let mainHeaderTextColor = Color.white
-    static let mainFooterTextColor = Color.white
-    static let formHeaderAndSaveButtonForeground = Color.black
-    static let formHeaderAndSaveButtonBackground = Color.green.opacity(0.8)
-}
-
-extension View {
-    func mainGradientBackground() -> some View {
-        self.background(
-            LinearGradient(
-                gradient: Gradient(colors: [Color.green, Color.accentColor]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
-    }
 }

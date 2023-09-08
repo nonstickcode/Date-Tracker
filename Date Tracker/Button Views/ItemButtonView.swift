@@ -35,7 +35,7 @@ struct ItemButtonView: View {
                         
                         HStack {
                             Text(bottomLineContent.text)
-                                .mainButtonTextStyle()
+                                .modifier(MainButtonTextStyle())
                             bottomLineContent.imageView
                         }
                         
