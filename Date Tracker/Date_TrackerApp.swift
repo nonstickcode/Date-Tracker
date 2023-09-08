@@ -13,6 +13,10 @@ struct Date_TrackerApp: App {
     
     init() {
         printFonts()
+        
+        // Perform cleanup operation on app launch
+        let context = persistenceController.container.viewContext
+        cleanUpItems(with: context)
     }
     
     func printFonts() {
@@ -33,3 +37,4 @@ struct Date_TrackerApp: App {
         }
     }
 }
+

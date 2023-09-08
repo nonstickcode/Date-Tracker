@@ -2,7 +2,7 @@
 //  Item+CoreDataProperties.swift
 //  Date Tracker
 //
-//  Created by Cody McRoy on 9/7/23.
+//  Created by Cody McRoy on 9/8/23.
 //
 //
 
@@ -16,14 +16,14 @@ extension Item {
         return NSFetchRequest<Item>(entityName: "Item")
     }
 
+    @NSManaged public var dateEventTaggedForDelete: Date?
     @NSManaged public var eventDate: Date?
     @NSManaged public var eventType: String?
     @NSManaged public var id: String?
     @NSManaged public var name: String?
-    @NSManaged public var preferredPronoun: String?
-    @NSManaged public var timestamp: Date?
     @NSManaged public var taggedForDelete: Bool
-    @NSManaged public var dateEventTaggedForDelete: Date?
+    @NSManaged public var timestamp: Date?
+    @NSManaged public var timeUntilHardDelete: Int64
 
 }
 

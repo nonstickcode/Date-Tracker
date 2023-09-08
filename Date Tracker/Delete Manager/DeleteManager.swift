@@ -58,6 +58,9 @@ func cleanUpItems(with context: NSManagedObjectContext) {
     let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "taggedForDelete == %@", NSNumber(value: true))
     
+    // Hardcoded days until hard delete; change this value as needed
+    let daysUntilHardDelete = 1  // <-------------------------------- Change this number as per your requirements
+    
     do {
         let items = try context.fetch(fetchRequest)
         
@@ -65,7 +68,15 @@ func cleanUpItems(with context: NSManagedObjectContext) {
         
         for item in items {
             if let taggedDate = item.dateEventTaggedForDelete {
-                if Calendar.current.dateComponents([.day], from: taggedDate, to: currentDate).day! >= 1 { // sets days to wait for delete
+                let daysPassed = Calendar.current.dateComponents([.day], from: taggedDate, to: currentDate).day ?? 0
+                print("Days passed since item was tagged for deletion: \(daysPassed)")  // Debug
+
+                // Update remaining days until hard delete on the item
+                item.timeUntilHardDelete = Int64(max(0, daysUntilHardDelete - daysPassed))
+                print("Updated time until hard delete for the item: \(item.timeUntilHardDelete)")  // Debug
+                
+                // Delete the item if the number of days passed reaches or exceeds the hardcoded daysUntilHardDelete
+                if daysPassed >= daysUntilHardDelete {
                     context.delete(item)
                 }
             }
@@ -79,3 +90,5 @@ func cleanUpItems(with context: NSManagedObjectContext) {
 }
 
 // Clean up function end --------------------------------------------------------------------------------------------
+
+

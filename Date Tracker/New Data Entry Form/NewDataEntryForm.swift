@@ -222,11 +222,11 @@ struct NewDataEntryForm: View {
         newItem.timestamp = Date()
         newItem.id = uuid
         newItem.name = newEventName
-        newItem.preferredPronoun = newPreferredPronoun
         newItem.eventDate = newEventDate
         newItem.eventType = newEventType
         
         newItem.taggedForDelete = false
+        newItem.timeUntilHardDelete = 10000000
         
         
         

@@ -24,22 +24,22 @@ struct RecycleBinItemButtonView: View {
                         HStack {
                             Text("\(item.name ?? "") \(item.eventType ?? "") event")
                                 .mainButtonTextStyle()
-                                                            
+                            
                         }
                         
                         HStack {
                             if let dateTaggedForDelete = item.dateEventTaggedForDelete {
                                 Text("Deleted on \(dateTaggedForDelete, formatter: dateFormatter)")
                                     .boldButtonRedTextStyle()
-                                    
-
+                                
+                                
                             } else {
                                 Text("No Date Tagged for Delete")
-                                                                        .mainButtonTextStyle()
+                                    .mainButtonTextStyle()
                             }
                         }
                         HStack {
-                            Text("30 days remaining until HARD DELETE")
+                            Text("Less than \(item.timeUntilHardDelete) days remaining until DELETE")  // use new daysUntilHardDelete to display the days counter in text
                                 .boldButtonRedTextStyle()
                             
                         }
@@ -84,8 +84,4 @@ struct RecycleBinItemButtonView: View {
     }
     
 }
-
-
-
-
 
