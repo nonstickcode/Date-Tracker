@@ -12,6 +12,8 @@
 		2B049D152AAA538B009E7499 /* DeleteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049D142AAA538B009E7499 /* DeleteManager.swift */; };
 		2B049D202AAA6C88009E7499 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049D1E2AAA6C88009E7499 /* Item+CoreDataClass.swift */; };
 		2B049D212AAA6C88009E7499 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049D1F2AAA6C88009E7499 /* Item+CoreDataProperties.swift */; };
+		2B049D282AAA7B39009E7499 /* RecycleBinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049D272AAA7B39009E7499 /* RecycleBinView.swift */; };
+		2B049D2A2AAA8670009E7499 /* RecycleBinItemButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B049D292AAA8670009E7499 /* RecycleBinItemButtonView.swift */; };
 		2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6412292AA5788500CC7506 /* ItemButtonView.swift */; };
 		2B64122D2AA5797800CC7506 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */; };
 		2B9879A52AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */; };
@@ -40,6 +42,8 @@
 		2B049D142AAA538B009E7499 /* DeleteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteManager.swift; sourceTree = "<group>"; };
 		2B049D1E2AAA6C88009E7499 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2B049D1F2AAA6C88009E7499 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2B049D272AAA7B39009E7499 /* RecycleBinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecycleBinView.swift; sourceTree = "<group>"; };
+		2B049D292AAA8670009E7499 /* RecycleBinItemButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecycleBinItemButtonView.swift; sourceTree = "<group>"; };
 		2B6412292AA5788500CC7506 /* ItemButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemButtonView.swift; sourceTree = "<group>"; };
 		2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-VariableFont_wght.ttf"; sourceTree = "<group>"; };
@@ -83,6 +87,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		2B049D262AAA7B0C009E7499 /* Delete Manager */ = {
+			isa = PBXGroup;
+			children = (
+				2B049D142AAA538B009E7499 /* DeleteManager.swift */,
+				2B049D272AAA7B39009E7499 /* RecycleBinView.swift */,
+			);
+			path = "Delete Manager";
+			sourceTree = "<group>";
+		};
 		2B116CB92A9A7FA900E5CA8E /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,19 +115,19 @@
 			path = "New Data Entry Form";
 			sourceTree = "<group>";
 		};
-		2B6412282AA5784E00CC7506 /* Item Button View */ = {
+		2B6412282AA5784E00CC7506 /* Button Views */ = {
 			isa = PBXGroup;
 			children = (
 				2B6412292AA5788500CC7506 /* ItemButtonView.swift */,
+				2B049D292AAA8670009E7499 /* RecycleBinItemButtonView.swift */,
 			);
-			path = "Item Button View";
+			path = "Button Views";
 			sourceTree = "<group>";
 		};
 		2B64122B2AA5794E00CC7506 /* Global Functions */ = {
 			isa = PBXGroup;
 			children = (
 				2B64122C2AA5797800CC7506 /* GlobalFunctions.swift */,
-				2B049D142AAA538B009E7499 /* DeleteManager.swift */,
 			);
 			path = "Global Functions";
 			sourceTree = "<group>";
@@ -150,8 +163,9 @@
 				2B9879A62AA6603F00DB74FF /* Date-Tracker-Info.plist */,
 				2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */,
 				2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */,
-				2B6412282AA5784E00CC7506 /* Item Button View */,
+				2B6412282AA5784E00CC7506 /* Button Views */,
 				2B64122B2AA5794E00CC7506 /* Global Functions */,
+				2B049D262AAA7B0C009E7499 /* Delete Manager */,
 				2B049D132AAA439C009E7499 /* Components */,
 				2BF48F902AA5B959004824C3 /* Item Detail View */,
 				2B6412272AA51F5D00CC7506 /* New Data Entry Form */,
@@ -280,6 +294,7 @@
 				2B9879A92AA660BC00DB74FF /* AppStyles.swift in Sources */,
 				2BF48F922AA5C47C004824C3 /* HalfModalView.swift in Sources */,
 				2BF48F8F2AA5B94E004824C3 /* ItemDetailView.swift in Sources */,
+				2B049D282AAA7B39009E7499 /* RecycleBinView.swift in Sources */,
 				2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */,
 				2B049D212AAA6C88009E7499 /* Item+CoreDataProperties.swift in Sources */,
 				2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */,
@@ -287,6 +302,7 @@
 				2BE1B8782A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld in Sources */,
 				2B049D152AAA538B009E7499 /* DeleteManager.swift in Sources */,
 				2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */,
+				2B049D2A2AAA8670009E7499 /* RecycleBinItemButtonView.swift in Sources */,
 				2BE1B86C2A9A7A3800CD2929 /* Date_TrackerApp.swift in Sources */,
 				2B64122D2AA5797800CC7506 /* GlobalFunctions.swift in Sources */,
 			);

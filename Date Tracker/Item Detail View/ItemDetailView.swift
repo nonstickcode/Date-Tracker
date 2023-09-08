@@ -58,22 +58,43 @@ struct ItemDetailView: View {
                         fourthLine.imageView
                     }
                     
-                    // Line 5 of Text in view --------------------------------------------------------
+                    // Line 5 of Text in view ------------------------optional--------------------------------
+                    
+                    if item.taggedForDelete == true, let dateEventTaggedForDelete = item.dateEventTaggedForDelete {
+                        Text("DELETED: \(dateEventTaggedForDelete, formatter: dateTimeFormatter)")
+                            .bold()
+                            .font(.caption)
+                            .foregroundColor(.red)
+                            .padding(5)
+                    }
+
+                    // Line 6 of Text in view -------------------------optional-------------------------------
+
+                    if item.taggedForDelete == true {
+                        Text("countdown to HARD DELETE")
+                            .bold()
+                            .font(.caption)
+                            .foregroundColor(.red)
+                            .padding(5)
+                    }
+
+                    
+                    // Line 7 of Text in view --------------------------------------------------------
                     
                     if let timestamp = item.timestamp {
                         Text("Event added to app: \(timestamp, formatter: dateTimeFormatter)")
                             .font(.caption)
-                            .padding(.top, 20)
+                            .padding(5)
                     }
                     
-                    // Line 6 of Text in view --------------------------------------------------------
+                    // Line 8 of Text in view --------------------------------------------------------
                     
                     if let id = item.id {
                         Text("ID: \(id)")
                             .font(.caption)
                             .foregroundColor(.blue)
                     }
-                    
+                                        
                     // End of Detailed view --------------------------------------------------------
                     
                 }

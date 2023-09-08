@@ -11,6 +11,7 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State private var showingRecycleBin = false
     @State private var showingDeleteAlert = false
     @State private var itemToDelete: Item?
     
@@ -62,115 +63,125 @@ struct ContentView: View {
     
     
     var body: some View {
+        NavigationView {
         
         ZStack {
-            VStack {
-                headerView
-                ScrollView {
-                    LazyVStack {
-                        Spacer()
-                        ForEach(sortedItems, id: \.self) { item in
-                            HStack {
-                                Button(action: {
-                                    self.selectedItem = item
-                                    self.showOverlay = true
-                                }) {
-                                    ItemButtonView(item: item, noDataPresent: $noDataPresent)
-                                }
-                                // long press menu starts here ----------------------------------------------
-                                .contextMenu {
-                                    
+            
+                VStack {
+                    headerView
+                    ScrollView {
+                        LazyVStack {
+                            Spacer()
+                            ForEach(sortedItems, id: \.self) { item in
+                                HStack {
                                     Button(action: {
-                                        // add edit action here
+                                        self.selectedItem = item
+                                        self.showOverlay = true
                                     }) {
-                                        Label("Share", systemImage: "square.and.arrow.up")
+                                        ItemButtonView(item: item, noDataPresent: $noDataPresent)
                                     }
-                                    Button(action: {
-                                        // add edit action here
-                                    }) {
-                                        Label("Edit", systemImage: "pencil")
+                                    // long press menu starts here ----------------------------------------------
+                                    .contextMenu {
+                                        
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Share", systemImage: "square.and.arrow.up")
+                                        }
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Edit", systemImage: "pencil")
+                                        }
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Settings", systemImage: "gear")
+                                        }
+                                        Button(action: {
+                                            
+                                            
+                                            
+                                            // add RecycleBinView Here
+                                            
+                                            
+                                            
+                                            
+                                        }) {
+                                            Label("Recycle Bin", systemImage: "trash")
+                                        }
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Coming Soon", systemImage: "questionmark.folder")
+                                        }
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Coming Soon", systemImage: "questionmark.folder")
+                                        }
+                                        Button(action: {
+                                            deleteItem(item: item)
+                                        }) {
+                                            Label("Delete", systemImage: "trash")
+                                                .foregroundColor(.red)
+                                        }
+                                        // long press menu ends here ----------------------------------------------
+                                        
                                     }
-                                    Button(action: {
-                                        // add edit action here
-                                    }) {
-                                        Label("Settings", systemImage: "gear")
+                                    if isEditMode {
+                                        Button(action: {
+                                            deleteItem(item: item)
+                                        }) {
+                                            Image(systemName: "delete.backward")
+                                                .font(.system(size: 24))
+                                        }
+                                        .foregroundColor(.mainHeaderTextColor)
+                                        .padding(.trailing, 20)
                                     }
-                                    Button(action: {
-                                        // add edit action here
-                                    }) {
-                                        Label("Coming Soon", systemImage: "questionmark.folder")
-                                    }
-                                    Button(action: {
-                                        // add edit action here
-                                    }) {
-                                        Label("Coming Soon", systemImage: "questionmark.folder")
-                                    }
-                                    Button(action: {
-                                        // add edit action here
-                                    }) {
-                                        Label("Coming Soon", systemImage: "questionmark.folder")
-                                    }
-                                    Button(action: {
-                                        deleteItem(item: item)
-                                    }) {
-                                        Label("Delete", systemImage: "trash")
-                                            .foregroundColor(.red)
-                                    }
-                                    // long press menu ends here ----------------------------------------------
-                                    
-                                }
-                                if isEditMode {
-                                    Button(action: {
-                                        deleteItem(item: item)
-                                    }) {
-                                        Image(systemName: "delete.backward")
-                                            .font(.system(size: 24))
-                                    }
-                                    .foregroundColor(.mainHeaderTextColor)
-                                    .padding(.trailing, 20)
                                 }
                             }
+                            if items.isEmpty {
+                                ItemButtonView(item: nil, noDataPresent: $noDataPresent)
+                            }
                         }
-                        if items.isEmpty {
-                            ItemButtonView(item: nil, noDataPresent: $noDataPresent)
+                        .padding(.bottom, 8)
+                    }
+                    .onChange(of: items.count) { newValue in
+                        if newValue == 0 {
+                            isEditMode = false
+                            noDataPresent = true
+                        } else {
+                            noDataPresent = false
                         }
                     }
-                    .padding(.bottom, 8)
+                    .mainGradientBackground()
+                    
+                    Text("Select an event")
+                        .mainFooterTextStyle()
+                        .padding(.top, 12)
+                        .frame(height: 25)
                 }
-                .onChange(of: items.count) { newValue in
-                    if newValue == 0 {
-                        isEditMode = false
-                        noDataPresent = true
-                    } else {
-                        noDataPresent = false
+                .background(Color.mainHeaderBackground.edgesIgnoringSafeArea(.all))
+                
+                if showOverlay, let selectedItem = selectedItem {
+                    HalfModalView {
+                        ItemDetailView(item: selectedItem)
+                    }
+                    
+                    .transition(.move(edge: .bottom))
+                    .onTapGesture {
+                        withAnimation {
+                            showOverlay = false
+                        }
                     }
                 }
-                .mainGradientBackground()
                 
-                Text("Select an event")
-                    .mainFooterTextStyle()
-                    .padding(.top, 12)
-                    .frame(height: 25)
             }
-            .background(Color.mainHeaderBackground.edgesIgnoringSafeArea(.all))
-            
-            if showOverlay, let selectedItem = selectedItem {
-                HalfModalView {
-                    ItemDetailView(item: selectedItem)
-                }
-                
-                .transition(.move(edge: .bottom))
-                .onTapGesture {
-                    withAnimation {
-                        showOverlay = false
-                    }
-                }
+            .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: softDeleteConfirmed, context: viewContext)
+            .onAppear {
+                showOverlay = false
             }
-            
-        }
-        .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: softDeleteConfirmed, context: viewContext)
-        .onAppear {
-            showOverlay = false
         }
     }
     
@@ -187,6 +198,17 @@ struct ContentView: View {
                 .padding()
             Spacer()
             HStack {
+                
+                NavigationLink(destination: RecycleBinView().environment(\.managedObjectContext, viewContext)) {
+                                    Image(systemName: "trash")
+                                        .foregroundColor(Color.mainHeaderTextColor)
+                                        .font(.system(size: 24))
+                                        .padding(5)
+                                }
+                
+                
+                
+                
                 Button(action: {
                     isEditMode = false // Disable edit mode when the '+' button is pressed.
                     isPresentingForm = true
