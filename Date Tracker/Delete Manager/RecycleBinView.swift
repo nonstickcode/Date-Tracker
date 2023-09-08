@@ -156,7 +156,7 @@ struct RecycleBinView: View {
                     }
                     .mainGradientBackground()
                     
-                    Text("Select an event")
+                    Text("Select an event to restore")
                         .mainFooterTextStyle()
                         .padding(.top, 12)
                         .frame(height: 25)
@@ -195,43 +195,43 @@ struct RecycleBinView: View {
             Text("Recycle Bin")
                 .mainHeaderStyle()
                 .padding()
-            Spacer()
-            HStack {
+//            Spacer()
+//            HStack {
                 
-                NavigationLink(destination: RecycleBinView().environment(\.managedObjectContext, viewContext)) {
-                    Image(systemName: "trash")
-                        .foregroundColor(Color.mainHeaderTextColor)
-                        .font(.system(size: 24))
-                        .padding(5)
-                }
-                
-                
+//                NavigationLink(destination: RecycleBinView().environment(\.managedObjectContext, viewContext)) {
+//                    Image(systemName: "trash")
+//                        .foregroundColor(Color.mainHeaderTextColor)
+//                        .font(.system(size: 24))
+//                        .padding(5)
+//                }
                 
                 
-                Button(action: {
-                    isEditMode = false // Disable edit mode when the '+' button is pressed.
-                    isPresentingForm = true
-                }) {
-                    Image(systemName: "plus.app")
-                        .foregroundColor(Color.mainHeaderTextColor)
-                        .font(.system(size: 24))
-                        .padding(5)
-                        .scaleEffect(noDataPresent ? 1.4 : 1.0)
-                        .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
-                }
-                .foregroundColor(Color.mainHeaderTextColor)
-                .sheet(isPresented: $isPresentingForm) {
-                    NewDataEntryForm()
-                        .environment(\.managedObjectContext, viewContext)
-                }
-                Button(isEditMode ? "Done" : "Edit") {
-                    isEditMode.toggle()
-                }
-                .font(.custom("Quicksand-Bold", size: 16))
-                .foregroundColor(Color.mainHeaderTextColor)
-                .frame(minWidth: 50, maxWidth: 50, minHeight: 40, maxHeight: 40)  // Explicitly set frame
-            }
-            .padding()
+                
+                
+//                Button(action: {
+//                    isEditMode = false // Disable edit mode when the '+' button is pressed.
+//                    isPresentingForm = true
+//                }) {
+//                    Image(systemName: "plus.app")
+//                        .foregroundColor(Color.mainHeaderTextColor)
+//                        .font(.system(size: 24))
+//                        .padding(5)
+//                        .scaleEffect(noDataPresent ? 1.4 : 1.0)
+//                        .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
+//                }
+//                .foregroundColor(Color.mainHeaderTextColor)
+//                .sheet(isPresented: $isPresentingForm) {
+//                    NewDataEntryForm()
+//                        .environment(\.managedObjectContext, viewContext)
+//                }
+//                Button(isEditMode ? "Done" : "Edit") {
+//                    isEditMode.toggle()
+//                }
+//                .font(.custom("Quicksand-Bold", size: 16))
+//                .foregroundColor(Color.mainHeaderTextColor)
+//                .frame(minWidth: 50, maxWidth: 50, minHeight: 40, maxHeight: 40)  // Explicitly set frame
+//            }
+//            .padding()
         }
         .frame(height: 60)
     }

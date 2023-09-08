@@ -13,7 +13,7 @@ extension Text {
     
     func mainHeaderStyle() -> Text {
         self
-            .font(.custom("Pacifico-Regular", size: 36))
+            .font(.custom("Pacifico-Regular", size: 30))
             .foregroundColor(.mainHeaderTextColor)
     }
     func mainHeaderEditButtonStyle() -> Text {

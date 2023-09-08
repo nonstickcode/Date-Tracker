@@ -99,18 +99,6 @@ struct ContentView: View {
                                             Label("Settings", systemImage: "gear")
                                         }
                                         Button(action: {
-                                            
-                                            
-                                            
-                                            // add RecycleBinView Here
-                                            
-                                            
-                                            
-                                            
-                                        }) {
-                                            Label("Recycle Bin", systemImage: "trash")
-                                        }
-                                        Button(action: {
                                             // add edit action here
                                         }) {
                                             Label("Coming Soon", systemImage: "questionmark.folder")
@@ -199,31 +187,30 @@ struct ContentView: View {
             Spacer()
             HStack {
                 
-                NavigationLink(destination: RecycleBinView().environment(\.managedObjectContext, viewContext)) {
-                    Image(systemName: "trash")
-                        .foregroundColor(Color.mainHeaderTextColor)
-                        .font(.system(size: 24))
-                        .padding(5)
-                }
-                
-                
-                
-                
-                Button(action: {
-                    isEditMode = false // Disable edit mode when the '+' button is pressed.
-                    isPresentingForm = true
-                }) {
-                    Image(systemName: "plus.app")
-                        .foregroundColor(Color.mainHeaderTextColor)
-                        .font(.system(size: 24))
-                        .padding(5)
-                        .scaleEffect(noDataPresent ? 1.4 : 1.0)
-                        .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
-                }
-                .foregroundColor(Color.mainHeaderTextColor)
-                .sheet(isPresented: $isPresentingForm) {
-                    NewDataEntryForm()
-                        .environment(\.managedObjectContext, viewContext)
+                if isEditMode {
+                    NavigationLink(destination: RecycleBinView().environment(\.managedObjectContext, viewContext)) {
+                        Image(systemName: "trash")
+                            .foregroundColor(Color.mainHeaderTextColor)
+                            .font(.system(size: 24))
+                            .padding(5)
+                    }
+                } else {
+                    Button(action: {
+                        isEditMode = false // Disable edit mode when the '+' button is pressed.
+                        isPresentingForm = true
+                    }) {
+                        Image(systemName: "plus.app")
+                            .foregroundColor(Color.mainHeaderTextColor)
+                            .font(.system(size: 24))
+                            .padding(5)
+                            .scaleEffect(noDataPresent ? 1.4 : 1.0)
+                            .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
+                    }
+                    .foregroundColor(Color.mainHeaderTextColor)
+                    .sheet(isPresented: $isPresentingForm) {
+                        NewDataEntryForm()
+                            .environment(\.managedObjectContext, viewContext)
+                    }
                 }
                 Button(isEditMode ? "Done" : "Edit") {
                     isEditMode.toggle()
