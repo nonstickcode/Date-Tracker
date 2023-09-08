@@ -20,7 +20,7 @@ struct RecycleBinView: View {
         predicate: NSPredicate(format: "taggedForDelete == %@", NSNumber(value: true)),  // Filtering by taggedForDelete
         animation: .default)
     private var items: FetchedResults<Item>
-
+    
     // Sort function below ----------------------------------------------------------------
     
     private var sortedItems: [Item] {
@@ -62,9 +62,10 @@ struct RecycleBinView: View {
     
     
     var body: some View {
-        
-        ZStack {
-            NavigationView {
+        NavigationView {
+            
+            ZStack {
+                
                 VStack {
                     headerView
                     ScrollView {
@@ -79,73 +80,64 @@ struct RecycleBinView: View {
                                         RecycleBinItemButtonView(item: item)
                                     }
                                     // long press menu starts here ----------------------------------------------
-//                                    .contextMenu {
-//                                        
-//                                        Button(action: {
-//                                            // add edit action here
-//                                        }) {
-//                                            Label("Share", systemImage: "square.and.arrow.up")
-//                                        }
-//                                        Button(action: {
-//                                            // add edit action here
-//                                        }) {
-//                                            Label("Edit", systemImage: "pencil")
-//                                        }
-//                                        Button(action: {
-//                                            // add edit action here
-//                                        }) {
-//                                            Label("Settings", systemImage: "gear")
-//                                        }
-//                                        Button(action: {
-//                                            // add edit action here
-//                                        }) {
-//                                            Label("Coming Soon", systemImage: "questionmark.folder")
-//                                        }
-//                                        Button(action: {
-//                                            // add edit action here
-//                                        }) {
-//                                            Label("Coming Soon", systemImage: "questionmark.folder")
-//                                        }
-//                                        Button(action: {
-//                                            // add edit action here
-//                                        }) {
-//                                            Label("Coming Soon", systemImage: "questionmark.folder")
-//                                        }
-//                                        Button(action: {
-//                                            deleteItem(item: item)
-//                                        }) {
-//                                            Label("Delete", systemImage: "trash")
-//                                                .foregroundColor(.red)
-//                                        }
+                                    .contextMenu {
+                                        
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Share", systemImage: "square.and.arrow.up")
+                                        }
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Edit", systemImage: "pencil")
+                                        }
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Settings", systemImage: "gear")
+                                        }
+                                        Button(action: {
+                                            
+                                            
+                                            
+                                            // add RecycleBinView Here
+                                            
+                                            
+                                            
+                                            
+                                        }) {
+                                            Label("Recycle Bin", systemImage: "trash")
+                                        }
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Coming Soon", systemImage: "questionmark.folder")
+                                        }
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Coming Soon", systemImage: "questionmark.folder")
+                                        }
+                                        Button(action: {
+                                            deleteItem(item: item)
+                                        }) {
+                                            Label("Delete", systemImage: "trash")
+                                                .foregroundColor(.red)
+                                        }
                                         // long press menu ends here ----------------------------------------------
                                         
-                                        
-                                        
-                                        
-                                        
                                     }
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-//                                    if isEditMode {
-//                                        Button(action: {
-//                                            deleteItem(item: item)
-//                                        }) {
-//                                            Image(systemName: "delete.backward")
-//                                                .font(.system(size: 24))
-//                                        }
-//                                        .foregroundColor(.mainHeaderTextColor)
-//                                        .padding(.trailing, 20)
-//                                    }
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+                                    if isEditMode {
+                                        Button(action: {
+                                            deleteItem(item: item)
+                                        }) {
+                                            Image(systemName: "delete.backward")
+                                                .font(.system(size: 24))
+                                        }
+                                        .foregroundColor(.mainHeaderTextColor)
+                                        .padding(.trailing, 20)
+                                    }
                                 }
                             }
                             if items.isEmpty {
@@ -204,43 +196,55 @@ struct RecycleBinView: View {
                 .mainHeaderStyle()
                 .padding()
             Spacer()
-//            HStack {
-//                Button(action: {
-//                    isEditMode = false // Disable edit mode when the '+' button is pressed.
-//                    isPresentingForm = true
-//                }) {
-//                    Image(systemName: "plus.app")
-//                        .foregroundColor(Color.mainHeaderTextColor)
-//                        .font(.system(size: 24))
-//                        .padding(5)
-//                        .scaleEffect(noDataPresent ? 1.4 : 1.0)
-//                            .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
-//                }
-//                .foregroundColor(Color.mainHeaderTextColor)
-//                .sheet(isPresented: $isPresentingForm) {
-//                    NewDataEntryForm()
-//                        .environment(\.managedObjectContext, viewContext)
-//                }
-//                Button(isEditMode ? "Done" : "Edit") {
-//                    isEditMode.toggle()
-//                }
-//                .font(.custom("Quicksand-Bold", size: 16))
-//                .foregroundColor(Color.mainHeaderTextColor)
-//                .frame(minWidth: 50, maxWidth: 50, minHeight: 40, maxHeight: 40)  // Explicitly set frame
-//            }
-//            .padding()
+            HStack {
+                
+                NavigationLink(destination: RecycleBinView().environment(\.managedObjectContext, viewContext)) {
+                    Image(systemName: "trash")
+                        .foregroundColor(Color.mainHeaderTextColor)
+                        .font(.system(size: 24))
+                        .padding(5)
+                }
+                
+                
+                
+                
+                Button(action: {
+                    isEditMode = false // Disable edit mode when the '+' button is pressed.
+                    isPresentingForm = true
+                }) {
+                    Image(systemName: "plus.app")
+                        .foregroundColor(Color.mainHeaderTextColor)
+                        .font(.system(size: 24))
+                        .padding(5)
+                        .scaleEffect(noDataPresent ? 1.4 : 1.0)
+                        .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
+                }
+                .foregroundColor(Color.mainHeaderTextColor)
+                .sheet(isPresented: $isPresentingForm) {
+                    NewDataEntryForm()
+                        .environment(\.managedObjectContext, viewContext)
+                }
+                Button(isEditMode ? "Done" : "Edit") {
+                    isEditMode.toggle()
+                }
+                .font(.custom("Quicksand-Bold", size: 16))
+                .foregroundColor(Color.mainHeaderTextColor)
+                .frame(minWidth: 50, maxWidth: 50, minHeight: 40, maxHeight: 40)  // Explicitly set frame
+            }
+            .padding()
         }
         .frame(height: 60)
     }
     
     
     
-//    private func deleteItem(item: Item) {
-//        prepareForDeletion(item: item, with: viewContext, showingAlert: &showingDeleteAlert, itemToDelete: &itemToDelete)
-//
-//    }
-
+    private func deleteItem(item: Item) {
+        prepareForDeletion(item: item, with: viewContext, showingAlert: &showingDeleteAlert, itemToDelete: &itemToDelete)
+        
+    }
     
+    
+}
 
 
 struct RecycleBinView_Previews: PreviewProvider {

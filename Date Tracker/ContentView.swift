@@ -21,7 +21,7 @@ struct ContentView: View {
         predicate: NSPredicate(format: "taggedForDelete == %@", NSNumber(value: false)),
         animation: .default)
     private var items: FetchedResults<Item>
-
+    
     // Sort function below ----------------------------------------------------------------
     
     private var sortedItems: [Item] {
@@ -64,9 +64,9 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-        
-        ZStack {
             
+            ZStack {
+                
                 VStack {
                     headerView
                     ScrollView {
@@ -200,11 +200,11 @@ struct ContentView: View {
             HStack {
                 
                 NavigationLink(destination: RecycleBinView().environment(\.managedObjectContext, viewContext)) {
-                                    Image(systemName: "trash")
-                                        .foregroundColor(Color.mainHeaderTextColor)
-                                        .font(.system(size: 24))
-                                        .padding(5)
-                                }
+                    Image(systemName: "trash")
+                        .foregroundColor(Color.mainHeaderTextColor)
+                        .font(.system(size: 24))
+                        .padding(5)
+                }
                 
                 
                 
@@ -218,7 +218,7 @@ struct ContentView: View {
                         .font(.system(size: 24))
                         .padding(5)
                         .scaleEffect(noDataPresent ? 1.4 : 1.0)
-                            .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
+                        .animation(noDataPresent ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default, value: noDataPresent)
                 }
                 .foregroundColor(Color.mainHeaderTextColor)
                 .sheet(isPresented: $isPresentingForm) {
@@ -241,9 +241,9 @@ struct ContentView: View {
     
     private func deleteItem(item: Item) {
         prepareForDeletion(item: item, with: viewContext, showingAlert: &showingDeleteAlert, itemToDelete: &itemToDelete)
-
+        
     }
-
+    
     
 }
 
