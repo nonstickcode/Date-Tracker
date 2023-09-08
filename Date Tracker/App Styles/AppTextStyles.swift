@@ -36,9 +36,7 @@ struct MainHeaderEditButtonStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("Quicksand-Bold", size: 16))  // not used this style is set manaully
-            .foregroundColor(Color.mainHeaderTextColor)
-            .padding(.leading, 10)
-            .padding(.trailing, 10)
+            .foregroundColor(Color.mainHeaderTextColor)  // foregroundColor is tied to this color variable
     }
 }
 
@@ -110,29 +108,72 @@ extension View {
 
 // --------------------------------------------------------------------
 
-extension Text {
-    
-    // Form View Style Below -------------------------------------------
-    
-    func formHeaderStyle() -> Text {
-        self
-            .font(.custom("BlackOpsOne-Regular", size: 36))
+
+
+// Form View Style Below -------------------------------------------
+
+
+struct FormHeaderStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("Pacifico-Regular", size: 36))
             .foregroundColor(.formHeaderAndSaveButtonForeground)
+            .shadow(color: .black.opacity(0.5), radius: 2, x: 2, y: 2)
     }
-    func formRegularStyle() -> Text {
-        self
-            .font(.custom("RobotoMono-Bold", size: 12))
-    }
-    func formItalicsStyle() -> Text {
-        self
-            .font(.custom("RobotoMono-Italic", size: 14))  // unused, cannot figure out how to change TextField style other than .font(.custom("RobotoMono-Italic", size: 16))
-    }
-    func formSaveButtonStyle() -> Text {
-        self
-            .font(.custom("BlackOpsOne-Regular", size: 32))
-            .foregroundColor(.formHeaderAndSaveButtonForeground)
-    }
-    
-    // --------------------------------------------------------------------
-    
 }
+
+extension View {
+    func formHeaderStyle() -> some View {
+        self.modifier(FormHeaderStyle())
+    }
+}
+
+//------------------------
+
+struct FormRegularStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("Quicksand-Bold", size: 12))
+    }
+}
+
+extension View {
+    func formRegularStyle() -> some View {
+        self.modifier(FormRegularStyle())
+    }
+}
+
+//------------------------
+
+struct FormPlaceholderTextStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("Quicksand-Regular", size: 14))  // unused, cannot figure out how to change TextField style other than .font(.custom("RobotoMono-Italic", size: 16))
+    }
+}
+
+extension View {
+    func formPlaceholderTextStyle() -> some View {
+        self.modifier(FormPlaceholderTextStyle())
+    }
+}
+
+//------------------------
+
+struct FormSaveButtonStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("Pacifico-Regular", size: 32))
+            .foregroundColor(.formHeaderAndSaveButtonForeground)
+    }
+}
+
+extension View {
+    func formSaveButtonStyle() -> some View {
+        self.modifier(FormSaveButtonStyle())
+    }
+}
+
+// --------------------------------------------------------------------
+
+

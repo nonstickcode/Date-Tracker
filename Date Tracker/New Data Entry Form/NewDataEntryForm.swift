@@ -42,6 +42,8 @@ struct NewDataEntryForm: View {
         return Calendar.current.date(from: components) ?? Date()
     }
     
+    @State private var eventNotifications = true
+    
     
     
     
@@ -69,10 +71,10 @@ struct NewDataEntryForm: View {
                             }
                         }
                 )
-//                .offset(y: moveDown1 ? 5 : -5)
-//                .onAppear {
-//                    startMoving1()
-//                }
+            //                .offset(y: moveDown1 ? 5 : -5)
+            //                .onAppear {
+            //                    startMoving1()
+            //                }
             
             Image(systemName: "chevron.compact.down") // add .scaleEffect(.bounce) when ios 17 drops
                 .padding(4)
@@ -85,25 +87,29 @@ struct NewDataEntryForm: View {
             Form {
                 Section(header: Text("Name of Person or Event").formRegularStyle()) {
                     TextField("enter name here", text: $newEventName)
-                        .font(.custom("RobotoMono-Italic", size: 14))
+                        .formPlaceholderTextStyle()
                         .onChange(of: newEventName) { newValue in
-                                    if newEventName.count > 40 { // Limit to 40 characters
-                                        newEventName = String(newEventName.prefix(40))
-                                    }
-                                }
+                            if newEventName.count > 40 { // Limit to 40 characters
+                                newEventName = String(newEventName.prefix(40))
+                            }
+                        }
                 }
                 
-//                Section(header: Text("Preferred pronoun for person or event").formRegularStyle()) {
-//                    TextField("enter pronoun here", text: $newPreferredPronoun)
-//                        .font(.custom("RobotoMono-Italic", size: 14))
-//                }
+                Section(header: Text("Notifications for this event").formRegularStyle()) {
+                    Toggle("Notifications", isOn: $eventNotifications)
+                        
+                }
+                
+                //                Section(header: Text("Preferred pronoun for person or event").formRegularStyle()) {
+                //                    TextField("enter pronoun here", text: $newPreferredPronoun)
+                //                        .font(.custom("RobotoMono-Italic", size: 14))
+                //                }
                 
                 Section(header: Text("Event Date, upcoming or past").formRegularStyle()) {
                     VStack {
                         Picker("Month", selection: $selectedMonth) {
                             ForEach(months, id: \.self) { month in
                                 Text(month).tag(month)
-                                
                             }
                         }
                         
@@ -111,15 +117,13 @@ struct NewDataEntryForm: View {
                         Picker("Day", selection: $selectedDay) {
                             ForEach(1..<32) { day in
                                 Text("\(day)").tag(day)
-                                
                             }
                         }
                         
                         
                         Picker("Year", selection: $selectedYear) {
-                            ForEach(1920..<2100) { year in
+                            ForEach(1900..<2123) { year in
                                 Text(String(format: "%ld", locale: Locale(identifier: "en_US_POSIX"), year)).tag(year)
-                                
                                 
                             }
                         }
@@ -160,6 +164,7 @@ struct NewDataEntryForm: View {
                                 Image(systemName: "calendar.badge.plus")
                                     .font(.system(size: 30))
                                     .padding(.trailing, 10)
+                                
                                 Text("Save")
                                     .formSaveButtonStyle()
                                 Spacer()
