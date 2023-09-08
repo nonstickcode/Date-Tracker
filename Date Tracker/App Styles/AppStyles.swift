@@ -41,6 +41,11 @@ extension Text {
             .font(.custom("Quicksand-Bold", size: 16))
             .foregroundColor(.accentColor)
     }
+    func boldButtonRedTextStyle() -> Text {
+        self
+            .font(.custom("Quicksand-Bold", size: 16))
+            .foregroundColor(.red)
+    }
     func emptyButtonTextStyle() -> Text {
         self
             .font(.custom("Quicksand-Regular", size: 16))

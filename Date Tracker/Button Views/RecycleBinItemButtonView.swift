@@ -16,24 +16,31 @@ struct RecycleBinItemButtonView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 8)
             .fill(Color.white)
-            .frame(height: 60)
+            .frame(height: 80)
             .overlay(
                 VStack(spacing: 3) {
-                    if let item = item, let eventDate = item.eventDate {
-                        
-                        
+                    if let item = item, let _ = item.eventDate {
                         
                         HStack {
-                            Text("")
+                            Text("\(item.name ?? "") \(item.eventType ?? "") event")
                                 .boldButtonTextStyle()
                             
                         }
                         
                         HStack {
-                            Text("")
-                                .mainButtonTextStyle()
-                            
-                            
+                            if let dateTaggedForDelete = item.dateEventTaggedForDelete {
+                                Text("Deleted on \(dateTaggedForDelete, formatter: dateFormatter)")
+                                    .boldButtonRedTextStyle()
+                                    
+
+                            } else {
+                                Text("No Date Tagged for Delete")
+                                                                        .mainButtonTextStyle()
+                            }
+                        }
+                        HStack {
+                            Text("30 days remaining until HARD DELETE")
+                                .boldButtonRedTextStyle()
                             
                         }
                     } else {
@@ -81,4 +88,4 @@ struct RecycleBinItemButtonView: View {
 
 
 
-    
+
