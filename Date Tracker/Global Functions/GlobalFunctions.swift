@@ -57,7 +57,7 @@ public func yearsSinceEvent(_ eventDate: Date?) -> Double {
     
     let exactYears = Double(days) / 365.25
     
-    let exactYearsTruncated = Double(floor(1000000 * exactYears)/1000000)  // this limits the double to 6 decimal places, adding another 0 to each increases by 1 place
+    let exactYearsTruncated = Double(round(1000000 * exactYears)/1000000)  // this limits the double to 6 decimal places, adding another 0 to each increases by 1 place
     
     return exactYearsTruncated
     

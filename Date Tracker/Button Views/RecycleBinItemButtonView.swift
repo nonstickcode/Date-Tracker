@@ -39,7 +39,7 @@ struct RecycleBinItemButtonView: View {
                             }
                         }
                         HStack {
-                            Text("Less than \(item.timeUntilHardDelete) days remaining until DELETE")  // use new daysUntilHardDelete to display the days counter in text
+                            Text("\(item.timeUntilHardDelete) days until DELETED")  // here is where its called in another file and displays not rounded or floored  see yearsUntil in GlobalFunctions was maybe affecting this rounding 
                                 .boldButtonRedTextStyle()
                             
                         }

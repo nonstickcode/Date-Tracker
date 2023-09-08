@@ -23,7 +23,7 @@ extension Item {
     @NSManaged public var name: String?
     @NSManaged public var taggedForDelete: Bool
     @NSManaged public var timestamp: Date?
-    @NSManaged public var timeUntilHardDelete: Int64
+    @NSManaged public var timeUntilHardDelete: Double
 
 }
 

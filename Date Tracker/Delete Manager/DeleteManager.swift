@@ -53,13 +53,14 @@ func softDeleteConfirmed(item: Item, with context: NSManagedObjectContext) {
 }
 
 // Clean up function ------------------------------------------------------------------------------------------------
+// Runs everytime the app launches then also whenever RecycleBinView is shown
 
 func cleanUpItems(with context: NSManagedObjectContext) {
     let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "taggedForDelete == %@", NSNumber(value: true))
     
     // Hardcoded days until hard delete; change this value as needed
-    let daysUntilHardDelete = 1  // <-------------------------------- Change this number as per your requirements
+    let daysUntilHardDelete: Double = 30  // <-------------------------------- Change this number as per your requirements in DAYS
     
     do {
         let items = try context.fetch(fetchRequest)
@@ -68,12 +69,17 @@ func cleanUpItems(with context: NSManagedObjectContext) {
         
         for item in items {
             if let taggedDate = item.dateEventTaggedForDelete {
-                let daysPassed = Calendar.current.dateComponents([.day], from: taggedDate, to: currentDate).day ?? 0
-                print("Days passed since item was tagged for deletion: \(daysPassed)")  // Debug
-
-                // Update remaining days until hard delete on the item
-                item.timeUntilHardDelete = Int64(max(0, daysUntilHardDelete - daysPassed))
-                print("Updated time until hard delete for the item: \(item.timeUntilHardDelete)")  // Debug
+                let timeIntervalPassed = currentDate.timeIntervalSince(taggedDate)
+                let daysPassed: Double = timeIntervalPassed / (60 * 60 * 24)
+                
+                // Calculate remaining days until hard delete on the item
+                let remainingTime = max(0.0, daysUntilHardDelete - daysPassed)
+                
+                // Rounding to 3 decimal places
+                let roundedRemainingTime = round(1000000 * remainingTime) / 1000000  // this limits the double to 6 decimal places, adding another 0 to each increases by 1 place
+                
+                // Update item attribute
+                item.timeUntilHardDelete = roundedRemainingTime
                 
                 // Delete the item if the number of days passed reaches or exceeds the hardcoded daysUntilHardDelete
                 if daysPassed >= daysUntilHardDelete {
@@ -90,5 +96,7 @@ func cleanUpItems(with context: NSManagedObjectContext) {
 }
 
 // Clean up function end --------------------------------------------------------------------------------------------
+
+
 
 

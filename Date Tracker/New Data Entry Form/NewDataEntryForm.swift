@@ -226,7 +226,7 @@ struct NewDataEntryForm: View {
         newItem.eventType = newEventType
         
         newItem.taggedForDelete = false
-        newItem.timeUntilHardDelete = 10000000
+        newItem.timeUntilHardDelete = 1000000
         
         
         

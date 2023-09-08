@@ -19,8 +19,8 @@
 		2B91B1C62AABA10600D846B4 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1C52AABA10600D846B4 /* AppColors.swift */; };
 		2B91B1C82AABA11800D846B4 /* AppViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1C72AABA11800D846B4 /* AppViewModifiers.swift */; };
 		2B91B1CB2AABBB9700D846B4 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1CA2AABBB9700D846B4 /* AppConfiguration.swift */; };
-		2B91B1D22AABBD4800D846B4 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1D02AABBD4800D846B4 /* Item+CoreDataClass.swift */; };
-		2B91B1D32AABBD4800D846B4 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1D12AABBD4800D846B4 /* Item+CoreDataProperties.swift */; };
+		2B91B1D62AABC41F00D846B4 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1D42AABC41F00D846B4 /* Item+CoreDataClass.swift */; };
+		2B91B1D72AABC41F00D846B4 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1D52AABC41F00D846B4 /* Item+CoreDataProperties.swift */; };
 		2B9879A52AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */; };
 		2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */; };
 		2BA9F3842AA933E6008EA520 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA9F3832AA933E6008EA520 /* Roboto-Italic.ttf */; };
@@ -53,8 +53,8 @@
 		2B91B1C52AABA10600D846B4 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		2B91B1C72AABA11800D846B4 /* AppViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModifiers.swift; sourceTree = "<group>"; };
 		2B91B1CA2AABBB9700D846B4 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
-		2B91B1D02AABBD4800D846B4 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2B91B1D12AABBD4800D846B4 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2B91B1D42AABC41F00D846B4 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2B91B1D52AABC41F00D846B4 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		2B9879A62AA6603F00DB74FF /* Date-Tracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Date-Tracker-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataEntryForm.swift; sourceTree = "<group>"; };
@@ -106,8 +106,8 @@
 		2B116CB92A9A7FA900E5CA8E /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				2B91B1D02AABBD4800D846B4 /* Item+CoreDataClass.swift */,
-				2B91B1D12AABBD4800D846B4 /* Item+CoreDataProperties.swift */,
+				2B91B1D42AABC41F00D846B4 /* Item+CoreDataClass.swift */,
+				2B91B1D52AABC41F00D846B4 /* Item+CoreDataProperties.swift */,
 				2BE1B8742A9A7A3900CD2929 /* Persistence.swift */,
 				2BE1B8762A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld */,
 			);
@@ -322,7 +322,7 @@
 				2BF48F922AA5C47C004824C3 /* HalfModalView.swift in Sources */,
 				2BF48F8F2AA5B94E004824C3 /* ItemDetailView.swift in Sources */,
 				2B049D282AAA7B39009E7499 /* RecycleBinView.swift in Sources */,
-				2B91B1D32AABBD4800D846B4 /* Item+CoreDataProperties.swift in Sources */,
+				2B91B1D72AABC41F00D846B4 /* Item+CoreDataProperties.swift in Sources */,
 				2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */,
 				2B91B1C42AABA0ED00D846B4 /* AppButtonTextStyles.swift in Sources */,
 				2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */,
@@ -331,7 +331,7 @@
 				2BE1B8782A9A7A3900CD2929 /* Date_Tracker.xcdatamodeld in Sources */,
 				2B91B1C82AABA11800D846B4 /* AppViewModifiers.swift in Sources */,
 				2B049D152AAA538B009E7499 /* DeleteManager.swift in Sources */,
-				2B91B1D22AABBD4800D846B4 /* Item+CoreDataClass.swift in Sources */,
+				2B91B1D62AABC41F00D846B4 /* Item+CoreDataClass.swift in Sources */,
 				2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */,
 				2B91B1CB2AABBB9700D846B4 /* AppConfiguration.swift in Sources */,
 				2B049D2A2AAA8670009E7499 /* RecycleBinItemButtonView.swift in Sources */,

@@ -126,7 +126,11 @@ struct RecycleBinView: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear {
+                cleanUpItems(with: self.viewContext)
+            }
     }
+        
     
     
     
