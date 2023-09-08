@@ -139,7 +139,7 @@ struct RecycleBinView: View {
             HStack {
                 
                 NavigationLink(destination: ContentView().environment(\.managedObjectContext, viewContext)) {
-                    Image(systemName: "arrowshape.backward")
+                    Image(systemName: "arrow.backward")
                         .foregroundColor(Color.mainHeaderTextColor)
                         .font(.system(size: 30))
                         .padding(.leading, 5)

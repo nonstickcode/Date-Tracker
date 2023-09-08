@@ -23,6 +23,7 @@ struct MainButtonTextStyle: ViewModifier {
             .foregroundColor(.accentColor)
             .padding(.leading, 10)
             .padding(.trailing, 10)
+            .lineSpacing(1)
     }
 }
 
@@ -41,6 +42,7 @@ struct BoldButtonTextStyle: ViewModifier {
             .foregroundColor(.accentColor)
             .padding(.leading, 10)
             .padding(.trailing, 10)
+            .lineSpacing(1)
     }
 }
 
@@ -59,6 +61,7 @@ struct BoldButtonRedTextStyle: ViewModifier {
             .foregroundColor(.red)
             .padding(.leading, 10)
             .padding(.trailing, 10)
+            .lineSpacing(1)
     }
 }
 
@@ -77,6 +80,7 @@ struct EmptyButtonTextStyle: ViewModifier {
             .foregroundColor(.black)
             .padding(.leading, 10)
             .padding(.trailing, 10)
+            .lineSpacing(1)
     }
 }
 
@@ -95,6 +99,7 @@ struct EmptyButtonBoldTextStyle: ViewModifier {
             .foregroundColor(.black)
             .padding(.leading, 10)
             .padding(.trailing, 10)
+            .lineSpacing(1)
     }
 }
 
