@@ -5,10 +5,16 @@ struct ButtonContent {
     let imageView: AnyView
 }
 
+
 struct ItemButtonView: View {
     var item: Item?
     
     @Binding var noDataPresent: Bool
+    
+    struct ButtonContent {
+        let text: String
+        let imageView: AnyView
+    }
     
     var body: some View {
         RoundedRectangle(cornerRadius: 8)

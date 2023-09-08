@@ -24,27 +24,11 @@ struct RecycleBinView: View {
     // Sort function below ----------------------------------------------------------------
     
     private var sortedItems: [Item] {
-        return items.sorted { item1, item2 in
-            let daysUntil1 = daysUntilEvent(item1.eventDate)
-            let daysUntil2 = daysUntilEvent(item2.eventDate)
-            
-            if daysUntil1 == 365 && daysUntil2 != 365 {
-                return true
-            }
-            
-            if daysUntil1 != 365 && daysUntil2 == 365 {
+        return items.sorted { (item1, item2) in
+            guard let date1 = item1.dateEventTaggedForDelete, let date2 = item2.dateEventTaggedForDelete else {
                 return false
             }
-            
-            if daysUntil1 == 0 && daysUntil2 != 0 && daysUntil2 != 365 {
-                return true
-            }
-            
-            if daysUntil1 != 0 && daysUntil2 == 0 && daysUntil1 != 365 {
-                return false
-            }
-            
-            return daysUntil1 < daysUntil2
+            return date1 < date2
         }
     }
     
@@ -58,7 +42,7 @@ struct RecycleBinView: View {
     @State private var showOverlay: Bool = false
     
     
-    @State private var noDataPresent: Bool = false // State variable
+    @State private var noDataPresentInRecycleBin: Bool = false // State variable
     
     
     var body: some View {
@@ -77,7 +61,10 @@ struct RecycleBinView: View {
                                         self.selectedItem = item
                                         self.showOverlay = true
                                     }) {
-                                        RecycleBinItemButtonView(item: item)
+                                        RecycleBinItemButtonView(item: item, noDataPresentInRecycleBin: $noDataPresentInRecycleBin)
+
+
+
                                     }
                                     // long press menu starts here ----------------------------------------------
                                     .contextMenu {
@@ -92,66 +79,24 @@ struct RecycleBinView: View {
                                         }) {
                                             Label("Edit", systemImage: "pencil")
                                         }
-                                        Button(action: {
-                                            // add edit action here
-                                        }) {
-                                            Label("Settings", systemImage: "gear")
-                                        }
-                                        Button(action: {
-                                            
-                                            
-                                            
-                                            // add RecycleBinView Here
-                                            
-                                            
-                                            
-                                            
-                                        }) {
-                                            Label("Recycle Bin", systemImage: "trash")
-                                        }
-                                        Button(action: {
-                                            // add edit action here
-                                        }) {
-                                            Label("Coming Soon", systemImage: "questionmark.folder")
-                                        }
-                                        Button(action: {
-                                            // add edit action here
-                                        }) {
-                                            Label("Coming Soon", systemImage: "questionmark.folder")
-                                        }
-                                        Button(action: {
-                                            deleteItem(item: item)
-                                        }) {
-                                            Label("Delete", systemImage: "trash")
-                                                .foregroundColor(.red)
-                                        }
+                                      
                                         // long press menu ends here ----------------------------------------------
                                         
                                     }
-                                    if isEditMode {
-                                        Button(action: {
-                                            deleteItem(item: item)
-                                        }) {
-                                            Image(systemName: "delete.backward")
-                                                .font(.system(size: 24))
-                                        }
-                                        .foregroundColor(.mainHeaderTextColor)
-                                        .padding(.trailing, 20)
-                                    }
+                                    
                                 }
                             }
                             if items.isEmpty {
-                                ItemButtonView(item: nil, noDataPresent: $noDataPresent)
+                                RecycleBinItemButtonView(item: nil, noDataPresentInRecycleBin: $noDataPresentInRecycleBin)
                             }
                         }
                         .padding(.bottom, 8)
                     }
                     .onChange(of: items.count) { newValue in
                         if newValue == 0 {
-                            isEditMode = false
-                            noDataPresent = true
+                            noDataPresentInRecycleBin = true
                         } else {
-                            noDataPresent = false
+                            noDataPresentInRecycleBin = false
                         }
                     }
                     .mainGradientBackground()
@@ -177,10 +122,7 @@ struct RecycleBinView: View {
                 }
                 
             }
-            .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: softDeleteConfirmed, context: viewContext)
-            .onAppear {
-                showOverlay = false
-            }
+            
         }
         .navigationBarBackButtonHidden(true)
         .navigationViewStyle(StackNavigationViewStyle())
@@ -222,14 +164,6 @@ struct RecycleBinView: View {
         .padding()
         .frame(height: 60)
     }
-    
-    
-    
-    private func deleteItem(item: Item) {
-        prepareForDeletion(item: item, with: viewContext, showingAlert: &showingDeleteAlert, itemToDelete: &itemToDelete)
-        
-    }
-    
     
 }
 
