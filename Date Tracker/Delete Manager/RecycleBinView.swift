@@ -198,8 +198,8 @@ struct RecycleBinView: View {
                 NavigationLink(destination: ContentView().environment(\.managedObjectContext, viewContext)) {
                     Image(systemName: "arrowshape.backward")
                         .foregroundColor(Color.mainHeaderTextColor)
-                        .font(.system(size: 36))
-                        .padding(5)
+                        .font(.system(size: 30))
+                        .padding(.leading, 5)
                 }
             }
             .frame(minWidth: 30, maxWidth: 30)  // Explicitly set frame
