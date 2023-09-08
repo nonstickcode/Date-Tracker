@@ -183,6 +183,7 @@ struct RecycleBinView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     
