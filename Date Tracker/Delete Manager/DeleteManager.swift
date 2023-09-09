@@ -74,7 +74,7 @@ func cleanUpItems(with context: NSManagedObjectContext) {
     fetchRequest.predicate = NSPredicate(format: "taggedForDelete == %@", NSNumber(value: true))
     
     // Hardcoded days until hard delete; change this value as needed
-    let daysUntilHardDelete: Double = 30  // <-------------------------------- Change this number as per your requirements in DAYS
+    let daysUntilHardDelete: Double = 1  // <-------------------------------- Change this number as per your requirements in DAYS
     
     do {
         let items = try context.fetch(fetchRequest)
@@ -89,7 +89,7 @@ func cleanUpItems(with context: NSManagedObjectContext) {
                 // Calculate remaining days until hard delete on the item
                 let remainingTime = max(0.0, daysUntilHardDelete - daysPassed)
                 
-                // Rounding to 3 decimal places
+                // Rounding to 6 decimal places
                 let roundedRemainingTime = round(1000000 * remainingTime) / 1000000  // this limits the double to 6 decimal places, adding another 0 to each increases by 1 place
                 
                 // Update item attribute

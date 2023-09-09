@@ -155,21 +155,25 @@ struct RecycleBinView: View {
                 NavigationLink(destination: ContentView().environment(\.managedObjectContext, viewContext)) {
                     Image(systemName: "arrow.backward")
                         .foregroundColor(Color.mainHeaderTextColor)
-                        .font(.system(size: 30))
+                        .font(.system(size: 24))
                         .padding(.leading, 5)
                 }
-            }
-            .frame(minWidth: 30, maxWidth: 30)  // Explicitly set frame
-            HStack {
-                
-                
                 Spacer()
+            }
+            .padding()
+            .frame(minWidth: 80, maxWidth: 80)  // Explicitly set frame
+            
+            Spacer()
+            
+            HStack {
                 
                 Text("Recycle Bin")
                     .mainHeaderStyle()
-                    .padding()
-                Spacer ()
+                
             }
+            
+            Spacer ()
+            
             HStack {
                 
                 if isEditMode {
@@ -187,20 +191,28 @@ struct RecycleBinView: View {
                             .environment(\.managedObjectContext, viewContext)
                     }
                 }
-                Button(isEditMode ? "Done" : "Restore") {
+                Button(action: {
                     isEditMode.toggle()
+                }) {
+                    if isEditMode {
+                        Text("Done")
+                    } else {
+                        VStack {
+                            Text("Restore")
+                            Text("Event")
+                        }
+                    }
                 }
-                .font(.custom("Quicksand-Bold", size: 16))
+                .font(.custom("Quicksand-Bold", size: 14))
                 .foregroundColor(Color.mainHeaderTextColor)
-                .frame(minWidth: 80, maxWidth: 80, minHeight: 40, maxHeight: 40)  // Explicitly set frame
+                .frame(minWidth: 80, maxWidth: 80)  // Explicitly set frame
+                
             }
-            .padding(.trailing, 25)
-            .frame(minWidth: 30, maxWidth: 30)  // Explicitly set frame
+            .padding()
+            
         }
-        .padding()
         .frame(height: 60)
     }
-    
 }
 
 
