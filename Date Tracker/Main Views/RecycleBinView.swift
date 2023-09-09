@@ -83,6 +83,16 @@ struct RecycleBinView: View {
                                         // long press menu ends here ----------------------------------------------
                                         
                                     }
+                                    if isEditMode {
+                                        Button(action: {
+//                                            deleteItem(item: item)  change this to a new function to restore items from recycle bin by setting taggedForDelete to false and clearing out dateTaggedForDelete to reset it to before delete
+                                        }) {
+                                            Image(systemName: "repeat")
+                                                .font(.system(size: 24))
+                                        }
+                                        .foregroundColor(.mainHeaderTextColor)
+                                        .padding(.trailing, 20)
+                                    }
                                     
                                 }
                             }
@@ -94,11 +104,11 @@ struct RecycleBinView: View {
                     }
                     .onChange(of: items.count) { newValue in
                         if newValue == 0 {
-                            noDataPresentInRecycleBin = true
-                        } else {
-                            noDataPresentInRecycleBin = false
+                            isEditMode = false
+                            
                         }
                     }
+                    
                     .mainGradientBackground()
                     
                     Text("Select an event to restore")
@@ -161,8 +171,30 @@ struct RecycleBinView: View {
                 Spacer ()
             }
             HStack {
-                Spacer()
+                
+                if isEditMode {
+                    
+                } else {
+                    Button(action: {
+                        isEditMode = false // Disable edit mode when the '+' button is pressed.
+                        isPresentingForm = true
+                    }) {
+                        
+                    }
+                    .foregroundColor(Color.mainHeaderTextColor)
+                    .sheet(isPresented: $isPresentingForm) {
+                        NewDataEntryForm()
+                            .environment(\.managedObjectContext, viewContext)
+                    }
+                }
+                Button(isEditMode ? "Done" : "Restore") {
+                    isEditMode.toggle()
+                }
+                .font(.custom("Quicksand-Bold", size: 16))
+                .foregroundColor(Color.mainHeaderTextColor)
+                .frame(minWidth: 80, maxWidth: 80, minHeight: 40, maxHeight: 40)  // Explicitly set frame
             }
+            .padding(.trailing, 25)
             .frame(minWidth: 30, maxWidth: 30)  // Explicitly set frame
         }
         .padding()

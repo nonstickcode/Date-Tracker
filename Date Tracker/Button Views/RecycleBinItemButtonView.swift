@@ -16,7 +16,7 @@ struct RecycleBinItemButtonView: View {
     var body: some View {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.white)
-            //            .frame(height: 80)
+                .frame(height: 80)
                 .overlay(
                     VStack(spacing: 3) {
                         if let item = item, let _ = item.eventDate {
