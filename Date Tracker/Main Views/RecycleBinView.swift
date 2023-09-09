@@ -87,7 +87,7 @@ struct RecycleBinView: View {
                                         Button(action: {
                                                 restoreItem(item: item, with: self.viewContext)
                                         }) {
-                                            Image(systemName: "repeat")
+                                            Image(systemName: "arrowshape.turn.up.backward.badge.clock")
                                                 .font(.system(size: 24))
                                         }
                                         .foregroundColor(.mainHeaderTextColor)

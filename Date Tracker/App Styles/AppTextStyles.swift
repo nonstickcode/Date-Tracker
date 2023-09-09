@@ -118,7 +118,7 @@ struct FormHeaderStyle: ViewModifier {
         content
             .font(.custom("Pacifico-Regular", size: 36))
             .foregroundColor(.formHeaderAndSaveButtonForeground)
-            .shadow(color: .black.opacity(0.5), radius: 2, x: 2, y: 2)
+            .shadow(color: .gray.opacity(0.8), radius: 2, x: 2, y: 2)
     }
 }
 
@@ -165,6 +165,7 @@ struct FormSaveButtonStyle: ViewModifier {
         content
             .font(.custom("Pacifico-Regular", size: 32))
             .foregroundColor(.formHeaderAndSaveButtonForeground)
+            .shadow(color: .gray.opacity(0.8), radius: 2, x: 2, y: 2)
     }
 }
 

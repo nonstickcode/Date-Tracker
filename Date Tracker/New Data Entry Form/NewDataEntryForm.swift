@@ -71,14 +71,12 @@ struct NewDataEntryForm: View {
                             }
                         }
                 )
-            //                .offset(y: moveDown1 ? 5 : -5)
-            //                .onAppear {
-            //                    startMoving1()
-            //                }
+     
             
             Image(systemName: "chevron.compact.down") // add .scaleEffect(.bounce) when ios 17 drops
                 .padding(4)
                 .font(.system(size: 30))
+                .shadow(color: .gray.opacity(0.8), radius: 2, x: 2, y: 2)
                 .offset(y: moveDown2 ? 5 : -5)
                 .onAppear {
                     startMoving2()
@@ -164,6 +162,7 @@ struct NewDataEntryForm: View {
                                 Image(systemName: "calendar.badge.plus")
                                     .font(.system(size: 30))
                                     .padding(.trailing, 10)
+                                    .shadow(color: .gray.opacity(0.8), radius: 2, x: 2, y: 2)
                                 
                                 Text("Save")
                                     .formSaveButtonStyle()
