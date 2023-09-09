@@ -150,53 +150,43 @@ struct RecycleBinView: View {
     
     private var headerView: some View {
         HStack {
-            
-            
             // Left - Navigation Link
             NavigationLink(destination: ContentView().environment(\.managedObjectContext, viewContext)) {
                 Image(systemName: "chevron.backward")
                     .foregroundColor(Color.mainHeaderTextColor)
                     .font(.system(size: 24))
-                
             }
-            .padding(.trailing, 30)
-            .frame(minWidth: 90, maxWidth: 90)  // Explicitly set frame to match first header
+            .frame(width: 50) // Explicitly set frame width to match first header
             
-            
-            Spacer() // Auto Spacer for the middle content
+            Spacer(minLength: 0) // Auto Spacer for the middle content
             
             // Center - Text
             Text("Recycle Bin")
                 .mainHeaderStyle()
-                .frame(maxHeight: .infinity)
-            Spacer() // Auto Spacer for the remaining content
             
+            Spacer(minLength: 0) // Auto Spacer for the remaining content
+
             // Right - Button
-            
             Button(action: {
                 isEditMode.toggle()
             }) {
                 if isEditMode {
                     Text("Done")
-                    
                 } else {
                     VStack {
                         Text("Restore")
                         Text("Event")
                     }
-                    
                 }
-                
             }
-            .font(.custom("Quicksand-Bold", size: isEditMode ? 16 : 14)) // Match font size to first header for "Done", and use smaller for "Restore Event"
+            .font(.custom("Quicksand-Bold", size: 14))
             .foregroundColor(Color.mainHeaderTextColor)
-            .frame(minWidth: 90, maxWidth: 90)  // Explicitly set frame to match first header
-            .frame(maxHeight: .infinity)
-            
+            .frame(width: 50) // Explicitly set frame width to match first header
         }
         .frame(height: 60)
+        .padding(.horizontal, 5) 
     }
-    
+
     
 }
 
