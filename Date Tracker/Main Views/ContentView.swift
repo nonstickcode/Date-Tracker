@@ -61,6 +61,9 @@ struct ContentView: View {
     
     @State private var noDataPresent: Bool = false // State variable
     
+    @State private var noDataPresentInRecycleBin = false
+
+    
     
     var body: some View {
         NavigationView {
@@ -168,8 +171,10 @@ struct ContentView: View {
             }
             .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: softDeleteConfirmed, context: viewContext)
             .onAppear {
-                showOverlay = false
-            }
+                            updateNoDataPresentInRecycleBin()
+                            showOverlay = false
+                        }
+            
         }
         .navigationBarBackButtonHidden(true)
         .navigationViewStyle(StackNavigationViewStyle())
@@ -191,7 +196,7 @@ struct ContentView: View {
                 
                 if isEditMode {
                     NavigationLink(destination: RecycleBinView().environment(\.managedObjectContext, viewContext)) {
-                        Image(systemName: "trash")
+                        Image(systemName: noDataPresentInRecycleBin ? "trash" : "trash.fill")
                             .foregroundColor(Color.green)
                             .font(.system(size: 24))
                             .padding(5)
@@ -234,14 +239,21 @@ struct ContentView: View {
         
     }
     
+    private func updateNoDataPresentInRecycleBin() {
+            let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "taggedForDelete == %@", NSNumber(value: true))
+            
+            do {
+                let recycleBinItems = try viewContext.fetch(fetchRequest)
+                noDataPresentInRecycleBin = recycleBinItems.isEmpty
+            } catch {
+                print("Failed to fetch items from the recycle bin: \(error)")
+            }
+        }
+    
+    
     
 }
-
-
-
-
-
-
 
 
 
