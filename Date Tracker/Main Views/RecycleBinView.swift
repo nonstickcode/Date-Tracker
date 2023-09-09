@@ -70,14 +70,9 @@ struct RecycleBinView: View {
                                     .contextMenu {
                                         
                                         Button(action: {
-                                            // add edit action here
-                                        }) {
-                                            Label("Share", systemImage: "square.and.arrow.up")
-                                        }
-                                        Button(action: {
                                             restoreItem(item: item, with: self.viewContext)  // added restoreItem here
                                         }) {
-                                            Label("Edit", systemImage: "pencil")
+                                            Label("Restore Event", systemImage: "arrowshape.turn.up.backward.badge.clock")
                                         }
                                         
                                         // long press menu ends here ----------------------------------------------

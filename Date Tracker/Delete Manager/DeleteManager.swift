@@ -8,6 +8,12 @@
 import SwiftUI
 import CoreData
 
+
+let daysUntilHardDelete: Double = 1 // <-- Set your value here
+
+
+
+
 struct DeletionAlertModifier: ViewModifier {
     @Binding var showingAlert: Bool
     @Binding var itemToDelete: Item?
@@ -18,7 +24,7 @@ struct DeletionAlertModifier: ViewModifier {
         content
             .alert(isPresented: $showingAlert) {
                 Alert(title: Text("Delete Item"),
-                      message: Text("Are you sure you want to delete this item?"),
+                      message: Text("All deleted events will be placed in the Recycle Bin and automatically deleted after \(Int(daysUntilHardDelete)) days, unless restored."),
                       primaryButton: .destructive(Text("Delete")) {
                         guard let item = itemToDelete else { return }
                         deleteConfirmed(item, context)
@@ -74,7 +80,7 @@ func cleanUpItems(with context: NSManagedObjectContext) {
     fetchRequest.predicate = NSPredicate(format: "taggedForDelete == %@", NSNumber(value: true))
     
     // Hardcoded days until hard delete; change this value as needed
-    let daysUntilHardDelete: Double = 1  // <-------------------------------- Change this number as per your requirements in DAYS
+//    let daysUntilHardDelete: Double = 1  // <-------------------------------- Change this number as per your requirements in DAYS
     
     do {
         let items = try context.fetch(fetchRequest)
