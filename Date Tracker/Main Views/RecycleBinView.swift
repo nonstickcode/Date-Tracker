@@ -75,7 +75,7 @@ struct RecycleBinView: View {
                                             Label("Share", systemImage: "square.and.arrow.up")
                                         }
                                         Button(action: {
-                                            // add edit action here
+                                            restoreItem(item: item, with: self.viewContext)  // added restoreItem here
                                         }) {
                                             Label("Edit", systemImage: "pencil")
                                         }
@@ -85,7 +85,7 @@ struct RecycleBinView: View {
                                     }
                                     if isEditMode {
                                         Button(action: {
-//                                            deleteItem(item: item)  change this to a new function to restore items from recycle bin by setting taggedForDelete to false and clearing out dateTaggedForDelete to reset it to before delete
+                                                restoreItem(item: item, with: self.viewContext)
                                         }) {
                                             Image(systemName: "repeat")
                                                 .font(.system(size: 24))

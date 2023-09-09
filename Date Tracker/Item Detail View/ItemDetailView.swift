@@ -71,7 +71,7 @@ struct ItemDetailView: View {
                     // Line 6 of Text in view -------------------------optional-------------------------------
 
                     if item.taggedForDelete == true {
-                        Text("\(item.timeUntilHardDelete) days until HARD Deleted")
+                        Text("\(item.timeUntilHardDelete) days until HARD Delete")
                             .bold()
                             .font(.caption)
                             .foregroundColor(.red)

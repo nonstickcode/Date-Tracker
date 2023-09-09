@@ -52,6 +52,20 @@ func softDeleteConfirmed(item: Item, with context: NSManagedObjectContext) {
     }
 }
 
+// Restore function ------------------------------------------------------------------------------------------------
+
+func restoreItem(item: Item, with context: NSManagedObjectContext) {
+    withAnimation {
+        item.taggedForDelete = false
+        item.dateEventTaggedForDelete = nil
+        do {
+            try context.save()
+        } catch {
+            print("Could not save context: \(error.localizedDescription)")
+        }
+    }
+}
+
 // Clean up function ------------------------------------------------------------------------------------------------
 // Runs everytime the app launches then also whenever RecycleBinView is shown
 
