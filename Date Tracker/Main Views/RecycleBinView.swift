@@ -150,21 +150,23 @@ struct RecycleBinView: View {
     
     private var headerView: some View {
         HStack {
-            // Left - Navigation Link
-            NavigationLink(destination: ContentView().environment(\.managedObjectContext, viewContext)) {
-                Image(systemName: "chevron.backward")
-                    .foregroundColor(Color.mainHeaderTextColor)
-                    .font(.system(size: 24))
+            HStack {
+                NavigationLink(destination: ContentView().environment(\.managedObjectContext, viewContext)) {
+                    Image(systemName: "chevron.backward")
+                        .foregroundColor(Color.mainHeaderTextColor)
+                        .font(.system(size: 24))
+                }
+                Spacer()
             }
-            .frame(width: 50) // Explicitly set frame width to match first header
+            .padding(.leading, 12)
+            .frame(width: 80)  // Explicitly set frame width to match first header
             
-            Spacer(minLength: 0) // Auto Spacer for the middle content
-            
+            Spacer(minLength: 0)
             // Center - Text
             Text("Recycle Bin")
                 .mainHeaderStyle()
             
-            Spacer(minLength: 0) // Auto Spacer for the remaining content
+            Spacer(minLength: 0)
 
             // Right - Button
             Button(action: {
@@ -181,10 +183,10 @@ struct RecycleBinView: View {
             }
             .font(.custom("Quicksand-Bold", size: 14))
             .foregroundColor(Color.mainHeaderTextColor)
-            .frame(width: 50) // Explicitly set frame width to match first header
+            .frame(width: 80) // Explicitly set frame width to match first header
         }
         .frame(height: 60)
-        .padding(.horizontal, 5) 
+        .padding([.leading, .trailing], 16)
     }
 
     

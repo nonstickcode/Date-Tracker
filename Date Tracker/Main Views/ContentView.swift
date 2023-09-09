@@ -185,7 +185,7 @@ struct ContentView: View {
         HStack {
             Text("Date Tracker")
                 .mainHeaderStyle()
-                .padding()
+                
             Spacer()
             HStack {
                 
@@ -221,9 +221,10 @@ struct ContentView: View {
                 .foregroundColor(Color.mainHeaderTextColor)
                 .frame(minWidth: 50, maxWidth: 50, minHeight: 40, maxHeight: 40)  // Explicitly set frame
             }
-            .padding()
         }
+        .padding([.leading, .trailing], 16)
         .frame(height: 60)
+
     }
     
     

@@ -78,11 +78,11 @@ struct RecycleBinItemButtonView: View {
                 Spacer()
                 Text("No data available")
                     .emptyButtonBoldTextStyle()
-                HStack {
-                    Text("Recycle Bin Empty")
+                Spacer()
+                Text("Recycle Bin Empty")
                         .emptyButtonTextStyle()
                     
-                }
+                
                 Spacer()
             }
             

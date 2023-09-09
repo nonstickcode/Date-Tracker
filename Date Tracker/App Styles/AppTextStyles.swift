@@ -148,7 +148,7 @@ extension View {
 struct FormPlaceholderTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("Quicksand-Regular", size: 14))  // unused, cannot figure out how to change TextField style other than .font(.custom("RobotoMono-Italic", size: 16))
+            .font(.custom("Quicksand-Regular", size: 14))  // unused, cannot figure out how to change TextField style
     }
 }
 
