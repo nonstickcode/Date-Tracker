@@ -62,9 +62,9 @@ struct RecycleBinView: View {
                                         self.showOverlay = true
                                     }) {
                                         RecycleBinItemButtonView(item: item, noDataPresentInRecycleBin: $noDataPresentInRecycleBin)
-
-
-
+                                        
+                                        
+                                        
                                     }
                                     // long press menu starts here ----------------------------------------------
                                     .contextMenu {
@@ -79,13 +79,13 @@ struct RecycleBinView: View {
                                         }) {
                                             Label("Edit", systemImage: "pencil")
                                         }
-                                      
+                                        
                                         // long press menu ends here ----------------------------------------------
                                         
                                     }
                                     if isEditMode {
                                         Button(action: {
-                                                restoreItem(item: item, with: self.viewContext)
+                                            restoreItem(item: item, with: self.viewContext)
                                         }) {
                                             Image(systemName: "arrowshape.turn.up.backward.badge.clock")
                                                 .font(.system(size: 24))
@@ -137,10 +137,10 @@ struct RecycleBinView: View {
         .navigationBarBackButtonHidden(true)
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
-                cleanUpItems(with: self.viewContext)
-            }
+            cleanUpItems(with: self.viewContext)
+        }
     }
-        
+    
     
     
     
@@ -150,71 +150,55 @@ struct RecycleBinView: View {
     
     private var headerView: some View {
         HStack {
-            HStack {
-                
-                NavigationLink(destination: ContentView().environment(\.managedObjectContext, viewContext)) {
-                    Image(systemName: "arrow.backward")
-                        .foregroundColor(Color.mainHeaderTextColor)
-                        .font(.system(size: 24))
-                        .padding(.leading, 5)
-                }
-                Spacer()
-            }
-            .padding()
-            .frame(minWidth: 80, maxWidth: 80)  // Explicitly set frame
             
-            Spacer()
             
-            HStack {
-                
-                Text("Recycle Bin")
-                    .mainHeaderStyle()
+            // Left - Navigation Link
+            NavigationLink(destination: ContentView().environment(\.managedObjectContext, viewContext)) {
+                Image(systemName: "chevron.backward")
+                    .foregroundColor(Color.mainHeaderTextColor)
+                    .font(.system(size: 24))
                 
             }
+            .padding(.trailing, 30)
+            .frame(minWidth: 90, maxWidth: 90)  // Explicitly set frame to match first header
             
-            Spacer ()
             
-            HStack {
-                
+            Spacer() // Auto Spacer for the middle content
+            
+            // Center - Text
+            Text("Recycle Bin")
+                .mainHeaderStyle()
+                .frame(maxHeight: .infinity)
+            Spacer() // Auto Spacer for the remaining content
+            
+            // Right - Button
+            
+            Button(action: {
+                isEditMode.toggle()
+            }) {
                 if isEditMode {
+                    Text("Done")
                     
                 } else {
-                    Button(action: {
-                        isEditMode = false // Disable edit mode when the '+' button is pressed.
-                        isPresentingForm = true
-                    }) {
-                        
+                    VStack {
+                        Text("Restore")
+                        Text("Event")
                     }
-                    .foregroundColor(Color.mainHeaderTextColor)
-                    .sheet(isPresented: $isPresentingForm) {
-                        NewDataEntryForm()
-                            .environment(\.managedObjectContext, viewContext)
-                    }
+                    
                 }
-                Button(action: {
-                    isEditMode.toggle()
-                }) {
-                    if isEditMode {
-                        Text("Done")
-                    } else {
-                        VStack {
-                            Text("Restore")
-                            Text("Event")
-                        }
-                    }
-                }
-                .font(.custom("Quicksand-Bold", size: 14))
-                .foregroundColor(Color.mainHeaderTextColor)
-                .frame(minWidth: 80, maxWidth: 80)  // Explicitly set frame
                 
             }
-            .padding()
+            .font(.custom("Quicksand-Bold", size: isEditMode ? 16 : 14)) // Match font size to first header for "Done", and use smaller for "Restore Event"
+            .foregroundColor(Color.mainHeaderTextColor)
+            .frame(minWidth: 90, maxWidth: 90)  // Explicitly set frame to match first header
+            .frame(maxHeight: .infinity)
             
         }
         .frame(height: 60)
     }
+    
+    
 }
-
 
 struct RecycleBinView_Previews: PreviewProvider {
     static var previews: some View {
