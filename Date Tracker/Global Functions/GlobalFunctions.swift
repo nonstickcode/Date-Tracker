@@ -120,6 +120,15 @@ public let dateFormatter: DateFormatter = {
 
 //-----------------------------------------------------------------------------
 
+public let dayDateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "EEEE, MMMM d, yyyy" // EEEE for day of the week, MMMM for full month name, d for day of the month, yyyy for year
+    return formatter
+}()
+
+//-----------------------------------------------------------------------------
+
+
 public let shortDateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "MMMM dd"  // Month and day, without the year

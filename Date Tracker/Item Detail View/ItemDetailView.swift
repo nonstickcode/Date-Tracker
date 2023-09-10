@@ -111,11 +111,19 @@ struct ItemDetailView: View {
     private func detailsFirstLine(for item: Item, on eventDate: Date) -> ButtonContent {
         let name = item.name ?? "Unknown"
         let eventType = item.eventType ?? "Unknown"
+//        let dayOfTheWeek = dayOfWeek(item.eventDate)
         
-        let dateFormatterString = dateFormatter.string(from: eventDate)  // always want to show the year in the date on first line of details view
+        let dateFormatterString = dateFormatter.string(from: eventDate)  // this one shows the year in the date on of details view
+        let dayDateFormatterString = dayDateFormatter.string(from: eventDate)  // for when Birthday we show the day of the week
         
         
-        return ButtonContent (text: "\(name)'s \(eventType) is \(dateFormatterString)", imageView: AnyView(EmptyView()))
+        
+        
+        if eventType == "Birthday" {
+            return ButtonContent (text: "\(name) was born on \(dayDateFormatterString)", imageView: AnyView(EmptyView()))
+        } else {
+            return ButtonContent (text: "\(name)'s \(eventType) is \(dateFormatterString)", imageView: AnyView(EmptyView())) // add more here later
+        }
     }
     
     
@@ -170,4 +178,5 @@ struct ItemDetailView: View {
     
     
 }
+
 

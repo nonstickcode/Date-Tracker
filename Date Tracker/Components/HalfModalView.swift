@@ -20,8 +20,8 @@ struct HalfModalView<Content: View>: View {
                             self.content
                         }
                         .padding(padding)
-                        .shadow(radius: 50)
-                        .background(Color.white)
+                        .background(Color.white.opacity(0.9))
+                        .shadow(color: Color.black.opacity(0.3), radius: 10, x: 5, y: 5)
                         .cornerRadius(cornerRadius)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: geometry.size.width - 2 * padding, maxHeight: .infinity)
