@@ -23,10 +23,10 @@ struct Date_TrackerApp: App {
         let fontFamilyNames = UIFont.familyNames
         
         for familyName in fontFamilyNames {
-            print("------------------------")
+            print("----------------------------------")
             print("Font Family name ---> [\(familyName)]")
             let names = UIFont.fontNames(forFamilyName: familyName)
-            print("Font Names =======================> [\(names)]")
+            print("Font Names =============> [\(names)]")
         }
     }
 
