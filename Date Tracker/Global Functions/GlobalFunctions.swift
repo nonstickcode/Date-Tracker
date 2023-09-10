@@ -57,9 +57,9 @@ public func yearsSinceEvent(_ eventDate: Date?) -> Double {
     
     let exactYears = Double(days) / 365.25
     
-    let exactYearsTruncated = Double(round(1000000 * exactYears)/1000000)  // this limits the double to 6 decimal places, adding another 0 to each increases by 1 place
+    let exactYearsRounded = Double(round(1000 * exactYears)/1000)  // this limits the double to 3 decimal places, adding another 0 to each increases by 1 place
     
-    return exactYearsTruncated
+    return exactYearsRounded
     
 }
 
@@ -68,7 +68,8 @@ public func yearsSinceEvent(_ eventDate: Date?) -> Double {
 public func daysConvertedToYears(_ days: Int) -> Double {
     // Calculate the exact years, accounting for leap years
     let exactYears = Double(days) / 365.25
-    return exactYears
+    let exactYearsRounded = Double(round(1000 * exactYears)/1000)  // this limits the double to 3 decimal places, adding another 0 to each increases by 1 place
+    return exactYearsRounded
 }
 
 //-----------------------------------------------------------------------------
