@@ -18,8 +18,8 @@ struct ItemButtonView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.white.opacity(0.9), lineWidth: 3)
+//            RoundedRectangle(cornerRadius: 16)
+//                .stroke(Color.white.opacity(0.9), lineWidth: 3)
             
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.white.opacity(0.9))
