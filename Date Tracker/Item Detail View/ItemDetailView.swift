@@ -84,6 +84,7 @@ struct ItemDetailView: View {
                     if let timestamp = item.timestamp {
                         Text("Event added to app: \(timestamp, formatter: dateTimeFormatter)")
                             .font(.caption)
+                            .foregroundColor(.black)
                             .padding(5)
                     }
                     
