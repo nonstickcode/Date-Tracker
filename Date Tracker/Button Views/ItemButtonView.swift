@@ -23,7 +23,7 @@ struct ItemButtonView: View {
             
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.white.opacity(0.9))
-                .shadow(color: Color.black.opacity(0.5), radius: 10, x: 5, y: 5)
+                .shadow(color: Color.black.opacity(0.3), radius: 10, x: 5, y: 5)
             
             VStack(spacing: 3) {
                 if let item = item, let eventDate = item.eventDate {
