@@ -17,39 +17,42 @@ struct ItemButtonView: View {
     }
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 8)
-            .fill(Color.white)
-            .frame(height: 60)
-            .overlay(
-                VStack(spacing: 3) {
-                    if let item = item, let eventDate = item.eventDate {
-                        let topLineContent = buttonContentTopLine(for: item, on: eventDate)
-                        let bottomLineContent = buttonContentBottomLine(for: item, on: eventDate)
-                        
-                        
-                        HStack {
-                            Text(topLineContent.text)
-                                .boldButtonTextStyle()
-                            topLineContent.imageView
-                        }
-                        
-                        HStack {
-                            Text(bottomLineContent.text)
-                                .modifier(MainButtonTextStyle())
-                            bottomLineContent.imageView
-                        }
-                        
-                        
-                        
-                    } else {
-                        noDataView
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.white.opacity(0.9), lineWidth: 3)
+            
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.9))
+                .shadow(color: Color.black.opacity(0.5), radius: 10, x: 5, y: 5)
+            
+            VStack(spacing: 3) {
+                if let item = item, let eventDate = item.eventDate {
+                    let topLineContent = buttonContentTopLine(for: item, on: eventDate)
+                    let bottomLineContent = buttonContentBottomLine(for: item, on: eventDate)
+                    
+                    HStack {
+                        Text(topLineContent.text)
+                            .boldButtonTextStyle()
+                        topLineContent.imageView
                     }
+                    
+                    HStack {
+                        Text(bottomLineContent.text)
+                            .modifier(MainButtonTextStyle())
+                        bottomLineContent.imageView
+                    }
+                    
+                } else {
+                    noDataView
                 }
-            )
-            .onAppear(perform: checkForData)
-            .padding(.top, 8)
-            .padding([.leading, .trailing], 16)
+            }
+        }
+        .frame(height: 60)
+        .onAppear(perform: checkForData)
+        .padding(.top, 8)
+        .padding([.leading, .trailing], 16)
     }
+
     
     private func checkForData() {
         if item == nil {
@@ -113,9 +116,3 @@ struct ItemButtonView: View {
         }
     }
 }
-
-
-
-
-
-    

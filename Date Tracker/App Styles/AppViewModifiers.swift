@@ -14,7 +14,7 @@ extension View {
     func mainGradientBackground() -> some View {
         self.background(
             LinearGradient(
-                gradient: Gradient(colors: [Color.green, Color.accentColor, Color.green]),
+                gradient: Gradient(colors: [Color.green, Color.accentColor]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
