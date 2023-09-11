@@ -237,6 +237,7 @@ struct ContentView: View {
     
     private func deleteItem(item: Item) {
         prepareForDeletion(item: item, with: viewContext, showingAlert: &showingDeleteAlert, itemToDelete: &itemToDelete)
+        updateNoDataPresentInRecycleBin()
         
     }
     
