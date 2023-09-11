@@ -19,7 +19,7 @@ import SwiftUI
 struct MainButtonTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("Quicksand-Regular", size: 16))
+            .font(.custom("Quicksand-Regular", size: 14))
             .foregroundColor(.black)
             .padding(.leading, 10)
             .padding(.trailing, 10)
@@ -38,7 +38,7 @@ extension View {
 struct BoldButtonTextStyle: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(.custom("Quicksand-Bold", size: 16))
+            .font(.custom("Quicksand-Bold", size: 14))
             .foregroundColor(.black)
             .padding(.leading, 10)
             .padding(.trailing, 10)
