@@ -48,7 +48,7 @@ struct CalendarIconView: View {
                 .frame(width: 30, height: 30)
                 .overlay(
                     Rectangle()
-                        .stroke(Color.gray, lineWidth: 1)
+                        .stroke(Color.gray, lineWidth: 0.5)
                 )
             Rectangle()
                 .foregroundColor(backgroundColor)
