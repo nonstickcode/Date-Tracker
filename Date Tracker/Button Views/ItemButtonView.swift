@@ -36,13 +36,13 @@ struct ItemButtonView: View {
                 .fill(Color.white.opacity(0.9))
                 .shadow(color: Color.black.opacity(0.3), radius: 10, x: 5, y: 5)
             
-            HStack {
+            HStack(alignment: .center) {
                 
                 if let item = item, let eventDate = item.eventDate {
                     let (monthString, dayString) = extractMonthDay(from: eventDate)
                     
                     CalendarIconView(month: monthString, day: dayString)
-                        .padding(.leading, 15)
+                        .padding(.leading, 20)
                         .frame(width: 40)
                         .shadow(color: .gray.opacity(0.5), radius: 2, x: 2, y: 2)
                     
@@ -76,11 +76,11 @@ struct ItemButtonView: View {
                 Spacer()
                 
                 Spacer()
-                    .padding(.trailing, 15)
+                    .padding(.trailing, 20)
                     .frame(width: 40)
                 
             }
-            
+            .padding([.top, .bottom], 12)
         }
         
         

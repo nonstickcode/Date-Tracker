@@ -24,8 +24,8 @@ struct CalendarIconView: View {
             
             // Top bar (red), taking up 40% of the height
             Rectangle()
-                .foregroundColor(.red)
-                .frame(width: 30, height: 12) // 40% of 50 is 20
+                .foregroundColor(.pink.opacity(0.9))
+                .frame(width: 30, height: 12)
                 .overlay(
                     Text(month)
                         .foregroundColor(.white)
