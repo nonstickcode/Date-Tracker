@@ -52,7 +52,7 @@ struct RecycleBinView: View {
                 
                 VStack {
                     headerView
-                    ScrollView {
+                    ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack {
                             Spacer()
                             ForEach(sortedItems, id: \.self) { item in

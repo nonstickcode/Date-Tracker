@@ -29,8 +29,6 @@ struct ItemButtonView: View {
     
     var body: some View {
         ZStack {
-            //            RoundedRectangle(cornerRadius: 16)
-            //                .stroke(Color.white.opacity(0.9), lineWidth: 3)
             
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.white.opacity(0.9))
@@ -140,16 +138,24 @@ struct ItemButtonView: View {
         
         if daysUntil == 365 && (eventType == "Birthday" || eventType == "Anniversary") {
             return ButtonContent (text: "\(name)'s \(eventType) was yesterday!", imageView: AnyView(Image(systemName: "figure.wave.circle").foregroundColor(.brown)))
-        } else if daysUntil == 365 && (eventType == "Holiday" || eventType == "Vacation") {
+        } else if daysUntil == 365 && eventType == "Vacation" {
             return ButtonContent (text: "\(name)'s \(eventType) was yesterday!", imageView: AnyView(Image(systemName: "figure.wave.circle.fill").foregroundColor(.purple)))
+        } else if daysUntil == 365 && eventType == "Holiday" {
+            return ButtonContent (text: "\(name) was yesterday!", imageView: AnyView(Image(systemName: "figure.wave.circle.fill").foregroundColor(.purple)))
         } else if daysUntil == 0 && (eventType == "Birthday" || eventType == "Anniversary") {
             return ButtonContent (text: "\(name)'s \(eventType) is Today!", imageView: AnyView(Image(systemName: "party.popper.fill").foregroundColor(.purple)))
-        } else if daysUntil == 0 && (eventType == "Holiday" || eventType == "Vacation") {
+        } else if daysUntil == 0 && eventType == "Vacation" {
             return ButtonContent (text: "\(name)'s \(eventType) is Today!", imageView: AnyView(Image(systemName: "calendar.badge.exclamationmark").foregroundColor(.purple)))
+        } else if daysUntil == 0 && eventType == "Holiday" {
+            return ButtonContent (text: "\(name) is Today!", imageView: AnyView(Image(systemName: "calendar.badge.exclamationmark").foregroundColor(.purple)))
         } else if daysUntil == 1 && (eventType == "Birthday" || eventType == "Anniversary") {
             return ButtonContent (text: "\(name)'s \(eventType) is Tomorrow!", imageView: AnyView(Image(systemName: "party.popper").foregroundColor(.purple)))
-        } else if daysUntil == 1 && (eventType == "Holiday" || eventType == "Vacation") {
+        } else if daysUntil == 1 && eventType == "Vacation" {
             return ButtonContent (text: "\(name)'s \(eventType) is Tomorrow!", imageView: AnyView(Image(systemName: "calendar.badge.clock").foregroundColor(.purple)))
+        } else if daysUntil == 1 && eventType == "Holiday" {
+            return ButtonContent (text: "\(name) is Tomorrow!", imageView: AnyView(Image(systemName: "calendar.badge.clock").foregroundColor(.purple)))
+        } else if eventType == "Holiday" {
+            return ButtonContent (text: "\(name) is in \(daysUntil) days", imageView: AnyView(EmptyView()))
         } else {
             return ButtonContent (text: "\(name)'s \(eventType) is in \(daysUntil) days", imageView: AnyView(EmptyView()))
         }

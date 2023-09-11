@@ -65,7 +65,7 @@ struct ContentView: View {
                 
                 VStack {
                     headerView
-                    ScrollView {
+                    ScrollView(.vertical, showsIndicators: false) { // i want to hide the scroll bars
                         LazyVStack {
                             Spacer()
                             ForEach(sortedItems, id: \.self) { item in
