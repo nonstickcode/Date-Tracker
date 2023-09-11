@@ -45,6 +45,8 @@ struct ItemButtonView: View {
                         .padding(.leading, 20)
                         .frame(width: 40)
                         .shadow(color: .gray.opacity(0.5), radius: 2, x: 2, y: 2)
+                        .padding([.top, .bottom], 15)
+//                        .border(Color.black, width: 2)
                     
                 }
                 
@@ -60,6 +62,8 @@ struct ItemButtonView: View {
                         HStack {
                             Text(topLineContent.text)
                                 .boldButtonTextStyle()
+                                .lineLimit(1) // Limit to 1 line
+                                .truncationMode(.tail) // Truncate with an ellipsis at the end
                             topLineContent.imageView
                         }
                         
@@ -71,6 +75,7 @@ struct ItemButtonView: View {
                         
                     } else {
                         noDataView
+                            
                     }
                 }
                 Spacer()
@@ -80,7 +85,7 @@ struct ItemButtonView: View {
                     .frame(width: 40)
                 
             }
-            .padding([.top, .bottom], 12)
+           
         }
         
         
@@ -102,20 +107,30 @@ struct ItemButtonView: View {
     
     private var noDataView: some View {
         VStack {
-            Spacer()
+            Spacer ()
             Text("No data available.")
                 .emptyButtonBoldTextStyle()
+                
+            Spacer ()
             HStack {
+                Spacer ()
                 Text("Tap the ")
                     .emptyButtonTextStyle()
+                    .padding(.trailing, -15)
                 Image(systemName: "plus.app")
+                    .padding(0)
                     .bold()
-                    .padding(-6)
+                    
                 Text(" to add a new event.")
                     .emptyButtonTextStyle()
+                    .padding(.leading, -15)
+                Spacer()
             }
-            Spacer()
+            Spacer ()
+            
         }
+        
+        
     }
     
     private func buttonContentTopLine(for item: Item, on eventDate: Date) -> ButtonContent {

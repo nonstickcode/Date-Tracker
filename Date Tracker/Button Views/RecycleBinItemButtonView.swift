@@ -81,7 +81,7 @@ struct RecycleBinItemButtonView: View {
                 Text("No data available")
                     .emptyButtonBoldTextStyle()
                 Spacer()
-                Text("Recycle Bin Empty")
+                Text("Recycle Bin is Empty")
                         .emptyButtonTextStyle()
                     
                 
