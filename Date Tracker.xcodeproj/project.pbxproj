@@ -21,10 +21,10 @@
 		2B91B1CB2AABBB9700D846B4 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1CA2AABBB9700D846B4 /* AppConfiguration.swift */; };
 		2B91B1D62AABC41F00D846B4 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1D42AABC41F00D846B4 /* Item+CoreDataClass.swift */; };
 		2B91B1D72AABC41F00D846B4 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1D52AABC41F00D846B4 /* Item+CoreDataProperties.swift */; };
-		2B91B1D92AABCED900D846B4 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B91B1D82AABCED900D846B4 /* ButtonView.swift */; };
 		2B9879A52AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */; };
 		2BA8DE402A9AEB8D003BBABF /* NewDataEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */; };
 		2BA9F3842AA933E6008EA520 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA9F3832AA933E6008EA520 /* Roboto-Italic.ttf */; };
+		2BDE73B62AAEB8BA001ACEB2 /* CalanderIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE73B52AAEB8BA001ACEB2 /* CalanderIconView.swift */; };
 		2BE1B86C2A9A7A3800CD2929 /* Date_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */; };
 		2BE1B86E2A9A7A3800CD2929 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */; };
 		2BE1B8702A9A7A3900CD2929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE1B86F2A9A7A3900CD2929 /* Assets.xcassets */; };
@@ -56,11 +56,11 @@
 		2B91B1CA2AABBB9700D846B4 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		2B91B1D42AABC41F00D846B4 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2B91B1D52AABC41F00D846B4 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		2B91B1D82AABCED900D846B4 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		2B9879A42AA6603000DB74FF /* RobotoSlab-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		2B9879A62AA6603F00DB74FF /* Date-Tracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Date-Tracker-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2BA8DE3F2A9AEB8D003BBABF /* NewDataEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataEntryForm.swift; sourceTree = "<group>"; };
 		2BA9F3832AA933E6008EA520 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		2BDE73B52AAEB8BA001ACEB2 /* CalanderIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalanderIconView.swift; sourceTree = "<group>"; };
 		2BE1B8682A9A7A3800CD2929 /* Date Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Date Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE1B86B2A9A7A3800CD2929 /* Date_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date_TrackerApp.swift; sourceTree = "<group>"; };
 		2BE1B86D2A9A7A3800CD2929 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				2BF48F912AA5C47C004824C3 /* HalfModalView.swift */,
-				2B91B1D82AABCED900D846B4 /* ButtonView.swift */,
+				2BDE73B52AAEB8BA001ACEB2 /* CalanderIconView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -323,7 +323,6 @@
 			files = (
 				2BE1B8752A9A7A3900CD2929 /* Persistence.swift in Sources */,
 				2BF48F922AA5C47C004824C3 /* HalfModalView.swift in Sources */,
-				2B91B1D92AABCED900D846B4 /* ButtonView.swift in Sources */,
 				2BF48F8F2AA5B94E004824C3 /* ItemDetailView.swift in Sources */,
 				2B049D282AAA7B39009E7499 /* RecycleBinView.swift in Sources */,
 				2B91B1D72AABC41F00D846B4 /* Item+CoreDataProperties.swift in Sources */,
@@ -337,6 +336,7 @@
 				2B049D152AAA538B009E7499 /* DeleteManager.swift in Sources */,
 				2B91B1D62AABC41F00D846B4 /* Item+CoreDataClass.swift in Sources */,
 				2B64122A2AA5788500CC7506 /* ItemButtonView.swift in Sources */,
+				2BDE73B62AAEB8BA001ACEB2 /* CalanderIconView.swift in Sources */,
 				2B91B1CB2AABBB9700D846B4 /* AppConfiguration.swift in Sources */,
 				2B049D2A2AAA8670009E7499 /* RecycleBinItemButtonView.swift in Sources */,
 				2BE1B86C2A9A7A3800CD2929 /* Date_TrackerApp.swift in Sources */,

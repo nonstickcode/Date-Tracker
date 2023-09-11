@@ -16,51 +16,88 @@ struct ItemButtonView: View {
         let imageView: AnyView
     }
     
+    private func extractMonthDay(from eventDate: Date) -> (String, String) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM"
+        let monthString = formatter.string(from: eventDate).uppercased()
+        
+        formatter.dateFormat = "dd"
+        let dayString = formatter.string(from: eventDate)
+        
+        return (monthString, dayString)
+    }
+    
     var body: some View {
         ZStack {
-//            RoundedRectangle(cornerRadius: 16)
-//                .stroke(Color.white.opacity(0.9), lineWidth: 3)
+            //            RoundedRectangle(cornerRadius: 16)
+            //                .stroke(Color.white.opacity(0.9), lineWidth: 3)
             
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.white.opacity(0.9))
                 .shadow(color: Color.black.opacity(0.3), radius: 10, x: 5, y: 5)
             
-            VStack(spacing: 3) {
+            HStack {
+                
                 if let item = item, let eventDate = item.eventDate {
-                    let topLineContent = buttonContentTopLine(for: item, on: eventDate)
-                    let bottomLineContent = buttonContentBottomLine(for: item, on: eventDate)
+                    let (monthString, dayString) = extractMonthDay(from: eventDate)
                     
-                    HStack {
-                        Text(topLineContent.text)
-                            .boldButtonTextStyle()
-                        topLineContent.imageView
-                    }
+                    CalendarIconView(month: monthString, day: dayString)
+                        .padding(.leading, 15)
+                        .frame(width: 40)
                     
-                    HStack {
-                        Text(bottomLineContent.text)
-                            .modifier(MainButtonTextStyle())
-                        bottomLineContent.imageView
-                    }
-                    
-                } else {
-                    noDataView
                 }
+                
+                
+                
+                Spacer()
+                
+                VStack(spacing: 3) {
+                    if let item = item, let eventDate = item.eventDate {
+                        let topLineContent = buttonContentTopLine(for: item, on: eventDate)
+                        let bottomLineContent = buttonContentBottomLine(for: item, on: eventDate)
+                        
+                        HStack {
+                            Text(topLineContent.text)
+                                .boldButtonTextStyle()
+                            topLineContent.imageView
+                        }
+                        
+                        HStack {
+                            Text(bottomLineContent.text)
+                                .modifier(MainButtonTextStyle())
+                            bottomLineContent.imageView
+                        }
+                        
+                    } else {
+                        noDataView
+                    }
+                }
+                Spacer()
+                
+                Spacer()
+                    .padding(.trailing, 15)
+                    .frame(width: 40)
+                
             }
+            
         }
+        
+        
+        
         .frame(height: 60)
         .onAppear(perform: checkForData)
         .padding(.top, 8)
         .padding([.leading, .trailing], 16)
     }
-
+    
     
     private func checkForData() {
         if item == nil {
             noDataPresent = true
         }
     }
-   
-
+    
+    
     
     private var noDataView: some View {
         VStack {

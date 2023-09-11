@@ -14,6 +14,12 @@ struct ContentView: View {
     @State private var showingRecycleBin = false
     @State private var showingDeleteAlert = false
     @State private var itemToDelete: Item?
+    @State private var isPresentingForm = false
+    @State private var selectedItem: Item?
+    @State private var isEditMode: Bool = false
+    @State private var showOverlay: Bool = false
+    @State private var noDataPresent: Bool = false
+    @State private var noDataPresentInRecycleBin = false
     
     @FetchRequest(
         entity: Item.entity(),
@@ -50,19 +56,6 @@ struct ContentView: View {
     }
     
     // Sort function above ----------------------------------------------------------------
-    
-    @State private var isPresentingForm = false
-    @State private var selectedItem: Item?
-    @State private var isEditMode: Bool = false
-    
-    
-    @State private var showOverlay: Bool = false
-    
-    
-    @State private var noDataPresent: Bool = false // State variable
-    
-    @State private var noDataPresentInRecycleBin = false
-    
     
     
     var body: some View {
@@ -189,7 +182,7 @@ struct ContentView: View {
     
     private var headerView: some View {
         HStack {
-            Text("Date Tracker")
+            Text("Events")
                 .mainHeaderStyle()
             
             Spacer()
