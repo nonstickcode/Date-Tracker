@@ -44,6 +44,7 @@ struct ItemButtonView: View {
                     CalendarIconView(month: monthString, day: dayString)
                         .padding(.leading, 15)
                         .frame(width: 40)
+                        .shadow(color: .gray.opacity(0.5), radius: 2, x: 2, y: 2)
                     
                 }
                 
