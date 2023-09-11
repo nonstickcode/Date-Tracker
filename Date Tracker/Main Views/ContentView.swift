@@ -62,7 +62,7 @@ struct ContentView: View {
     @State private var noDataPresent: Bool = false // State variable
     
     @State private var noDataPresentInRecycleBin = false
-
+    
     
     
     var body: some View {
@@ -87,7 +87,7 @@ struct ContentView: View {
                                     .contextMenu {
                                         
                                         Button(action: {
-                                            // add edit action here
+                                            // add share action here
                                         }) {
                                             Label("Share", systemImage: "square.and.arrow.up")
                                         }
@@ -97,17 +97,17 @@ struct ContentView: View {
                                             Label("Edit", systemImage: "pencil")
                                         }
                                         Button(action: {
-                                            // add edit action here
+                                            // add setting action here
                                         }) {
                                             Label("Settings", systemImage: "gear")
                                         }
                                         Button(action: {
-                                            // add edit action here
+                                            // add some action here
                                         }) {
                                             Label("Coming Soon", systemImage: "questionmark.folder")
                                         }
                                         Button(action: {
-                                            // add edit action here
+                                            // add some action here
                                         }) {
                                             Label("Coming Soon", systemImage: "questionmark.folder")
                                         }
@@ -117,7 +117,7 @@ struct ContentView: View {
                                             Label("Delete", systemImage: "trash")
                                                 .foregroundColor(.red)
                                         }
-                                        // long press menu ends here ----------------------------------------------
+                                    // long press menu ends here ----------------------------------------------
                                         
                                     }
                                     if isEditMode {
@@ -125,7 +125,8 @@ struct ContentView: View {
                                             deleteItem(item: item)
                                         }) {
                                             Image(systemName: "delete.backward")
-                                                .font(.system(size: 24))
+                                                .font(.system(size: 36))
+                                                .shadow(color: .black.opacity(0.5), radius: 2, x: 2, y: 2)
                                         }
                                         .foregroundColor(.mainHeaderTextColor)
                                         .padding(.trailing, 20)
@@ -171,9 +172,9 @@ struct ContentView: View {
             }
             .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: softDeleteConfirmed, context: viewContext)
             .onAppear {
-                            updateNoDataPresentInRecycleBin()
-                            showOverlay = false
-                        }
+                updateNoDataPresentInRecycleBin()
+                showOverlay = false
+            }
             
         }
         .navigationBarBackButtonHidden(true)
@@ -190,7 +191,7 @@ struct ContentView: View {
         HStack {
             Text("Date Tracker")
                 .mainHeaderStyle()
-                
+            
             Spacer()
             HStack {
                 
@@ -229,7 +230,7 @@ struct ContentView: View {
         }
         .padding([.leading, .trailing], 16)
         .frame(height: 60)
-
+        
     }
     
     
@@ -240,16 +241,16 @@ struct ContentView: View {
     }
     
     private func updateNoDataPresentInRecycleBin() {
-            let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "taggedForDelete == %@", NSNumber(value: true))
-            
-            do {
-                let recycleBinItems = try viewContext.fetch(fetchRequest)
-                noDataPresentInRecycleBin = recycleBinItems.isEmpty
-            } catch {
-                print("Failed to fetch items from the recycle bin: \(error)")
-            }
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "taggedForDelete == %@", NSNumber(value: true))
+        
+        do {
+            let recycleBinItems = try viewContext.fetch(fetchRequest)
+            noDataPresentInRecycleBin = recycleBinItems.isEmpty
+        } catch {
+            print("Failed to fetch items from the recycle bin: \(error)")
         }
+    }
     
     
     

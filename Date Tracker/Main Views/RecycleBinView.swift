@@ -42,7 +42,7 @@ struct RecycleBinView: View {
     @State private var showOverlay: Bool = false
     
     
-    @State private var noDataPresentInRecycleBin: Bool = false // State variable
+    @State private var noDataPresentInRecycleBin: Bool = false
     
     
     var body: some View {
@@ -70,12 +70,12 @@ struct RecycleBinView: View {
                                     .contextMenu {
                                         
                                         Button(action: {
-                                            restoreItem(item: item, with: self.viewContext)  // added restoreItem here
+                                            restoreItem(item: item, with: self.viewContext)
                                         }) {
                                             Label("Restore Event", systemImage: "arrowshape.turn.up.backward.badge.clock")
                                         }
                                         
-                                        // long press menu ends here ----------------------------------------------
+                                    // long press menu ends here ----------------------------------------------
                                         
                                     }
                                     if isEditMode {
@@ -83,7 +83,8 @@ struct RecycleBinView: View {
                                             restoreItem(item: item, with: self.viewContext)
                                         }) {
                                             Image(systemName: "arrowshape.turn.up.backward.badge.clock")
-                                                .font(.system(size: 24))
+                                                .font(.system(size: 36))
+                                                .shadow(color: .black.opacity(0.5), radius: 2, x: 2, y: 2)
                                         }
                                         .foregroundColor(.mainHeaderTextColor)
                                         .padding(.trailing, 20)
