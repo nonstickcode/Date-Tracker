@@ -28,11 +28,14 @@ struct ItemDetailView: View {
                     
                     // Line 1 of Text in view --------------------------------------------------------
                     
+                    
                     HStack {
                         Text(firstLine.text)
                             .detailViewRegularStyle()
                         firstLine.imageView
+                            
                     }
+                    .padding(0)
                     
                     // Line 2 of Text in view --------------------------------------------------------
                     
@@ -40,7 +43,9 @@ struct ItemDetailView: View {
                         Text(secondLine.text)
                             .detailViewBoldStyle()
                         secondLine.imageView
+                            
                     }
+                    .padding(0)
                     
                     // Line 3 of Text in view --------------------------------------------------------
                     
@@ -49,6 +54,7 @@ struct ItemDetailView: View {
                             .detailViewRegularStyle()
                         thirdLine.imageView
                     }
+                    .padding(0)
                     
                     // Line 4 of Text in view --------------------------------------------------------
                     
@@ -56,7 +62,9 @@ struct ItemDetailView: View {
                         Text(fourthLine.text)
                             .detailViewRegularStyle()
                         fourthLine.imageView
+                            
                     }
+                    .padding(0)
                     
                     // Line 5 of Text in view ------------------------optional--------------------------------
                     
@@ -65,7 +73,7 @@ struct ItemDetailView: View {
                             .bold()
                             .font(.caption)
                             .foregroundColor(.red)
-                            .padding(5)
+                            .padding(0)
                     }
 
                     // Line 6 of Text in view -------------------------optional-------------------------------
@@ -75,7 +83,7 @@ struct ItemDetailView: View {
                             .bold()
                             .font(.caption)
                             .foregroundColor(.red)
-                            .padding(5)
+                            .padding(0)
                     }
 
                     
@@ -85,15 +93,19 @@ struct ItemDetailView: View {
                         Text("Event added to app: \(timestamp, formatter: dateTimeFormatter)")
                             .font(.caption)
                             .foregroundColor(.black)
-                            .padding(5)
+                            .padding(0)
                     }
+                    
+                    // Line 8 of Text in view --------------------------------------------------------
+                    
+                    
                     
                     // Line 8 of Text in view --------------------------------------------------------
                     
                     if let id = item.id {
                         Text("ID: \(id)")
                             .font(.caption)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.teal)
                     }
                                         
                     // End of Detailed view --------------------------------------------------------
@@ -112,18 +124,19 @@ struct ItemDetailView: View {
     private func detailsFirstLine(for item: Item, on eventDate: Date) -> ButtonContent {
         let name = item.name ?? "Unknown"
         let eventType = item.eventType ?? "Unknown"
-//        let dayOfTheWeek = dayOfWeek(item.eventDate)
-        
         let dateFormatterString = dateFormatter.string(from: eventDate)  // this one shows the year in the date on of details view
         let dayDateFormatterString = dayDateFormatter.string(from: eventDate)  // for when Birthday we show the day of the week
+        let shortDateFormatterString = shortDateFormatter.string(from: eventDate)
         
         
         
         
         if eventType == "Birthday" {
             return ButtonContent (text: "\(name) was born on \(dayDateFormatterString)", imageView: AnyView(EmptyView()))
+        } else if eventType == "Holiday" {
+            return ButtonContent (text: "\(name) is \(shortDateFormatterString)", imageView: AnyView(EmptyView()))
         } else {
-            return ButtonContent (text: "\(name)'s \(eventType) is \(dateFormatterString)", imageView: AnyView(EmptyView())) // add more here later
+            return ButtonContent (text: "\(name)'s \(eventType) is \(dateFormatterString)", imageView: AnyView(EmptyView()))
         }
     }
     

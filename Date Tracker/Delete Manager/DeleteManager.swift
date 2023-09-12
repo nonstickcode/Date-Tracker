@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 
-let daysUntilHardDelete: Double = 30 // <-- Set your value here
+let daysUntilHardDelete: Double = 30 // <-- Set your value here for hard delete delay
 
 
 

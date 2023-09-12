@@ -5,6 +5,17 @@ struct ButtonContent {
     let imageView: AnyView
 }
 
+public func extractMonthDay(from eventDate: Date) -> (String, String) {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMM"
+    let monthString = formatter.string(from: eventDate).uppercased()
+    
+    formatter.dateFormat = "dd"
+    let dayString = formatter.string(from: eventDate)
+    
+    return (monthString, dayString)
+}
+
 
 struct ItemButtonView: View {
     var item: Item?
@@ -16,16 +27,7 @@ struct ItemButtonView: View {
         let imageView: AnyView
     }
     
-    private func extractMonthDay(from eventDate: Date) -> (String, String) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM"
-        let monthString = formatter.string(from: eventDate).uppercased()
-        
-        formatter.dateFormat = "dd"
-        let dayString = formatter.string(from: eventDate)
-        
-        return (monthString, dayString)
-    }
+    
     
     var body: some View {
         ZStack {
