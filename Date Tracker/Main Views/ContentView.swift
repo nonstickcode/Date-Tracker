@@ -144,7 +144,8 @@ struct ContentView: View {
                                     ItemButtonView(item: nil, noDataPresent: $noDataPresent)
                                 }
                             }
-                            .padding(.bottom, 8)
+                            .padding(.bottom, 12)
+                            .padding(.top, -20)  // not sure what this is fighting but it got large gap when shrinking header feature added
                         }
                         .onPreferenceChange(ScrollOffsetKey.self) { offset in
                             self.scrollOffset = offset
@@ -201,6 +202,8 @@ struct ContentView: View {
                 }
             }
             .coordinateSpace(name: "scrollView")  // Named coordinate space to measure the scroll offset
+//            .frame(height: 790)
+
             
         }
         .navigationBarBackButtonHidden(true)
@@ -259,14 +262,14 @@ struct ContentView: View {
                     .frame(minWidth: 50, maxWidth: 50, minHeight: 40, maxHeight: 40)  // Explicitly set frame
                 }
             }
-                .padding([.leading, .trailing], 16)
+                .padding([.leading, .trailing], 8)
                 .frame(height: 60 * scale)  // Scale the header frame
+                .padding(.bottom, 0)
                 
             
         )
         .opacity(Double(opacity))  // Adjust the opacity of the header text
-        
-    }
+        }
     
     
     

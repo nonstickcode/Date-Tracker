@@ -177,12 +177,12 @@ struct RecycleBinView: View {
                     }
                 }
             }
-            .font(.custom("Quicksand-Bold", size: 14))
+            .font(.custom("Quicksand-Bold", size: 12))
             .foregroundColor(Color.mainHeaderTextColor)
             .frame(width: 80) // Explicitly set frame width to match first header
         }
         .frame(height: 60)
-        .padding([.leading, .trailing], 16)
+        .padding([.leading, .trailing], 8)
     }
 
     
