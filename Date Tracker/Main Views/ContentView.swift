@@ -61,6 +61,14 @@ struct ContentView: View {
     
     
     var body: some View {
+        
+        
+        let footerScale = max(min(1.0 + scrollOffset / 300, 1.0), 0.0)  // Adjust scale
+        let footerOpacity = max(min(1.0 + scrollOffset / 300, 1.0), 0.0)  // Adjust opacity
+        
+        
+        
+        
         NavigationView {
             GeometryReader { fullView in  // Capture the full size of the ContentView
                 ZStack {
@@ -151,12 +159,17 @@ struct ContentView: View {
                         }
                         .mainGradientBackground()
                         
+                        
                         Text("Select an event")
                             .mainFooterTextStyle()
                             .padding(.top, 12)
-                            .frame(height: 25)
+                            .frame(height: 25 * footerScale)  // Scale the footer
+                            .opacity(Double(footerOpacity))  // Adjust the opacity of the footer text
+                            
                     }
+//                    .background(Color.mainHeaderBackground.opacity(Double(footerOpacity)).edgesIgnoringSafeArea(.all))
                     .background(Color.mainHeaderBackground.edgesIgnoringSafeArea(.all))
+                    
                     
                     if showOverlay, let selectedItem = selectedItem {
                         HalfModalView {
@@ -248,9 +261,11 @@ struct ContentView: View {
             }
                 .padding([.leading, .trailing], 16)
                 .frame(height: 60 * scale)  // Scale the header frame
+                
             
         )
-        .opacity(Double(opacity))  // Adjust the opacity
+        .opacity(Double(opacity))  // Adjust the opacity of the header text
+        
     }
     
     
