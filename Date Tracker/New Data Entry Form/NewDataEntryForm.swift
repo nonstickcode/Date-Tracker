@@ -16,8 +16,8 @@ struct NewDataEntryForm: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State private var moveDown1 = false  // For text animation
-    @State private var moveDown2 = false  // For chevron icon animation
+//    @State private var moveDown1 = false  // For text animation
+//    @State private var moveDown2 = false  // For chevron icon animation
     
     @State private var showAlert = false
     
@@ -58,29 +58,29 @@ struct NewDataEntryForm: View {
                 .padding(.bottom, 4)
                 .padding(.top, 8)
             
-            Text("Swipe down to dismiss")
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .padding(.top, 4)
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            // Detect swipe down gesture
-                            if value.translation.height > 100 {
-                                presentationMode.wrappedValue.dismiss()
-                            }
-                        }
-                )
+//            Text("Swipe down to dismiss")
+//                .font(.caption)
+//                .foregroundColor(.secondary)
+//                .padding(.top, 4)
+//                .gesture(
+//                    DragGesture()
+//                        .onChanged { value in
+//                            // Detect swipe down gesture
+//                            if value.translation.height > 100 {
+//                                presentationMode.wrappedValue.dismiss()
+//                            }
+//                        }
+//                )
      
             
-            Image(systemName: "chevron.compact.down") // add .scaleEffect(.bounce) when ios 17 drops
-                .padding(4)
-                .font(.system(size: 30))
-                .shadow(color: .gray.opacity(0.8), radius: 2, x: 2, y: 2)
-                .offset(y: moveDown2 ? 5 : -5)
-                .onAppear {
-                    startMoving2()
-                }
+//            Image(systemName: "chevron.compact.down") // add .scaleEffect(.bounce) when ios 17 drops
+//                .padding(4)
+//                .font(.system(size: 30))
+//                .shadow(color: .gray.opacity(0.8), radius: 2, x: 2, y: 2)
+//                .offset(y: moveDown2 ? 5 : -5)
+//                .onAppear {
+//                    startMoving2()
+//                }
             
             Form {
                 Section(header: Text("Name of Person or Event").formRegularStyle()) {
@@ -92,10 +92,10 @@ struct NewDataEntryForm: View {
 
                 }
                 
-                Section(header: Text("Notifications for this event").formRegularStyle()) {
-                    Toggle("Notifications", isOn: $eventNotifications)
-                        
-                }
+//                Section(header: Text("Notifications for this event").formRegularStyle()) {
+//                    Toggle("Notifications", isOn: $eventNotifications)
+//                        
+//                }
                 
                 //                Section(header: Text("Preferred pronoun for person or event").formRegularStyle()) {
                 //                    TextField("enter pronoun here", text: $newPreferredPronoun)
@@ -103,42 +103,17 @@ struct NewDataEntryForm: View {
                 //                }
                 
                 Section(header: Text("Event Date, upcoming or past").formRegularStyle()) {
-                    VStack {
-                        Picker("Month", selection: $selectedMonth) {
-                            ForEach(months, id: \.self) { month in
-                                Text(month).tag(month)
-                            }
-                        }
-                        
-                        
-                        Picker("Day", selection: $selectedDay) {
-                            ForEach(1..<32) { day in
-                                Text("\(day)").tag(day)
-                            }
-                        }
-                        
-                        
-                        Picker("Year", selection: $selectedYear) {
-                            ForEach(1900..<2123) { year in
-                                Text(String(format: "%ld", locale: Locale(identifier: "en_US_POSIX"), year)).tag(year)
-                                
-                            }
-                        }
-                        
-                        
-                    }
-                    .onAppear {
-                        // Initialize the custom picker with the existing date
-                        let components = Calendar.current.dateComponents([.day, .month, .year], from: newEventDate)
-                        selectedMonth = months[(components.month ?? 1) - 1]
-                        selectedDay = components.day ?? 1
-                        selectedYear = components.year ?? 2023
-                    }
-                    .task {
-                        newEventDate = customDate
-                    }
+                    DatePicker("Select date", selection: $newEventDate, displayedComponents: [.date])
+                        .datePickerStyle(GraphicalDatePickerStyle())
+//                        .onChange(of: newEventDate) { oldValue, newValue in
+//                            let calendar = Calendar.current
+//                            selectedDay = calendar.component(.day, from: newValue)
+//                            selectedMonth = months[calendar.component(.month, from: newValue) - 1]
+//                            selectedYear = calendar.component(.year, from: newValue)
+//                        }
 
                 }
+
                 
                 
                 
@@ -241,16 +216,16 @@ struct NewDataEntryForm: View {
     
     
     
-    private func startMoving1() {
-        withAnimation(Animation.linear(duration: 2.0).repeatForever(autoreverses: false)) {  // For text animation
-            moveDown1.toggle()
-        }
-    }
-    private func startMoving2() {
-        withAnimation(Animation.linear(duration: 2.0).repeatForever(autoreverses: false)) {  // For chevron icon animation
-            moveDown2.toggle()
-        }
-    }
+//    private func startMoving1() {
+//        withAnimation(Animation.linear(duration: 2.0).repeatForever(autoreverses: false)) {  // For text animation
+//            moveDown1.toggle()
+//        }
+//    }
+//    private func startMoving2() {
+//        withAnimation(Animation.linear(duration: 2.0).repeatForever(autoreverses: false)) {  // For chevron icon animation
+//            moveDown2.toggle()
+//        }
+//    }
     
     
     
