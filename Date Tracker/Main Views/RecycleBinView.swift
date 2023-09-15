@@ -98,12 +98,12 @@ struct RecycleBinView: View {
                         }
                         .padding(.bottom, 8)
                     }
-                    .onChange(of: items.count) { newValue in
-                        if newValue == 0 {
+                    .task {
+                        if items.count == 0 {
                             isEditMode = false
-                            
                         }
                     }
+
                     
                     .mainGradientBackground()
                     

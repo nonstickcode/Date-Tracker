@@ -86,11 +86,10 @@ struct NewDataEntryForm: View {
                 Section(header: Text("Name of Person or Event").formRegularStyle()) {
                     TextField("enter name here", text: $newEventName)
                         .formPlaceholderTextStyle()
-                        .onChange(of: newEventName) { newValue in
-                            if newEventName.count > 40 { // Limit to 40 characters
-                                newEventName = String(newEventName.prefix(40))
-                            }
-                        }
+                        .task {
+                                    self.newEventName = String(self.newEventName.prefix(40))
+                                }
+
                 }
                 
                 Section(header: Text("Notifications for this event").formRegularStyle()) {
@@ -135,9 +134,10 @@ struct NewDataEntryForm: View {
                         selectedDay = components.day ?? 1
                         selectedYear = components.year ?? 2023
                     }
-                    .onChange(of: customDate) { newDate in
-                        newEventDate = newDate
+                    .task {
+                        newEventDate = customDate
                     }
+
                 }
                 
                 

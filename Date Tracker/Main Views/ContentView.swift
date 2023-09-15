@@ -22,6 +22,8 @@ struct ContentView: View {
     @State private var noDataPresentInRecycleBin = false
     
     @State private var scrollOffset: CGFloat = 0.0
+    @State private var lastScrollOffset: CGFloat = 0.0
+    
     
     @FetchRequest(
         entity: Item.entity(),
@@ -63,147 +65,141 @@ struct ContentView: View {
     var body: some View {
         
         
-        let footerScale = max(min(1.0 + scrollOffset / 300, 1.0), 0.0)  // Adjust scale
-        let footerOpacity = max(min(1.0 + scrollOffset / 300, 1.0), 0.0)  // Adjust opacity
-        
+        let footerScale = max(min(1.0 + scrollOffset / 100, 1.0), 0.0)  // Adjust scale
+        let footerOpacity = max(min(1.0 + scrollOffset / 100, 1.0), 0.0)  // Adjust opacity
         
         
         
         NavigationView {
-            GeometryReader { fullView in  // Capture the full size of the ContentView
-                ZStack {
-                    
-                    VStack {
-                        headerView
-                        ScrollView(.vertical, showsIndicators: false) {
-                            GeometryReader { geometry in
-                                Color.clear
-                                    .preference(key: ScrollOffsetKey.self, value: geometry.frame(in: .global).minY)
-                            }
-                            LazyVStack {
-                                Spacer()
-                                ForEach(sortedItems, id: \.self) { item in
-                                    HStack {
+            ZStack {
+                VStack {
+                    headerView
+                    ScrollView(.vertical, showsIndicators: false) {
+                        
+                        
+                        
+                        GeometryReader { geometry in
+                            Color.clear
+                                .preference(key: ScrollOffsetKey.self, value: geometry.frame(in: .global).minY)
+                        }
+                        
+                        
+                        
+                        LazyVStack {
+                            Spacer()
+                            ForEach(sortedItems, id: \.self) { item in
+                                HStack {
+                                    Button(action: {
+                                        self.selectedItem = item
+                                        self.showOverlay = true
+                                    }) {
+                                        ItemButtonView(item: item, noDataPresent: $noDataPresent)
+                                    }
+                                    // long press menu starts here ----------------------------------------------
+                                    .contextMenu {
+                                        
                                         Button(action: {
-                                            self.selectedItem = item
-                                            self.showOverlay = true
+                                            // add share action here
                                         }) {
-                                            ItemButtonView(item: item, noDataPresent: $noDataPresent)
+                                            Label("Share", systemImage: "square.and.arrow.up")
                                         }
-                                        // long press menu starts here ----------------------------------------------
-                                        .contextMenu {
-                                            
-                                            Button(action: {
-                                                // add share action here
-                                            }) {
-                                                Label("Share", systemImage: "square.and.arrow.up")
-                                            }
-                                            Button(action: {
-                                                // add edit action here
-                                            }) {
-                                                Label("Edit", systemImage: "pencil")
-                                            }
-                                            Button(action: {
-                                                // add setting action here
-                                            }) {
-                                                Label("Settings", systemImage: "gear")
-                                            }
-                                            Button(action: {
-                                                // add some action here
-                                            }) {
-                                                Label("Coming Soon", systemImage: "questionmark.folder")
-                                            }
-                                            Button(action: {
-                                                // add some action here
-                                            }) {
-                                                Label("Coming Soon", systemImage: "questionmark.folder")
-                                            }
-                                            Button(action: {
-                                                deleteItem(item: item)
-                                            }) {
-                                                Label("Delete", systemImage: "trash")
-                                                    .foregroundColor(.red)
-                                            }
-                                            // long press menu ends here ----------------------------------------------
-                                            
+                                        Button(action: {
+                                            // add edit action here
+                                        }) {
+                                            Label("Edit", systemImage: "pencil")
                                         }
-                                        if isEditMode {
-                                            Button(action: {
-                                                deleteItem(item: item)
-                                            }) {
-                                                Image(systemName: "delete.backward")
-                                                    .font(.system(size: 36))
-                                                    .shadow(color: .black.opacity(0.5), radius: 2, x: 2, y: 2)
-                                            }
-                                            .foregroundColor(.mainHeaderTextColor)
-                                            .padding(.trailing, 20)
+                                        Button(action: {
+                                            // add setting action here
+                                        }) {
+                                            Label("Settings", systemImage: "gear")
                                         }
+                                        Button(action: {
+                                            // add some action here
+                                        }) {
+                                            Label("Coming Soon", systemImage: "questionmark.folder")
+                                        }
+                                        Button(action: {
+                                            // add some action here
+                                        }) {
+                                            Label("Coming Soon", systemImage: "questionmark.folder")
+                                        }
+                                        Button(action: {
+                                            deleteItem(item: item)
+                                        }) {
+                                            Label("Delete", systemImage: "trash")
+                                                .foregroundColor(.red)
+                                        }
+                                        // long press menu ends here ----------------------------------------------
+                                        
+                                    }
+                                    if isEditMode {
+                                        Button(action: {
+                                            deleteItem(item: item)
+                                        }) {
+                                            Image(systemName: "delete.backward")
+                                                .font(.system(size: 36))
+                                                .shadow(color: .black.opacity(0.5), radius: 2, x: 2, y: 2)
+                                        }
+                                        .foregroundColor(.mainHeaderTextColor)
+                                        .padding(.trailing, 20)
                                     }
                                 }
-                                if items.isEmpty {
-                                    ItemButtonView(item: nil, noDataPresent: $noDataPresent)
-                                }
                             }
-                            .padding(.bottom, 12)
-                            .padding(.top, -20)  // not sure what this is fighting but it got large gap when shrinking header feature added
-                        }
-                        .onPreferenceChange(ScrollOffsetKey.self) { offset in
-                            self.scrollOffset = offset
-                        }
-                        .onChange(of: items.count) { newValue in
-                            if newValue == 0 {
-                                isEditMode = false
-                                noDataPresent = true
-                            } else {
-                                noDataPresent = false
+                            if items.isEmpty {
+                                ItemButtonView(item: nil, noDataPresent: $noDataPresent)
                             }
                         }
-                        .mainGradientBackground()
-                        
-                        
-                        Text("Select an event")
-                            .mainFooterTextStyle()
-                            .padding(.top, 12)
-                            .frame(height: 25 * footerScale)  // Scale the footer
-                            .opacity(Double(footerOpacity))  // Adjust the opacity of the footer text
-                            
+                        .padding(.bottom, 12)
+                        .padding(.top, -20)  // not sure what this is fighting but it got large gap when shrinking header feature added
                     }
-//                    .background(Color.mainHeaderBackground.opacity(Double(footerOpacity)).edgesIgnoringSafeArea(.all))
-                    .background(Color.mainHeaderBackground.edgesIgnoringSafeArea(.all))
-                    
-                    
-                    if showOverlay, let selectedItem = selectedItem {
-                        HalfModalView {
-                            ItemDetailView(item: selectedItem)
-                        }
-                        
-                        .transition(.move(edge: .bottom))
-                        .onTapGesture {
-                            withAnimation {
-                                showOverlay = false
-                            }
+                    .task {
+                        if items.count == 0 {
+                            isEditMode = false
+                            noDataPresent = true
+                        } else {
+                            noDataPresent = false
                         }
                     }
+                    .mainGradientBackground()
                     
+                    Text("Select an event")
+                        .mainFooterTextStyle()
+                        .padding(.top, 12)
+                        .frame(height: 25 * footerScale)  // Scale the footer
+                        .opacity(Double(footerOpacity))  // Adjust the opacity of the footer text
                 }
-                .background(
-                    GeometryReader { scrollViewProxy in  // Capture the scroll offset
-                        Color.clear.preference(key: ScrollOffsetKey.self,
-                                               value: scrollViewProxy.frame(in: .named("scrollView")).minY)
+                .background(Color.mainHeaderBackground.edgesIgnoringSafeArea(.all))
+                
+                if showOverlay, let selectedItem = selectedItem {
+                    HalfModalView {
+                        ItemDetailView(item: selectedItem)
                     }
-                )
-                .onPreferenceChange(ScrollOffsetKey.self) { minY in
-                    self.scrollOffset = minY
-                }
-                .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: softDeleteConfirmed, context: viewContext)
-                .onAppear {
-                    updateNoDataPresentInRecycleBin()
-                    showOverlay = false
+                    .transition(.move(edge: .bottom))
+                    .onTapGesture {
+                        withAnimation {
+                            showOverlay = false
+                        }
+                    }
                 }
             }
-            .coordinateSpace(name: "scrollView")  // Named coordinate space to measure the scroll offset
-//            .frame(height: 790)
-
+            
+            
+            .onPreferenceChange(ScrollOffsetKey.self) { offset in
+                if abs(lastScrollOffset - offset) > 0.1 { // or some threshold suitable to your needs
+                    self.scrollOffset = offset
+                    self.lastScrollOffset = offset
+                }
+            }
+            
+            
+            
+            .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: softDeleteConfirmed, context: viewContext)
+            .onAppear {
+                updateNoDataPresentInRecycleBin()
+                showOverlay = false
+            }
+            
+            
             
         }
         .navigationBarBackButtonHidden(true)
@@ -218,8 +214,8 @@ struct ContentView: View {
     
     private var headerView: some View {
         
-        let scale = max(min(1.0 + scrollOffset / 300, 1.0), 0.0)  // Adjust scale
-        let opacity = max(min(1.0 + scrollOffset / 300, 1.0), 0.0)  // Adjust opacity
+        let scale = max(min(1.0 + scrollOffset / 100, 1.0), 0.0)  // Adjust scale
+        let opacity = max(min(1.0 + scrollOffset / 100, 1.0), 0.0)  // Adjust opacity
         
         return AnyView (
             HStack {
@@ -265,11 +261,11 @@ struct ContentView: View {
                 .padding([.leading, .trailing], 8)
                 .frame(height: 60 * scale)  // Scale the header frame
                 .padding(.bottom, 0)
-                
+            
             
         )
         .opacity(Double(opacity))  // Adjust the opacity of the header text
-        }
+    }
     
     
     
