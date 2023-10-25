@@ -61,7 +61,7 @@ struct CalendarIconView: View {
                 )
             Text(day)
                 .foregroundColor(.black)
-                .font(.headline)
+                .font(.subheadline)
                 .fontWeight(.bold)
                 .offset(y: 11)
         }

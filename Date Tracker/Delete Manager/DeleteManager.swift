@@ -24,7 +24,7 @@ struct DeletionAlertModifier: ViewModifier {
         content
             .alert(isPresented: $showingAlert) {
                 Alert(title: Text("Delete Item"),
-                      message: Text("All deleted events will be placed in the Recycle Bin and automatically deleted after \(Int(daysUntilHardDelete)) days, unless restored."),
+                      message: Text("All deleted events will be placed in the Recycle Bin and permanetly deleted after \(Int(daysUntilHardDelete)) days, unless restored."),
                       primaryButton: .destructive(Text("Delete")) {
                         guard let item = itemToDelete else { return }
                         deleteConfirmed(item, context)
