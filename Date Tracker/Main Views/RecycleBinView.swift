@@ -107,7 +107,7 @@ struct RecycleBinView: View {
                     
                     .mainGradientBackground()
                     
-                    Text("Select an event to restore")
+                    Text("Long press an event to restore")
                         .mainFooterTextStyle()
                         .padding(.top, 12)
                         .frame(height: 25)
@@ -159,7 +159,7 @@ struct RecycleBinView: View {
             
             Spacer(minLength: 0)
             // Center - Text
-            Text("Recycle Bin")
+            Text("Recycle")
                 .mainHeaderStyle()
             
             Spacer(minLength: 0)
