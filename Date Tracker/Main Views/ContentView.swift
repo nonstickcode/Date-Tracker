@@ -255,7 +255,7 @@ struct ContentView: View {
                     }
                     .font(.custom("Quicksand-Bold", size: 16))
                     .foregroundColor(Color.mainHeaderTextColor)
-                    .frame(minWidth: 50, maxWidth: 50, minHeight: 40, maxHeight: 40)  // Explicitly set frame
+                    .frame(minWidth: 60, maxWidth: 60, minHeight: 40, maxHeight: 40)  // Explicitly set frame
                 }
             }
                 .padding([.leading, .trailing], 8)
