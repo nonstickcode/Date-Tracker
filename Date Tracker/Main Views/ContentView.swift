@@ -61,6 +61,7 @@ struct ContentView: View {
     
     // Sort function above ----------------------------------------------------------------
     
+    @State private var showSplashScreenView = true
     
     var body: some View {
         
@@ -71,143 +72,155 @@ struct ContentView: View {
         
         
         NavigationView {
-            ZStack {
-                VStack {
-                    headerView
-                    ScrollView(.vertical, showsIndicators: false) {
-                        
-                        
-                        
-                        GeometryReader { geometry in
-                            Color.clear
-                                .preference(key: ScrollOffsetKey.self, value: geometry.frame(in: .global).minY)
+            if showSplashScreenView {
+                SplashScreenView()
+                    .onAppear {
+                        // Add a timer to control how long the splash screen is displayed
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                showSplashScreenView = false
+                            }
                         }
-                        
-                        
-                        
-                        LazyVStack {
-                            Spacer()
-                            ForEach(sortedItems, id: \.self) { item in
-                                HStack {
-                                    Button(action: {
-                                        self.selectedItem = item
-                                        self.showOverlay = true
-                                    }) {
-                                        ItemButtonView(item: item, noDataPresent: $noDataPresent)
-                                    }
-                                    // long press menu starts here ----------------------------------------------
-                                    .contextMenu {
-                                        
+                    }
+            } else {
+                ZStack {
+                    VStack {
+                        headerView
+                        ScrollView(.vertical, showsIndicators: false) {
+                            
+                            
+                            
+                            GeometryReader { geometry in
+                                Color.clear
+                                    .preference(key: ScrollOffsetKey.self, value: geometry.frame(in: .global).minY)
+                            }
+                            
+                            
+                            
+                            LazyVStack {
+                                Spacer()
+                                ForEach(sortedItems, id: \.self) { item in
+                                    HStack {
                                         Button(action: {
-                                            // add share action here
+                                            self.selectedItem = item
+                                            self.showOverlay = true
                                         }) {
-                                            Label("Share", systemImage: "square.and.arrow.up")
+                                            ItemButtonView(item: item, noDataPresent: $noDataPresent)
                                         }
-                                        Button(action: {
-                                            // add edit action here
-                                        }) {
-                                            Label("Edit", systemImage: "pencil")
+                                        // long press menu starts here ----------------------------------------------
+                                        .contextMenu {
+                                            
+                                            Button(action: {
+                                                // add share action here
+                                            }) {
+                                                Label("Share", systemImage: "square.and.arrow.up")
+                                            }
+                                            Button(action: {
+                                                // add edit action here
+                                            }) {
+                                                Label("Edit", systemImage: "pencil")
+                                            }
+                                            Button(action: {
+                                                // add setting action here
+                                            }) {
+                                                Label("Settings", systemImage: "gear")
+                                            }
+                                            Button(action: {
+                                                // add some action here
+                                            }) {
+                                                Label("Coming Soon", systemImage: "questionmark.folder")
+                                            }
+                                            Button(action: {
+                                                // add some action here
+                                            }) {
+                                                Label("Coming Soon", systemImage: "questionmark.folder")
+                                            }
+                                            Button(action: {
+                                                deleteItem(item: item)
+                                            }) {
+                                                Label("Delete", systemImage: "trash")
+                                                    .foregroundColor(.red)
+                                            }
+                                            // long press menu ends here ----------------------------------------------
+                                            
                                         }
-                                        Button(action: {
-                                            // add setting action here
-                                        }) {
-                                            Label("Settings", systemImage: "gear")
+                                        if isEditMode {
+                                            Button(action: {
+                                                deleteItem(item: item)
+                                            }) {
+                                                Image(systemName: "delete.backward")
+                                                    .font(.system(size: 36))
+                                                    .shadow(color: .black.opacity(0.5), radius: 2, x: 2, y: 2)
+                                            }
+                                            .foregroundColor(.mainHeaderTextColor)
+                                            .padding(.trailing, 20)
                                         }
-                                        Button(action: {
-                                            // add some action here
-                                        }) {
-                                            Label("Coming Soon", systemImage: "questionmark.folder")
-                                        }
-                                        Button(action: {
-                                            // add some action here
-                                        }) {
-                                            Label("Coming Soon", systemImage: "questionmark.folder")
-                                        }
-                                        Button(action: {
-                                            deleteItem(item: item)
-                                        }) {
-                                            Label("Delete", systemImage: "trash")
-                                                .foregroundColor(.red)
-                                        }
-                                        // long press menu ends here ----------------------------------------------
-                                        
-                                    }
-                                    if isEditMode {
-                                        Button(action: {
-                                            deleteItem(item: item)
-                                        }) {
-                                            Image(systemName: "delete.backward")
-                                                .font(.system(size: 36))
-                                                .shadow(color: .black.opacity(0.5), radius: 2, x: 2, y: 2)
-                                        }
-                                        .foregroundColor(.mainHeaderTextColor)
-                                        .padding(.trailing, 20)
                                     }
                                 }
+                                if items.isEmpty {
+                                    ItemButtonView(item: nil, noDataPresent: $noDataPresent)
+                                }
                             }
-                            if items.isEmpty {
-                                ItemButtonView(item: nil, noDataPresent: $noDataPresent)
+                            .padding(.bottom, 12)
+                            .padding(.top, -20)  // not sure what this is fighting but it got large gap when shrinking header feature added
+                        }
+                        .task {
+                            if items.count == 0 {
+                                isEditMode = false
+                                noDataPresent = true
+                            } else {
+                                noDataPresent = false
                             }
                         }
-                        .padding(.bottom, 12)
-                        .padding(.top, -20)  // not sure what this is fighting but it got large gap when shrinking header feature added
+                        .mainGradientBackground()
+                        
+                        Text("Select an event")
+                            .mainFooterTextStyle()
+                            .padding(.top, 12)
+                            .frame(height: 25 * footerScale)  // Scale the footer
+                            .opacity(Double(footerOpacity))  // Adjust the opacity of the footer text
                     }
-                    .task {
-                        if items.count == 0 {
-                            isEditMode = false
-                            noDataPresent = true
-                        } else {
-                            noDataPresent = false
-                        }
-                    }
-                    .mainGradientBackground()
+                    .background(Color.mainHeaderBackground.edgesIgnoringSafeArea(.all))
                     
-                    Text("Select an event")
-                        .mainFooterTextStyle()
-                        .padding(.top, 12)
-                        .frame(height: 25 * footerScale)  // Scale the footer
-                        .opacity(Double(footerOpacity))  // Adjust the opacity of the footer text
-                }
-                .background(Color.mainHeaderBackground.edgesIgnoringSafeArea(.all))
-                
-                if showOverlay, let selectedItem = selectedItem {
-                    HalfModalView {
-                        ItemDetailView(item: selectedItem)
-                    }
-                    .transition(.move(edge: .bottom))
-                    .onTapGesture {
-                        withAnimation {
-                            showOverlay = false
+                    if showOverlay, let selectedItem = selectedItem {
+                        HalfModalView {
+                            ItemDetailView(item: selectedItem)
+                        }
+                        .transition(.move(edge: .bottom))
+                        .onTapGesture {
+                            withAnimation {
+                                showOverlay = false
+                            }
                         }
                     }
                 }
-            }
-            
-            
-            .onPreferenceChange(ScrollOffsetKey.self) { offset in
-                if abs(lastScrollOffset - offset) > 0.1 { // or some threshold suitable to your needs
-                    self.scrollOffset = offset
-                    self.lastScrollOffset = offset
+                
+                
+                .onPreferenceChange(ScrollOffsetKey.self) { offset in
+                    if abs(lastScrollOffset - offset) > 0.1 { // or some threshold suitable to your needs
+                        self.scrollOffset = offset
+                        self.lastScrollOffset = offset
+                    }
                 }
+                
+                
+                
+                .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: softDeleteConfirmed, context: viewContext)
+                .onAppear {
+                    updateNoDataPresentInRecycleBin()
+                    showOverlay = false
+                }
+                
+                
+                
             }
-            
-            
-            
-            .deletionAlert(showingAlert: $showingDeleteAlert, itemToDelete: $itemToDelete, deleteConfirmed: softDeleteConfirmed, context: viewContext)
-            .onAppear {
-                updateNoDataPresentInRecycleBin()
-                showOverlay = false
-            }
-            
-            
-            
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationViewStyle(StackNavigationViewStyle())
-    }
-    
-    
-    
+                .navigationBarBackButtonHidden(true)
+                .navigationViewStyle(StackNavigationViewStyle())
+        }
+        
+        
+        
     
     
     
