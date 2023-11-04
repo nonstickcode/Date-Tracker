@@ -10,18 +10,19 @@ import SwiftUI
 @main
 struct Date_TrackerApp: App {
     let persistenceController = PersistenceController.shared
-    
+    @State private var hasLaunched = false
+
     init() {
         printFonts()
-        
+
         // Perform cleanup operation on app launch
         let context = persistenceController.container.viewContext
         cleanUpItems(with: context)
     }
-    
+
     func printFonts() {
         let fontFamilyNames = UIFont.familyNames
-        
+
         for familyName in fontFamilyNames {
             print("----------------------------------")
             print("Font Family name ---> [\(familyName)]")
@@ -32,10 +33,19 @@ struct Date_TrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            if !hasLaunched {
+                SplashScreenView()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                hasLaunched = true
+                            }
+                        }
+                    }
+            } else {
+                ContentView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            }
         }
     }
 }
-

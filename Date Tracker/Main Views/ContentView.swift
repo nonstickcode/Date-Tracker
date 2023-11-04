@@ -61,7 +61,7 @@ struct ContentView: View {
     
     // Sort function above ----------------------------------------------------------------
     
-    @State private var showSplashScreenView = true
+    @State private var showSplashScreenView = false
     
     var body: some View {
         
