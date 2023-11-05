@@ -72,17 +72,7 @@ struct ContentView: View {
         
         
         NavigationView {
-            if showSplashScreenView {
-                SplashScreenView()
-                    .onAppear {
-                        // Add a timer to control how long the splash screen is displayed
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation {
-                                showSplashScreenView = false
-                            }
-                        }
-                    }
-            } else {
+         
                 ZStack {
                     VStack {
                         headerView
@@ -110,21 +100,21 @@ struct ContentView: View {
                                         // long press menu starts here ----------------------------------------------
                                         .contextMenu {
                                             
-                                            Button(action: {
-                                                // add share action here
-                                            }) {
-                                                Label("Share", systemImage: "square.and.arrow.up")
-                                            }
-                                            Button(action: {
-                                                // add edit action here
-                                            }) {
-                                                Label("Edit", systemImage: "pencil")
-                                            }
-                                            Button(action: {
-                                                // add setting action here
-                                            }) {
-                                                Label("Settings", systemImage: "gear")
-                                            }
+//                                            Button(action: {
+//                                                // add share action here
+//                                            }) {
+//                                                Label("Share", systemImage: "square.and.arrow.up")
+//                                            }
+//                                            Button(action: {
+//                                                // add edit action here
+//                                            }) {
+//                                                Label("Edit", systemImage: "pencil")
+//                                            }
+//                                            Button(action: {
+//                                                // add setting action here
+//                                            }) {
+//                                                Label("Settings", systemImage: "gear")
+//                                            }
                                             Button(action: {
                                                 // add some action here
                                             }) {
@@ -213,7 +203,7 @@ struct ContentView: View {
                 
                 
                 
-            }
+            
         }
                 .navigationBarBackButtonHidden(true)
                 .navigationViewStyle(StackNavigationViewStyle())
