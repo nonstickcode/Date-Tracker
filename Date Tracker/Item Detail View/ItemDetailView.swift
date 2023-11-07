@@ -89,12 +89,12 @@ struct ItemDetailView: View {
                     
                     // Line 7 of Text in view --------------------------------------------------------
                     
-                    if let timestamp = item.timestamp {
-                        Text("Event added to app: \(timestamp, formatter: dateTimeFormatter)")
-                            .font(.caption)
-                            .foregroundColor(.black)
-                            .padding(0)
-                    }
+//                    if let timestamp = item.timestamp {
+//                        Text("Event added to app: \(timestamp, formatter: dateTimeFormatter)")
+//                            .font(.caption)
+//                            .foregroundColor(.black)
+//                            .padding(0)
+//                    }
                     
                     // Line 8 of Text in view --------------------------------------------------------
                     
@@ -102,11 +102,11 @@ struct ItemDetailView: View {
                     
                     // Line 8 of Text in view --------------------------------------------------------
                     
-                    if let id = item.id {
-                        Text("ID: \(id)")
-                            .font(.caption)
-                            .foregroundColor(.teal)
-                    }
+//                    if let id = item.id {
+//                        Text("ID: \(id)")
+//                            .font(.caption)
+//                            .foregroundColor(.teal)
+//                    }
                                         
                     // End of Detailed view --------------------------------------------------------
                     
