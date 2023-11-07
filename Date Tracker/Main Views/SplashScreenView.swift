@@ -30,19 +30,13 @@ struct SplashScreenView: View {
                 .scaleEffect(size)
                 .opacity(opacity)
                 .onAppear {
-                    withAnimation(.easeIn(duration: 2.0)) {
+                    withAnimation(.easeIn(duration: 2.0)) { // total time SplashScreenView seen determined in @main file
                         self.size = 0.9
                         self.opacity = 1.00
                     }
                 }
             }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
-                    withAnimation {
-                        self.isActive = true
-                    }
-                }
-            }
+
         }
     }
 }

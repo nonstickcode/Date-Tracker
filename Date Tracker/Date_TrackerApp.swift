@@ -15,7 +15,6 @@ struct Date_TrackerApp: App {
     init() {
         printFonts()
 
-        // Perform cleanup operation on app launch
         let context = persistenceController.container.viewContext
         cleanUpItems(with: context)
     }
@@ -36,7 +35,7 @@ struct Date_TrackerApp: App {
             if !hasLaunched {
                 SplashScreenView()
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { // total time SplashScreenView is present on screen
                             withAnimation {
                                 hasLaunched = true
                             }
