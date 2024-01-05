@@ -1,5 +1,9 @@
 # 𝗗𝗮𝘁𝗲 𝗧𝗿𝗮𝗰𝗸𝗲𝗿 - 𝗶𝗢𝗦 𝗔𝗽𝗽
 
+[View Live Deployment in the Apple App Store](https://apps.apple.com/us/app/date-tracker-nonstickcode/id6470582718)
+
+![Project Image](./public/readme-image.jpeg)
+
 ## Overview
 
 Introducing Date Tracker, a cutting-edge iOS app designed to keep your important dates organized and accessible. Developed with Swift and incorporating both SwiftUI and SwiftData, Date Tracker is a personal solo project that showcases innovative coding practices and user-friendly design. It's now available on the Apple App Store, offering a seamless and intuitive way to manage your special occasions.
