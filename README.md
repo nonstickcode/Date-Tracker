@@ -2,7 +2,7 @@
 
 [View Live Deployment in the Apple App Store](https://apps.apple.com/us/app/date-tracker-nonstickcode/id6470582718)
 
-![Project Image](./public/readme-image.jpeg)
+![Project Image](./readme-image.jpeg)
 
 ## Overview
 
